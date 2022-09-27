@@ -1,10 +1,10 @@
-name: Test and Build 😎
+name: Build and Deploy 😎
 
 on: [push, pull_request]
 
 jobs:
   build:
-    name: Test and build WebGL ✨
+    name: Build WebGL ✨
     runs-on: ubuntu-latest
     environment: build
     steps:
@@ -73,7 +73,7 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@4.1.4
         with:
           branch: gh-pages
-          folder: build/WebGL
+          folder: build
 
       
 
