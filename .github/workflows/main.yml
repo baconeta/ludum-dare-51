@@ -58,18 +58,22 @@ jobs:
   
   deployPages:
     needs: build
-    name: Deploy WebGL to pages
+    name: Deploy to Github Pages 🚀
     runs-on: ubuntu-latest
     steps:
-      # Checkout (without LFS)
       - name: Checkout code
         uses: actions/checkout@v2
+
+      - uses: actions/download-artifact@v2
         with:
-          lfs: true
+          name: Build
+          path: build
 
-        - uses: actions/download-artifact@v2
-          with:
-            name: build
+      - name: Deploy 🚀
+        uses: Baconeta/github-pages-deploy-action@4.1.4
+        with:
+          branch: gh-pages
+          folder: build/WebGL
 
-      # Deployment
+      
 
