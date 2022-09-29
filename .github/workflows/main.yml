@@ -34,10 +34,9 @@ jobs:
       # Cache
       - uses: actions/cache@v2
         with:
-          path: Library
+          path: .
           key: Library-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
-          restore-keys: |
-            Library-
+          restore-keys: Library-
 
       # Build
       - name: Build project
