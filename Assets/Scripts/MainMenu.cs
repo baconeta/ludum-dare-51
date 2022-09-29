@@ -7,7 +7,7 @@ public class MainMenu : MonoBehaviour
 
     public void NewGame()
     {
-        SceneManager.LoadScene(playGameScene);
+        // SceneManager.LoadScene(playGameScene);
         if (playGameScene == "Start")
         {
             Destroy (GameObject.Find("MainCamera"));
