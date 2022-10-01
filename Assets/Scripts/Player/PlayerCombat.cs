@@ -72,17 +72,9 @@ public class PlayerCombat : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        attacking = false;
         // If user is left-clicking.
-        if (Input.GetButtonDown("Fire1"))
-        {
-            attacking = true;
-        }
         // TODO Replace this check for analog 2.
-        if (Input.GetMouseButtonDown(1))
-        {
-            attacking = true;
-        }
+        attacking = Input.GetButton("Fire1") || Input.GetMouseButton(1);
 
         // Update the animator.
         animator.SetBool("Attacking", attacking);
