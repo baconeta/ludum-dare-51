@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Controllers;
 
-namespace ModeSwap
+namespace Utils
 {
     [RequireComponent(typeof(SpriteRenderer))]
     public class SpriteSwapper : MonoBehaviour
@@ -15,8 +15,8 @@ namespace ModeSwap
             gameController = FindObjectOfType<GameController>();
             if (gameController != null)
             {
-                gameController.Timer.OnPhaseChange.AddListener(SetPhaseMode);
-                gameController.Timer.OnTimerStart.AddListener(SetPhaseMode);
+                gameController.timer.OnPhaseChange.AddListener(SetPhaseMode);
+                gameController.timer.OnTimerStart.AddListener(SetPhaseMode);
             }
 
             spriteRender = GetComponent<SpriteRenderer>();

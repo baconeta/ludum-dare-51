@@ -1,51 +1,57 @@
 using System.Collections;
-using Unity.VisualScripting;
+using Entities;
 using UnityEngine;
 
-public class PlayerWeapon : MonoBehaviour
+namespace Player
 {
-    public PlayerCombat pc;
-    
-    [Tooltip("Per swing, how long should the weapon be \"hot\" for, as a percentage.")] [SerializeField]
-    private float weaponIsDamagingDurationPercentage = 70.0F;
-    private float weaponIsDamagingDurationActual;
-
-    // True if collisions with the weapon will damage enemies.
-    protected bool weaponIsDamaging = false;
-
-    void Start()
+    public class PlayerWeapon : MonoBehaviour
     {
-        RecalculateStats();
-    }
+        private PlayerCombat _playerCombat;
 
-    
-    public void RecalculateStats()
-    {
-        // Attack Period (how long a full attack rotation takes) * "Hot" percentage (how long the weapon is hot for).
-        weaponIsDamagingDurationActual = (1 / pc.GetAttackSpeed()) * (weaponIsDamagingDurationPercentage / 100F);
-    }
+        [Tooltip("Per swing, how long should the weapon be \"hot\" for, as a percentage.")] [SerializeField]
+        private float weaponIsDamagingDurationPercentage = 70.0F;
 
-    public void DoAttack()
-    {
-        weaponIsDamaging = true;
-        // TODO Trigger animation/visibility here.
-        StartCoroutine(DisableMeleeDamage());
-    }
+        private float _weaponIsDamagingDurationActual;
 
-    // This function disables the weapon after the swing has finished.
-    IEnumerator DisableMeleeDamage()
-    {
-        yield return new WaitForSeconds(weaponIsDamagingDurationActual);
-        weaponIsDamaging = false;
-    }
+        // True if collisions with the weapon will damage enemies.
+        protected bool weaponIsDamaging = false;
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (weaponIsDamaging && other.CompareTag("Enemy"))
+        private void Start()
         {
-            other.GetComponent<Enemy>().TakeDamage(pc.GetAttackDamage());
-            // Optional, for if we get injure animations for enemies.
-            //other.GetComponent<Animator>().SetTrigger("Hit");
+            _playerCombat = GetComponent<PlayerCombat>();
+            RecalculateStats();
+        }
+
+
+        public void RecalculateStats()
+        {
+            // Attack Period (how long a full attack rotation takes) * "Hot" percentage (how long the weapon is hot for).
+            _weaponIsDamagingDurationActual =
+                (1 / _playerCombat.GetAttackSpeed()) * (weaponIsDamagingDurationPercentage / 100F);
+        }
+
+        public void DoAttack()
+        {
+            weaponIsDamaging = true;
+            // TODO Trigger animation/visibility here.
+            StartCoroutine(DisableMeleeDamage());
+        }
+
+        // This function disables the weapon after the swing has finished.
+        IEnumerator DisableMeleeDamage()
+        {
+            yield return new WaitForSeconds(_weaponIsDamagingDurationActual);
+            weaponIsDamaging = false;
+        }
+
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            if (weaponIsDamaging && other.CompareTag("Enemy"))
+            {
+                other.GetComponent<Enemy>().TakeDamage(_playerCombat.GetAttackDamage());
+                // Optional, for if we get injure animations for enemies.
+                //other.GetComponent<Animator>().SetTrigger("Hit");
+            }
         }
     }
 }

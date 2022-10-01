@@ -7,11 +7,12 @@ TagManager:
   - BackgroundMusic
   - Floor
   - Enemy
+  - SpawnableArea
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Enemy
   - Water
   - UI
   - 
