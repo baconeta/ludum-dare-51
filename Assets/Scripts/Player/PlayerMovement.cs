@@ -10,6 +10,7 @@ namespace Player
         [Tooltip("How far in game units that the player can move per tick.")]
         [SerializeField]
         public float movementSpeedInitial = 2F;
+
         public float movementSpeedActual;
 
         public Rigidbody2D rb;
@@ -17,14 +18,13 @@ namespace Player
 
         private Vector2 _movement;
 
-        void Start()
+        private void Start()
         {
             movementSpeedActual = movementSpeedInitial;
 
             //If missing components
             if (!rb) rb = GetComponent<Rigidbody2D>();
             if (!animator) animator = GetComponent<Animator>();
-
         }
 
         void Update()
@@ -36,7 +36,7 @@ namespace Player
 
                 animator.SetFloat("Horizontal", _movement.x);
                 animator.SetFloat("Vertical", _movement.y);
-                animator.SetFloat("Velocity", _movement.sqrMagnitude);
+                animator.SetFloat("Velocity", _movement.magnitude);
             }
 
         }

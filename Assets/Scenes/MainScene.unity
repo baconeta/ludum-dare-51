@@ -575,7 +575,7 @@ MonoBehaviour:
   enemyController: {fileID: 399779816}
   waves:
   - numberOfPuffballs: 10
-    numberOfSeeds: 12
+    numberOfSeeds: 10
     numberOfMushrooms: 4
   - numberOfPuffballs: 15
     numberOfSeeds: 15
@@ -679,10 +679,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FollowSpeed: 10
   posOffset: {x: 0.5, y: 0.5}
-  leftLimit: -25
-  RightLimit: 25
-  BottomLimit: -25
-  TopLimit: 25
+  leftLimit: -15
+  RightLimit: 15
+  BottomLimit: -5
+  TopLimit: 5
 --- !u!1 &562728907 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7369678367256390200, guid: 1f794f3f39fee51499b78d5c49b8607e, type: 3}
@@ -934,7 +934,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sanctuaryUI: {fileID: 562728907}
-  gameController: {fileID: 0}
+  gameController: {fileID: 297036110}
   scoreText: {fileID: 623552608}
   currencyText: {fileID: 617831048}
   player: {fileID: 1378147120}
@@ -1023,15 +1023,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 375893899820495528, guid: adb2cd2b963d29c4f8ebec31626cee0e, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.4
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 375893899820495528, guid: adb2cd2b963d29c4f8ebec31626cee0e, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.4
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 375893899820495528, guid: adb2cd2b963d29c4f8ebec31626cee0e, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.4
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 375893899820495528, guid: adb2cd2b963d29c4f8ebec31626cee0e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1206,12 +1206,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -1
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.18867922, g: 0.1121341, b: 0.057849765, a: 0.6039216}
+  m_Sprite: {fileID: 21300000, guid: 0456d25a32945af4f932cfb2a47ac2f4, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 1
-  m_Size: {x: 50, y: 50}
+  m_Size: {x: 40, y: 20}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
