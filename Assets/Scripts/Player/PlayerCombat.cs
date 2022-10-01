@@ -1,7 +1,5 @@
 using UnityEngine;
 
-using static Utilities;
-
 public class Player : MonoBehaviour {
     
     /*
