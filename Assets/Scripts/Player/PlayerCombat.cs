@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Player : MonoBehaviour {
+public class PlayerCombat : MonoBehaviour {
     
     /*
      * Player health.
