@@ -27,6 +27,9 @@ namespace Controllers
             }
 
             CurrentRound = 0;
+
+            // Start the first wave
+            enemyController.SpawnRound();
         }
 
         public void LastEnemyDestroyed() // could this be an event listener?
@@ -37,9 +40,14 @@ namespace Controllers
             gameController.RoundEnded(CurrentRound);
         }
 
-        public WaveData NextWave()
+        public WaveData GetNextWave()
         {
             return waves[CurrentRound];
+        }
+
+        public void StartNextWave()
+        {
+            enemyController.SpawnRound();
         }
     }
 }

@@ -18,7 +18,7 @@ namespace Controllers
         private float boundX;
         private float boundY;
 
-        private void Start()
+        private void Awake()
         {
             if (roundController == default)
             {
@@ -35,25 +35,31 @@ namespace Controllers
             //Get bounds of spawnable area
             boundX = spawnableArea.GetComponent<SpriteRenderer>().size.x / 2;
             boundY = spawnableArea.GetComponent<SpriteRenderer>().size.y / 2;
-
-            //Start round - Arbitrary number of enemies to spawn
-            SpawnRound(10);
         }
 
         public void Update()
         {
             if (livingEnemies.Count == 0)
             {
+                Debug.Log("All enemies destroyed - tell round controller");
                 roundController.LastEnemyDestroyed();
+            }
+
+            if (Input.GetButtonDown("Debug Reset"))
+            {
+                ClearLivingEnemies();
             }
         }
 
-        public void ClearLivingEnemies()
+        private void ClearLivingEnemies()
         {
+            // Debug only
             foreach (Enemy enemy in livingEnemies)
             {
                 enemy.Die(true);
             }
+
+            Debug.Log("All enemies destroyed by debug command.");
         }
 
         public void SpawnEnemy(Transform spawnPosition = null, string enemyType = null)
@@ -80,9 +86,9 @@ namespace Controllers
             newEnemy.transform.position = newPosition;
         }
 
-        public void SpawnRound(int enemiesToSpawn)
+        public void SpawnRound()
         {
-            _currentWave = roundController.NextWave();
+            _currentWave = roundController.GetNextWave();
 
             for (int i = 0; i < _currentWave.numberOfPuffballs; i++)
             {
@@ -118,6 +124,8 @@ namespace Controllers
                     newEnemy = enemyList[2];
                     break;
             }
+
+            if (newEnemy != null) newEnemy.EcRef = this;
 
             return newEnemy;
         }
