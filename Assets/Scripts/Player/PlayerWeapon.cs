@@ -17,7 +17,10 @@ namespace Player
 
         private float _weaponIsDamagingDurationActual;
 
-        public float HitAngle = 90f;
+        [SerializeField]
+        float HitAngle = 60f;
+
+
 
         // True if collisions with the weapon will damage enemies.
         protected bool weaponIsDamaging = false;
@@ -77,10 +80,15 @@ namespace Player
             {
                 Vector2 dir = result.gameObject.transform.position - gameObject.transform.position;
                 float angle = Vector2.Angle(dir, GetCurrentDirection());
+                float distance = Vector2.Distance(gameObject.transform.position, result.gameObject.transform.position);
 
-                if (weaponIsDamaging && angle <= HitAngle && result.CompareTag("Enemy"))
+                if (weaponIsDamaging && result.CompareTag("Enemy"))
                 {
-                    result.GetComponent<Enemy>().TakeDamage(_playerCombat.GetAttackDamage());
+                    if (angle <= HitAngle
+                        || angle <= 90 && distance <= 0.2)
+                    {
+                        result.GetComponent<Enemy>().TakeDamage(_playerCombat.GetAttackDamage());
+                    }
                 }
             }
         }
