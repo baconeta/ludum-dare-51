@@ -934,7 +934,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sanctuaryUI: {fileID: 562728907}
-  gameController: {fileID: 0}
+  gameController: {fileID: 297036110}
   scoreText: {fileID: 623552608}
   currencyText: {fileID: 617831048}
   player: {fileID: 1378147120}
