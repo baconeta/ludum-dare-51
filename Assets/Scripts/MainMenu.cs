@@ -10,6 +10,9 @@ public class MainMenu : MonoBehaviour, IPointerClickHandler
     public GameObject creditsButton;
     public GameObject howtoButton;
     public GameObject quitButton;
+
+    public GameObject howtoImage;
+    public bool howtoImageShowing = false;
     
     public void NewGame()
     {
@@ -17,7 +20,7 @@ public class MainMenu : MonoBehaviour, IPointerClickHandler
         if (playGameScene == "Start")
         {
             Destroy (GameObject.Find("MainCamera"));
-            SceneManager.LoadScene("Scenes/MainScene");
+            SceneManager.LoadScene("MainScene");
         }
 
         if (playGameScene == "BossBattle")
@@ -47,6 +50,15 @@ public class MainMenu : MonoBehaviour, IPointerClickHandler
         if (menuEvent.pointerClick.gameObject == howtoButton)
         {
             // pop up art image of how to play
+            if (howtoImageShowing == false)
+            {
+                howtoImageShowing = true;
+            }
+            else
+            {
+                howtoImageShowing = false;
+            }
+            
         }
     }
 }
