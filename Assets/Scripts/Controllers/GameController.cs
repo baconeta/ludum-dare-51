@@ -11,6 +11,8 @@ namespace Controllers
         private RoundController _rc;
         public bool GameRunning { get; set; }
 
+        public static bool IsPlayerInputEnabled = true;
+
         [HideInInspector] public GameTimer timer;
 
         private void Awake()
@@ -65,15 +67,15 @@ namespace Controllers
         public void RoundEnded(int currentRound)
         {
             Debug.Log("Round " + currentRound + " completed successfully.");
-            sanctuary.ShowSanctuary();
-            // Also we should pause the game and all elements here including input!!
+            timer.StopTimer();
+            IsPlayerInputEnabled = false;
+            sanctuary.ShowSanctuary();           
         }
 
         public void Continue()
         {
-            // This function will start the next wave and unpause the controls and game systems/timer
-            // TODO unpause everything and then spawn the next wave
-
+            IsPlayerInputEnabled = true;
+            timer.StartTimer();
             _rc.StartNextWave();
         }
     }
