@@ -111,7 +111,15 @@ public class PlayerCombat : MonoBehaviour {
         healthActual -= damage;
         // TODO Give visual indication?
         // TODO Update HUD?
-        animator.SetTrigger("Dead");
+        if (healthActual <= 0)
+        {
+            // Make sure that health doesn't go negative.
+            healthActual = 0;
+            // Stop the game. TODO Hook into the controllers later.
+            _playing = false;
+            // Trigger the death animation for the player.
+            animator.SetTrigger("Dead");
+        }
     }
 
     public float GetAttackDamage()
