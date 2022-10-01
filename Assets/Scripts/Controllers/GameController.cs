@@ -7,6 +7,13 @@ namespace Controllers
         [SerializeField] public bool isInvincible;
         public bool GameRunning { get; set; }
 
+        public GameTimer Timer;
+
+        private void Awake()
+        {
+            Timer = gameObject.AddComponent<GameTimer>();
+        }
+
         // Start is called before the first frame update
         private void Start()
         {
@@ -16,6 +23,9 @@ namespace Controllers
             {
                 hud.GameStart();
             }
+        
+            if (Timer)
+                Timer.StartTimer();
         }
 
         public void ResetGame()
