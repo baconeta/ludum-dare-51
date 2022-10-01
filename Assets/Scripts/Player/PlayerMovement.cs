@@ -32,6 +32,7 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        rb.MovePosition(rb.position + ((movementSpeedActual * Time.fixedDeltaTime) * _movement));
+        Vector2 distanceToMove = _movement * (movementSpeedActual * Time.fixedDeltaTime);
+        rb.MovePosition(rb.position + distanceToMove);
     }
 }
