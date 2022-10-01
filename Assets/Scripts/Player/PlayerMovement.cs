@@ -1,9 +1,12 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Player
 {
     public class PlayerMovement : MonoBehaviour
-    {
+    { 
+        
+        
         /*
      * Player movement speed.
      */
@@ -13,6 +16,7 @@ namespace Player
 
         public float movementSpeedActual;
 
+        public PlayerInput playerInput;
         public Rigidbody2D rb;
         public Animator animator;
 
@@ -25,14 +29,16 @@ namespace Player
             //If missing components
             if (!rb) rb = GetComponent<Rigidbody2D>();
             if (!animator) animator = GetComponent<Animator>();
+            if (!playerInput) playerInput = GetComponent<PlayerInput>();
         }
 
         void Update()
         {
             if (Controllers.GameController.IsPlayerInputEnabled)
             {
-                _movement.x = Input.GetAxisRaw("Horizontal");
-                _movement.y = Input.GetAxisRaw("Vertical");
+                Vector2 playerMovement = playerInput.actions["Move"].ReadValue<Vector2>();
+                _movement.x = playerMovement.x;
+                _movement.y = playerMovement.y;
 
                 animator.SetFloat("Horizontal", _movement.x);
                 animator.SetFloat("Vertical", _movement.y);
