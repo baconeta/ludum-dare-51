@@ -574,9 +574,9 @@ MonoBehaviour:
   gameController: {fileID: 297036110}
   enemyController: {fileID: 399779816}
   waves:
-  - numberOfPuffballs: 10
-    numberOfSeeds: 12
-    numberOfMushrooms: 4
+  - numberOfPuffballs: 2
+    numberOfSeeds: 2
+    numberOfMushrooms: 2
   - numberOfPuffballs: 15
     numberOfSeeds: 15
     numberOfMushrooms: 8
@@ -679,10 +679,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FollowSpeed: 10
   posOffset: {x: 0.5, y: 0.5}
-  leftLimit: -25
-  RightLimit: 25
-  BottomLimit: -25
-  TopLimit: 25
+  leftLimit: -15
+  RightLimit: 15
+  BottomLimit: -5
+  TopLimit: 5
 --- !u!1 &562728907 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7369678367256390200, guid: 1f794f3f39fee51499b78d5c49b8607e, type: 3}
