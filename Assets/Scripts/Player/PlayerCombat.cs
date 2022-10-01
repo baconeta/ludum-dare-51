@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerCombat : MonoBehaviour {
@@ -14,6 +15,7 @@ public class PlayerCombat : MonoBehaviour {
     protected int healthLevel = 0;
     
     // Use me for calculations.
+    protected int healthMax;
     protected int healthActual;
     
     /*
@@ -43,6 +45,9 @@ public class PlayerCombat : MonoBehaviour {
     
     // Use me for calculations.
     protected float attackSpeedActual;
+    
+    // Used to calculate how long it has been since the last attack.
+    protected float timeOfLastAttack = 0.0F;
     
     /*
      * Player attack range.
@@ -90,11 +95,33 @@ public class PlayerCombat : MonoBehaviour {
     {
         // Only update if the game is in play.
         if (!_playing) return;
+        
+        // If the player is trying to attack, and the attack isn't on cooldown, initiate an attack.
+        if (attacking && !attackOnCooldown)
+        {
+            Attack();
+        }
+    }
+
+    // Declare an attack.
+    private void Attack()
+    {
+        attackOnCooldown = true;
+        // TODO Implement attacking.
+        StartCoroutine(ResetAttackCooldown());
+    }
+
+    // This function resets the attack cooldown after the cooldown period ends.
+    IEnumerator ResetAttackCooldown()
+    {
+        yield return new WaitForSeconds(1 / attackSpeedActual);
+        attackOnCooldown = false;
     }
 
     public void RecalculateStats()
     {
-        healthActual = healthInitial + (healthLevel * healthGrowthPerLevel);
+        healthMax = healthInitial + (healthLevel * healthGrowthPerLevel);
+        healthActual = healthMax;
         attackDamageActual = attackDamageInitial + (attackDamageLevel * attackDamageGrowthPerLevel);
         attackSpeedActual = attackSpeedInitial + (attackSpeedLevel * attackSpeedGrowthPerLevel);
         attackRangeActual = attackRangeInitial + (attackRangeLevel * attackRangeGrowthPerLevel);
@@ -104,6 +131,14 @@ public class PlayerCombat : MonoBehaviour {
     public int GetPlayerHealth()
     {
         return healthActual;
+    }
+
+    public void HealPlayer(int healing)
+    {
+        if (healthActual < healthMax)
+        {
+            healthActual += healing;
+        }
     }
 
     public void DamagePlayer(int damage)
