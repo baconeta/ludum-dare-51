@@ -1,4 +1,4 @@
-using System;
+using HUD;
 using UnityEngine;
 
 namespace Controllers
@@ -6,13 +6,13 @@ namespace Controllers
     public class GameController : MonoBehaviour
     {
         [SerializeField] private bool isInvincible;
-        [SerializeField] private Sanctuary _sanctuary;
+        [SerializeField] private Sanctuary sanctuary;
         public bool GameRunning { get; set; }
 
         // Start is called before the first frame update
         private void Start()
         {
-            if (_sanctuary == default)
+            if (sanctuary == default)
             {
                 Debug.Log("Add a sanctuary ref to the game controller");
             }
