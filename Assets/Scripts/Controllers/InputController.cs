@@ -3,37 +3,41 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class InputController : MonoBehaviour
+namespace Controllers
 {
-    public PlayerInput playerInput;
-    public bool isMobile;
-
-    
-    void SetControlsToMobile()
+    public class InputController : MonoBehaviour
     {
-        playerInput.SwitchCurrentActionMap("PlayerMobile");
-        isMobile = true;
-        //Show Mobile UI
+        public PlayerInput playerInput;
+        public static bool isMobile = false;
 
-    }
-
-    void SetControlsToKeyboard()
-    {
-        playerInput.SwitchCurrentActionMap("Player");
-        isMobile = false;
-        //Hide mobile UI
-    }
-
-    public void UseMobileControls(bool toggle)
-    {
-        if(toggle) SetControlsToMobile();
-        else SetControlsToKeyboard();
         
-        Debug.Log(playerInput.currentActionMap);
-    }
+        void SetControlsToMobile()
+        {
+            playerInput.SwitchCurrentActionMap("PlayerMobile");
+            isMobile = true;
+            //Show Mobile UI
 
-    public bool GetIsMobile()
-    {
-        return isMobile;
-    }
+        }
+
+        void SetControlsToKeyboard()
+        {
+            playerInput.SwitchCurrentActionMap("Player");
+            isMobile = false;
+            //Hide mobile UI
+        }
+
+        public void UseMobileControls(bool toggle)
+        {
+            if(toggle) SetControlsToMobile();
+            else SetControlsToKeyboard();
+            
+            Debug.Log(playerInput.currentActionMap);
+        }
+
+        public bool GetIsMobile()
+        {
+            return isMobile;
+        }
+    
+}
 }

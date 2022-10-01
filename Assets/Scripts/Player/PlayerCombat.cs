@@ -136,12 +136,33 @@ namespace Player
             {
                 // If user is left-clicking.
                 // TODO Replace this check for analog 2.
-                if (Controllers)
+                if (Controllers.InputController.isMobile) //Mobile Controls
                 {
+                    Vector2 playerAttack = playerInput.actions["Attack"].ReadValue<Vector2>();
                     
+                    //Only if stick is in use
+                    if (playerAttack != Vector2.zero)
+                    {
+                        //Face direction and Attack!
+                        //playerAttack <-- Use this Vector2 for player-to-enemy direction
+                        attacking = true;
+                    }
                 }
-                Vector2 playerMovement = playerInput.actions["Move"].ReadValue<Vector2>();
-                attacking = Input.GetButton("Fire1") || Input.GetMouseButton(1);
+                else //keyboard controls
+                {
+                    //Attack is pressed
+                    if(playerInput.actions["Attack"].IsPressed())
+                    {
+                        //Attack in direction of the mouse
+                        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                        Vector2 attackDirection = mousePosition - (Vector2)transform.position;
+                        //Final attack direction to face player to mouse
+                        attackDirection = transform.position + (Vector3)attackDirection;
+                        
+                        //Attack!
+                        attacking = true;
+                    }
+                }
 
                 // Update the animator.
                 animator.SetBool("Attacking", attacking);
@@ -166,6 +187,7 @@ namespace Player
             attackOnCooldown = true;
             _weapon.DoAttack();
             StartCoroutine(ResetAttackCooldown());
+            attacking = false;
         }
 
         // This function resets the attack cooldown after the cooldown period ends.

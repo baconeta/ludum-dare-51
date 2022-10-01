@@ -37,7 +37,6 @@ namespace Player
             if (Controllers.GameController.IsPlayerInputEnabled)
             {
                 Vector2 playerMovement = playerInput.actions["Move"].ReadValue<Vector2>();
-                Debug.Log(playerMovement);
                 _movement.x = playerMovement.x;
                 _movement.y = playerMovement.y;
 
