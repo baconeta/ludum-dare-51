@@ -7,6 +7,7 @@ namespace Controllers
         [SerializeField] public bool isInvincible;
         public bool GameRunning { get; set; }
 
+        [HideInInspector] 
         public GameTimer Timer;
 
         private void Awake()
