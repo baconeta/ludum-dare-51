@@ -49,19 +49,25 @@ public class Customization : MonoBehaviour
         }
 
     }
-    
-    //Finds player stats and copies vital information across
-    public void SaveCustomizationToPlayer()
+
+    private void FixedUpdate()
     {
-        //Should be carried over to MainScene. -- done
         //If Main scene check
         if (SceneManager.GetActiveScene().name == "MainScene")
         {
-            //Save variables to player stats
-            FindObjectOfType<PlayerStats>().SetPlayerInfo(playerName, favouriteAnimal);
-            
-            //Destroy this
-            Destroy(gameObject);
+            SaveCustomizationToPlayer();
         }
+        
+    }
+
+    //Finds player stats and copies vital information across
+    public void SaveCustomizationToPlayer()
+    {
+        //Save variables to player stats
+        FindObjectOfType<PlayerStats>().SetPlayerInfo(playerName, favouriteAnimal);
+        
+        //Destroy this
+        Destroy(gameObject);
+        
     }
 }
