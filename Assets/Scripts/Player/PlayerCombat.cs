@@ -1,9 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
-{
+using static Utilities;
+
+public class Player : MonoBehaviour {
+    
     /*
      * Player health.
      */
@@ -60,6 +60,11 @@ public class Player : MonoBehaviour
     // Use me for calculations.
     protected float attackRangeActual;
     
+    public Animator animator;
+
+    private bool _playing = true;
+    protected bool attacking = false;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -69,14 +74,23 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        attacking = false;
+        // If user is left-clicking.
+        if (Input.GetButtonDown("Fire1"))
+        {
+            attacking = true;
+        }
+        // TODO Replace this check for analog 2.
+        if (Input.GetMouseButtonDown(1))
+        {
+            attacking = true;
+        }
     }
 
-    public void DamagePlayer(int damage)
+    void FixedUpdate()
     {
-        healthActual -= damage;
-        // TODO Give visual indication?
-        // TODO Update HUD?
+        // Only update if the game is in play.
+        if (!_playing) return;
     }
 
     public void RecalculateStats()
@@ -85,11 +99,20 @@ public class Player : MonoBehaviour
         attackDamageActual = attackDamageInitial + (attackDamageLevel * attackDamageGrowthPerLevel);
         attackSpeedActual = attackSpeedInitial + (attackSpeedLevel * attackSpeedGrowthPerLevel);
         attackRangeActual = attackRangeInitial + (attackRangeLevel * attackRangeGrowthPerLevel);
+        animator.ResetTrigger("Dead");
     }
 
     public int GetPlayerHealth()
     {
         return healthActual;
+    }
+
+    public void DamagePlayer(int damage)
+    {
+        healthActual -= damage;
+        // TODO Give visual indication?
+        // TODO Update HUD?
+        animator.SetTrigger("Dead");
     }
 
     public float GetAttackDamage()
@@ -151,6 +174,10 @@ public class Player : MonoBehaviour
             attackRangeLevel++;
         RecalculateStats();
     }
-    
-    
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, attackRangeActual);
+    }
 }
