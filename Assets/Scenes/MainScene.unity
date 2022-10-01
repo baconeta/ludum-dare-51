@@ -679,10 +679,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FollowSpeed: 10
   posOffset: {x: 0.5, y: 0.5}
-  leftLimit: -15
-  RightLimit: 15
-  BottomLimit: -5
-  TopLimit: 5
+  leftLimit: -10
+  RightLimit: 10
+  BottomLimit: -4.9
+  TopLimit: 4.9
 --- !u!1 &562728907 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7369678367256390200, guid: 1f794f3f39fee51499b78d5c49b8607e, type: 3}
