@@ -6,6 +6,9 @@ public class PlayerCombat : MonoBehaviour {
     [Header("Unity References")]
     public Animator animator;
 
+    public PlayerWeapon weapon;
+    public AudioClip attackSound;
+    
     /*
      * Player health.
      */
@@ -71,9 +74,19 @@ public class PlayerCombat : MonoBehaviour {
     protected float attackRangeActual;
 
     private bool _playing = true;
+    // True if the player is trying to attack.
     protected bool attacking = false;
+    // True if the player can't attack because they have recently attacked.
     protected bool attackOnCooldown = false;
-    
+
+    protected enum FacingDirection
+    {
+        Up,
+        Down,
+        Left,
+        Right,
+    }
+    protected FacingDirection facingDirection;
     
     // Start is called before the first frame update
     void Start()
@@ -115,7 +128,7 @@ public class PlayerCombat : MonoBehaviour {
     private void Attack()
     {
         attackOnCooldown = true;
-        // TODO Implement attacking.
+        weapon.DoAttack();
         StartCoroutine(ResetAttackCooldown());
     }
 
@@ -134,6 +147,7 @@ public class PlayerCombat : MonoBehaviour {
         attackSpeedActual = attackSpeedInitial + (attackSpeedLevel * attackSpeedGrowthPerLevel);
         attackRangeActual = attackRangeInitial + (attackRangeLevel * attackRangeGrowthPerLevel);
         animator.ResetTrigger("Dead");
+        weapon.RecalculateStats();
     }
 
     public int GetPlayerHealth()
