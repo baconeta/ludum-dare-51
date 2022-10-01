@@ -1,31 +1,40 @@
 ﻿using UnityEngine;
+using Controllers;
 
 namespace ModeSwap
 {
+    [RequireComponent(typeof(SpriteRenderer))]
     public class SpriteSwapper : MonoBehaviour
     {
-        private SpriteRenderer _sr;
+        private SpriteRenderer spriteRender;
         [SerializeField] private Sprite lightSprite;
         [SerializeField] private Sprite darkSprite;
-
-        private delegate void Swap(bool swap);
-
-        private Swap _useLightMode;
-
-        public SpriteSwapper()
+        private GameController gameController;
+        private void Awake()
         {
-            _useLightMode = SetLightMode;
+            gameController = FindObjectOfType<GameController>();
+            if (gameController != null)
+            {
+                gameController.Timer.OnPhaseChange.AddListener(SetPhaseMode);
+                gameController.Timer.OnTimerStart.AddListener(SetPhaseMode);
+            }
+
+            spriteRender = GetComponent<SpriteRenderer>();
         }
 
-        private void SetLightMode(bool useLight)
+        private void SetPhaseMode(EWorldPhase worldPhase)
         {
-            _sr.sprite = useLight ? lightSprite : darkSprite;
-        }
-
-        public void Start()
-        {
-            _sr = GetComponent<SpriteRenderer>();
-            SetLightMode(true);
+            switch (worldPhase)
+            {
+                case EWorldPhase.LIGHT:
+                    if (lightSprite != null)
+                        spriteRender.sprite = lightSprite;
+                    break;
+                case EWorldPhase.DARK:
+                    if (darkSprite != null)
+                        spriteRender.sprite = darkSprite;
+                    break;
+            }
         }
     }
 }
