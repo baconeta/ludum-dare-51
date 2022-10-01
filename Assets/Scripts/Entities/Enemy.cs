@@ -25,7 +25,7 @@ public abstract class Enemy : MonoBehaviour
     private float _timeOfLastAttack;
 
     //Components
-    protected Player _player;
+    protected Player.Player _player;
     protected Rigidbody2D _rigidbody2D;
 
     protected abstract void EnemyMovement();
@@ -43,7 +43,7 @@ public abstract class Enemy : MonoBehaviour
 
         if (!_player)
         {
-            _player = FindObjectOfType<Player>();
+            _player = FindObjectOfType<Player.Player>();
         }
         
         //Set health to max

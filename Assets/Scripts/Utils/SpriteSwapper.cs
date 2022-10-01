@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace ModeSwap
+namespace Utils
 {
     public class SpriteSwapper : MonoBehaviour
     {

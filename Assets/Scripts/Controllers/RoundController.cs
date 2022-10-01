@@ -28,7 +28,7 @@ namespace Controllers
             CurrentRound = 1;
         }
 
-        private void LastEnemyDestroyed() // This may need to be renamed or rewritten
+        private void LastEnemyDestroyed() // This may need to be renamed or rewritten as it should be a listener 
         {
             // Tell the GameController the round ended so it can inform the elements in the world and the timer
             // Which should also then show the sanctuary menu on the screen 

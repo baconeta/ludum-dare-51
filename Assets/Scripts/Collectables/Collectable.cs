@@ -14,14 +14,14 @@ namespace Collectables
         public Sprite sprite;
         protected SpriteRenderer _sr;
         protected Rigidbody2D _rb;
-        protected Player _player;
+        protected Player.Player _player;
         
         protected abstract void OnCollectablePickup();
         
         // Start is called before the first frame update
         void Start()
         {
-            _player = FindObjectOfType<Player>();
+            _player = FindObjectOfType<Player.Player>();
             _sr = GetComponent<SpriteRenderer>();
             _rb = GetComponent<Rigidbody2D>();
         }
