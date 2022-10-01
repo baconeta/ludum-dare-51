@@ -96,7 +96,7 @@ namespace Player
         // True if the player can't attack because they have recently attacked.
         protected bool attackOnCooldown = false;
 
-        protected enum FacingDirection
+        public enum FacingDirection
         {
             Up,
             Down,
@@ -104,13 +104,14 @@ namespace Player
             Right,
         }
 
-        protected FacingDirection facingDirection;
+        private FacingDirection facingDirection;
+        public FacingDirection GetFacingDirection() { return facingDirection; }
 
         // Start is called before the first frame update
         private void Start()
         {
             if (!animator) GetComponent<Animator>();
-            _weapon = GetComponent<PlayerWeapon>();
+            _weapon = gameObject.GetComponentInChildren<PlayerWeapon>();
 
             RecalculateStats();
         }
