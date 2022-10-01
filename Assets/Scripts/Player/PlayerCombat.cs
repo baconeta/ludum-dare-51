@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerCombat : MonoBehaviour {
@@ -43,6 +44,9 @@ public class PlayerCombat : MonoBehaviour {
     
     // Use me for calculations.
     protected float attackSpeedActual;
+    
+    // Used to calculate how long it has been since the last attack.
+    protected float timeOfLastAttack = 0.0F;
     
     /*
      * Player attack range.
@@ -90,6 +94,27 @@ public class PlayerCombat : MonoBehaviour {
     {
         // Only update if the game is in play.
         if (!_playing) return;
+        
+        // If the player is trying to attack, and the attack isn't on cooldown, initiate an attack.
+        if (attacking && !attackOnCooldown)
+        {
+            Attack();
+        }
+    }
+
+    // Declare an attack.
+    private void Attack()
+    {
+        attackOnCooldown = true;
+        // TODO Implement attacking.
+        StartCoroutine(ResetAttackCooldown());
+    }
+
+    // This function resets the attack cooldown after the cooldown period ends.
+    IEnumerator ResetAttackCooldown()
+    {
+        yield return new WaitForSeconds(1 / attackSpeedActual);
+        attackOnCooldown = false;
     }
 
     public void RecalculateStats()
