@@ -1,33 +1,31 @@
-﻿namespace DefaultNamespace;
-using UnityEngine;
-public class SpriteSwapper :MonoBehaviour
+﻿using UnityEngine;
+
+namespace ModeSwap
 {
-    public delegate void Swap(bool swap);
-    private Swap lightMode;
-    private Swap darkMode;
-    public void Start()
+    public class SpriteSwapper : MonoBehaviour
     {
-        lightMode = true;
-        darkMode = false;
+        private SpriteRenderer _sr;
+        [SerializeField] private Sprite lightSprite;
+        [SerializeField] private Sprite darkSprite;
 
-    }
+        private delegate void Swap(bool swap);
 
-    void SwitchToFalse(bool boolean)
-    {
-        boolean = false;
-    }
+        private Swap _useLightMode;
 
-    void SwitchToTrue(bool boolean)
-    {
-        boolean = true;
-    }
-
-    public void Update()
-    {
-        if (darkMode)
+        public SpriteSwapper()
         {
-            // sprites get switched out
-            // filter turns on
+            _useLightMode = SetLightMode;
+        }
+
+        private void SetLightMode(bool useLight)
+        {
+            _sr.sprite = useLight ? lightSprite : darkSprite;
+        }
+
+        public void Start()
+        {
+            _sr = GetComponent<SpriteRenderer>();
+            SetLightMode(true);
         }
     }
 }
