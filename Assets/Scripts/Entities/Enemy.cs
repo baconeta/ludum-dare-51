@@ -6,7 +6,7 @@ using UnityEngine;
 public abstract class Enemy : MonoBehaviour
 {
     //Enemy collectable
-    public GameObject droppable;
+    public GameObject lootOnDeath;
 
     [Header("Enemy Stats")] 
     public string enemyName;
@@ -25,7 +25,7 @@ public abstract class Enemy : MonoBehaviour
     private float _timeOfLastAttack;
 
     //Components
-    protected PlayerCombat _player;
+    protected Player _player;
     protected Rigidbody2D _rigidbody2D;
 
     protected abstract void EnemyMovement();
@@ -43,7 +43,7 @@ public abstract class Enemy : MonoBehaviour
 
         if (!_player)
         {
-            _player = FindObjectOfType<PlayerCombat>();
+            _player = FindObjectOfType<Player>();
         }
         
         //Set health to max
@@ -53,12 +53,6 @@ public abstract class Enemy : MonoBehaviour
     // Update is called once per frame
     protected virtual void Update()
     {
-        //Die check
-        if (_currentHealth <= 0)
-        {
-            Die();
-        }
-        
     }
     
     
@@ -112,16 +106,34 @@ public abstract class Enemy : MonoBehaviour
         _isAggravated = true;
     }
 
+    public void TakeDamage(float damage)
+    {
+        _currentHealth -= damage;
+        //Die check
+        if (_currentHealth <= 0)
+        {
+            Die();
+        }
+    }
     //Despawning variable for if no rewards should be given
     public void Die(bool isDespawning = false)
     {
         if (!isDespawning)
         {
             //Rewards
+            SpawnLoot();
         }
         Destroy(gameObject);
 
 
+    }
+
+    private void SpawnLoot()
+    {
+        //Spawn loot
+        GameObject newLoot = Instantiate(lootOnDeath);
+        //Move loot to die position
+        newLoot.transform.position = transform.position;
     }
 
     private void OnDrawGizmos()

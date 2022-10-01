@@ -7,20 +7,11 @@ namespace Collectables
     // Item that heals the player upon pickup.
     public class Healing : Collectable
     {
-        // Start is called before the first frame update
-        void Start()
+        protected override void OnCollectablePickup()
         {
-            /*
-             * This is a stub.
-             */
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-            /*
-             * This is a stub.
-             */
+            Debug.Log(value + " health healed!");
+            _player.GetPlayerCombat();//.Heal(healValue);
+            Destroy(gameObject);
         }
     }
 }
