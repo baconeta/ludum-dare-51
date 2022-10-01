@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Puffball : Enemy
 {
+    [Header("Jumping Movement")]
     public AnimationCurve jumpCurve;
     public float jumpDistance;
     //The duration it takes to jump from Start to End
@@ -11,10 +12,10 @@ public class Puffball : Enemy
     //How often the enemy jumps
     public float jumpCooldown;
     
-    
     private float _timeOfLastJump;
     private Vector3 _positionOfLastJump;
     private bool _isJumping;
+    
 
 
 
@@ -32,6 +33,13 @@ public class Puffball : Enemy
             }
         }
 
+    }
+
+    //Melee Attack
+    protected override void Attack()
+    {
+        //Player take damage
+        Debug.Log(enemyName + " Attack Player!");
     }
 
     private IEnumerator Jump()
@@ -103,4 +111,6 @@ public class Puffball : Enemy
         
         yield return null;
     }
+    
+    
 }

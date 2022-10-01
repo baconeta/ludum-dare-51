@@ -524,7 +524,7 @@ GameObject:
   - component: {fileID: 1288501712}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -537,7 +537,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1288501707}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.86, y: -0.74, z: 0}
+  m_LocalPosition: {x: 10.19, y: -0.74, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -724,10 +724,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   droppable: {fileID: 0}
-  enemyName: 
+  enemyName: Mushroom
   moveSpeed: 1
   maxHealth: 1
-  attackRadius: 0
+  attackRadius: 0.6
+  attackSpeed: 3
+  attackDamage: 1
 --- !u!50 &1347916695
 Rigidbody2D:
   serializedVersion: 4
@@ -883,7 +885,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1582364312
 GameObject:
@@ -950,7 +952,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1886765058
 GameObject:
@@ -982,7 +984,7 @@ Transform:
   m_Children:
   - {fileID: 8082246}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2017024191
 GameObject:
@@ -1032,10 +1034,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   droppable: {fileID: 0}
-  enemyName: 
+  enemyName: Seed
   moveSpeed: 1
   maxHealth: 1
-  attackRadius: 0
+  attackRadius: 1.5
+  attackSpeed: 1
+  attackDamage: 2
+  projectile: {fileID: 7244973061248620078, guid: b77f0f27f1e93e2418352bffe572728f, type: 3}
+  projectileSpeed: 1
 --- !u!50 &2017024194
 Rigidbody2D:
   serializedVersion: 4
@@ -1293,10 +1299,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   droppable: {fileID: 0}
-  enemyName: 
+  enemyName: Puffball
   moveSpeed: 1
   maxHealth: 1
-  attackRadius: 0
+  attackRadius: 0.3
+  attackSpeed: 2
+  attackDamage: 1
   jumpCurve:
     serializedVersion: 2
     m_Curve:
@@ -1321,6 +1329,6 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  jumpDistance: 2
-  jumpSpeed: 1
-  jumpCooldown: 3
+  jumpDistance: 0.3
+  jumpSpeed: 0.4
+  jumpCooldown: 0.4

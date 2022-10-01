@@ -13,24 +13,31 @@ public abstract class Enemy : MonoBehaviour
 
     public float moveSpeed = 1;
     public float maxHealth = 1;
-    public float attackRadius = 1;
     
     private float _currentHealth;
     private bool _isDarkMode = true;
     
-    
+    [Header("Attack Stats")]
+    public float attackRadius = 1;
+    public float attackSpeed = 1;
+    public float attackDamage = 1;
+    private float timeOfLastAttack;
+
     //Components
     protected Player _player;
     protected Rigidbody2D _rigidbody2D;
 
     protected abstract void EnemyMovement();
+    protected abstract void Attack();
     
     // Start is called before the first frame update
     protected virtual void Start()
     {
         if (!_rigidbody2D)
         {
+            
             _rigidbody2D = GetComponent<Rigidbody2D>();
+            
         }
 
         if (!_player)
@@ -50,6 +57,7 @@ public abstract class Enemy : MonoBehaviour
         {
             Die();
         }
+        
     }
     
     
@@ -58,9 +66,24 @@ public abstract class Enemy : MonoBehaviour
         //If in dark mode, move.
         if (_isDarkMode)
         {
+            float distanceToPlayer = Vector3.Distance(transform.position, _player.transform.position);
             
-            EnemyMovement();
+            //If in range
+            if (distanceToPlayer <= attackRadius)
+            {
+                if (Time.time > timeOfLastAttack + attackSpeed)
+                {
+                    timeOfLastAttack = Time.time;
+                    Attack();
+                }
+            }
+            else //(Out of range)
+            {
+                EnemyMovement();
+            }
+            
         }
+        
         // Else in light mode!
 
         
@@ -73,6 +96,7 @@ public abstract class Enemy : MonoBehaviour
 
     private void OnDrawGizmos()
     {
+        Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRadius);
     }
 }

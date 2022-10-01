@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Seed : Enemy
 {
+    public Projectile projectile;
+    public float projectileSpeed;
+    
+
     //Only runs in "Dark Mode"
     protected override void EnemyMovement()
     {
@@ -15,5 +19,15 @@ public class Seed : Enemy
         //Move to player
         transform.position +=  moveSpeed * Time.deltaTime * directionToPlayer;
         
+    }
+    
+    //Range Attack
+    protected override void Attack()
+    {
+        //Player take damage
+        Debug.Log(enemyName + " Attack Player!");
+        Projectile newProjectile = Instantiate(projectile);
+        newProjectile.ShootTarget(_player.transform.position, gameObject, projectileSpeed, attackDamage);
+
     }
 }
