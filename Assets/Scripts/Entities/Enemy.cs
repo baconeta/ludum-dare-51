@@ -15,7 +15,7 @@ namespace Entities
         private float _currentHealth;
         public float aggravationRange = 10;
         private bool _isAggravated = false;
-        private bool _isDarkMode = true;
+        private EWorldPhase WorldPhase;
 
         [Header("Attack Stats")] public float attackRadius = 1;
         public float attackSpeed = 1;
@@ -54,6 +54,8 @@ namespace Entities
 
             //Set health to max
             _currentHealth = maxHealth;
+
+            WorldPhase = _gameController.timer.GetWorldPhase();
         }
 
         // Update is called once per frame
@@ -77,7 +79,7 @@ namespace Entities
             }
 
             //If its in light mode
-            if (!_isDarkMode)
+            if (WorldPhase == EWorldPhase.LIGHT)
             {
                 return;
             }
@@ -112,11 +114,15 @@ namespace Entities
 
         public void TakeDamage(float damage)
         {
-            _currentHealth -= damage;
-            //Die check
-            if (_currentHealth <= 0)
+            if (WorldPhase == EWorldPhase.DARK)
             {
-                Die();
+
+                _currentHealth -= damage;
+                //Die check
+                if (_currentHealth <= 0)
+                {
+                    Die();
+                }
             }
         }
 
@@ -168,7 +174,7 @@ namespace Entities
 
         private void SetWorldPhase(EWorldPhase newPhase)
         {
-            _isDarkMode = newPhase == EWorldPhase.DARK;
+            WorldPhase = newPhase;
         }
     }
 }
