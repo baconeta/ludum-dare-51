@@ -50,7 +50,6 @@ jobs:
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
         with:
           targetPlatform: WebGL
-          allowDirtyBuild: false
 
       # Output
       - uses: actions/upload-artifact@v2
