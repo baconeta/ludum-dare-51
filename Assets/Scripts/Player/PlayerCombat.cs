@@ -3,9 +3,16 @@ using UnityEngine;
 
 public class PlayerCombat : MonoBehaviour {
     
+    [Header("Unity References")]
+    public Animator animator;
+
+    public PlayerWeapon weapon;
+    public AudioClip attackSound;
+    
     /*
      * Player health.
      */
+    [Header("Health")]
     [Tooltip("Starting player health.")] [SerializeField]
     protected int healthInitial = 5;
     [Tooltip("How much player health increases per upgrade level.")] [SerializeField]
@@ -21,6 +28,7 @@ public class PlayerCombat : MonoBehaviour {
     /*
      * Player attack damage.
      */
+    [Header("Attack Damage")]
     [Tooltip("How much damage the player deals to enemies per swing attack.")] [SerializeField]
     protected float attackDamageInitial = 1.0F;
     [Tooltip("By how much the player's attack damage increases per level.")] [SerializeField]
@@ -35,6 +43,7 @@ public class PlayerCombat : MonoBehaviour {
     /*
      * Player attack speed.
      */
+    [Header("Attack Speed")]
     [Tooltip("How many times per second that the player can attack with their weapon.")] [SerializeField]
     protected float attackSpeedInitial = 2.0F;
     [Tooltip("By how much the player's attack speed increases per level.")] [SerializeField]
@@ -52,6 +61,7 @@ public class PlayerCombat : MonoBehaviour {
     /*
      * Player attack range.
      */
+    [Header("Attack Range")]
     [Tooltip("How far in game units that the player can reach enemies with their weapon.")] [SerializeField]
     protected float attackRangeInitial = 100.0F;
     [Tooltip("By how much the player's attack range increases per level.")] [SerializeField]
@@ -62,13 +72,21 @@ public class PlayerCombat : MonoBehaviour {
 
     // Use me for calculations.
     protected float attackRangeActual;
-    
-    public Animator animator;
 
     private bool _playing = true;
+    // True if the player is trying to attack.
     protected bool attacking = false;
+    // True if the player can't attack because they have recently attacked.
     protected bool attackOnCooldown = false;
-    
+
+    protected enum FacingDirection
+    {
+        Up,
+        Down,
+        Left,
+        Right,
+    }
+    protected FacingDirection facingDirection;
     
     // Start is called before the first frame update
     void Start()
@@ -110,7 +128,7 @@ public class PlayerCombat : MonoBehaviour {
     private void Attack()
     {
         attackOnCooldown = true;
-        // TODO Implement attacking.
+        weapon.DoAttack();
         StartCoroutine(ResetAttackCooldown());
     }
 
@@ -129,6 +147,7 @@ public class PlayerCombat : MonoBehaviour {
         attackSpeedActual = attackSpeedInitial + (attackSpeedLevel * attackSpeedGrowthPerLevel);
         attackRangeActual = attackRangeInitial + (attackRangeLevel * attackRangeGrowthPerLevel);
         animator.ResetTrigger("Dead");
+        weapon.RecalculateStats();
     }
 
     public int GetPlayerHealth()
@@ -141,6 +160,9 @@ public class PlayerCombat : MonoBehaviour {
         if (healthActual < healthMax)
         {
             healthActual += healing;
+            // Prevent over-healing.
+            if (healthActual >= healthMax)
+                healthActual = healthMax;
         }
     }
 
