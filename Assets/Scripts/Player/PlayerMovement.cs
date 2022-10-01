@@ -18,16 +18,16 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         movementSpeedActual = movementSpeedInitial;
-
-        animator.SetFloat("Horizontal", _movement.x);
-        animator.SetFloat("Vertical", _movement.y);
-        animator.SetFloat("Velocity", _movement.sqrMagnitude);
     }
 
     void Update()
     {
         _movement.x = Input.GetAxisRaw("Horizontal");
         _movement.y = Input.GetAxisRaw("Vertical");
+
+        animator.SetFloat("Horizontal", _movement.x);
+        animator.SetFloat("Vertical", _movement.y);
+        animator.SetFloat("Velocity", _movement.sqrMagnitude);
     }
 
     void FixedUpdate()
