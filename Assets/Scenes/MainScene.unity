@@ -591,6 +591,7 @@ GameObject:
   - component: {fileID: 519420032}
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
+  - component: {fileID: 519420033}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -664,6 +665,24 @@ Transform:
   m_Father: {fileID: 256700353}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &519420033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cf3f6a800c8e4c44ae9dff02bb79495, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FollowSpeed: 10
+  posOffset: {x: 0.5, y: 0.5}
+  leftLimit: -25
+  RightLimit: 25
+  BottomLimit: -25
+  TopLimit: 25
 --- !u!1 &562728907 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7369678367256390200, guid: 1f794f3f39fee51499b78d5c49b8607e, type: 3}
@@ -915,6 +934,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sanctuaryUI: {fileID: 562728907}
+  gameController: {fileID: 0}
   scoreText: {fileID: 623552608}
   currencyText: {fileID: 617831048}
   player: {fileID: 1378147120}
