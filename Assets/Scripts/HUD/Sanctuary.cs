@@ -17,8 +17,6 @@ namespace HUD
         public GameObject upgradeWeaponDamageButton;
         public GameObject upgradeWeaponSpeedButton;
         public GameObject upgradeWeaponRangeButton;
-
-        
         
         private void Start()
         {
