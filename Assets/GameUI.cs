@@ -13,6 +13,7 @@ public class GameUI : MonoBehaviour
     public void Start()
     {
         player = FindObjectOfType<Player.Player>();
+        ShowUI();
     }
     
     public void ShowUI()
