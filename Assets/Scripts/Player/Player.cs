@@ -8,7 +8,7 @@ namespace Player
         public PlayerMovement playerMovement;
         public PlayerStats playerStats;
 
-        private void Start()
+        private void Awake()
         {
             playerCombat = GetComponent<PlayerCombat>();
             playerMovement = GetComponent<PlayerMovement>();
