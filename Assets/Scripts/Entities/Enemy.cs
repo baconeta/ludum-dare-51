@@ -6,7 +6,7 @@ using UnityEngine;
 public abstract class Enemy : MonoBehaviour
 {
     //Enemy collectable
-    public GameObject droppable;
+    public GameObject lootOnDeath;
 
     [Header("Enemy Stats")] 
     public string enemyName;
@@ -53,12 +53,6 @@ public abstract class Enemy : MonoBehaviour
     // Update is called once per frame
     protected virtual void Update()
     {
-        //Die check
-        if (_currentHealth <= 0)
-        {
-            Die();
-        }
-        
     }
     
     
@@ -71,12 +65,15 @@ public abstract class Enemy : MonoBehaviour
             if (distanceToPlayer < aggravationRange) Aggravate();
             return;
         }
+        else
+        {
+            if (distanceToPlayer > aggravationRange) DeAggravate();
+        }
         
         //If its in light mode
         if (!_isDarkMode)
         {
             return;
-
         }
         //Else its in dark mode
         
@@ -99,21 +96,44 @@ public abstract class Enemy : MonoBehaviour
         
     }
 
+    private void DeAggravate()
+    {
+        _isAggravated = false;
+    }
+
     private void Aggravate()
     {
         _isAggravated = true;
     }
 
+    public void TakeDamage(float damage)
+    {
+        _currentHealth -= damage;
+        //Die check
+        if (_currentHealth <= 0)
+        {
+            Die();
+        }
+    }
     //Despawning variable for if no rewards should be given
     public void Die(bool isDespawning = false)
     {
         if (!isDespawning)
         {
             //Rewards
+            SpawnLoot();
         }
         Destroy(gameObject);
 
 
+    }
+
+    private void SpawnLoot()
+    {
+        //Spawn loot
+        GameObject newLoot = Instantiate(lootOnDeath);
+        //Move loot to die position
+        newLoot.transform.position = transform.position;
     }
 
     private void OnDrawGizmos()

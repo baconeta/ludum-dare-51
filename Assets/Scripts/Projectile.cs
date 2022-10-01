@@ -50,6 +50,7 @@ public class Projectile : MonoBehaviour
 
         //Move to spawn
         transform.position = newSource.transform.position;
+        
         //Get direction to shoot
         Vector3 shootDirection = (newTargetPosition - source.transform.position).normalized;
         //Get speed/direction of bullet

@@ -72,6 +72,7 @@ public class PlayerCombat : MonoBehaviour {
     void Start()
     {
         RecalculateStats();
+        if (!animator) GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -85,7 +86,7 @@ public class PlayerCombat : MonoBehaviour {
         animator.SetBool("Attacking", attacking);
         
         // Temporary function to damage the player when SPACE is pressed.
-        if (Input.GetButton("Space"))
+        if (Input.GetButton("Jump"))
         {
             DamagePlayer(1);
         }

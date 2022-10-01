@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7151240252480087817}
   m_Layer: 0
   m_Name: Enemy_Seed
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -99,10 +99,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d253ad551e0c07c44a37e95d0d80ffe5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  droppable: {fileID: 0}
+  lootOnDeath: {fileID: 357654020248760077, guid: 8a95e7913e576564f9b683e766cdc2a1, type: 3}
   enemyName: Seed
   moveSpeed: 1
   maxHealth: 1
+  aggravationRange: 10
   attackRadius: 1.5
   attackSpeed: 1
   attackDamage: 2
