@@ -12,13 +12,14 @@ namespace Controllers
         public GameObject spawnableArea;
         public List<Enemy> livingEnemies;
 
+        private bool _active;
         private WaveData _currentWave;
         [SerializeField] private RoundController roundController;
 
         private float boundX;
         private float boundY;
 
-        private void Start()
+        private void Awake()
         {
             if (roundController == default)
             {
@@ -35,25 +36,30 @@ namespace Controllers
             //Get bounds of spawnable area
             boundX = spawnableArea.GetComponent<SpriteRenderer>().size.x / 2;
             boundY = spawnableArea.GetComponent<SpriteRenderer>().size.y / 2;
-
-            //Start round - Arbitrary number of enemies to spawn
-            SpawnRound(10);
         }
 
         public void Update()
         {
-            if (livingEnemies.Count == 0)
-            {
-                roundController.LastEnemyDestroyed();
-            }
+            if (!_active) return;
+            if (livingEnemies.Count > 0) return;
+
+            Debug.Log("No enemies remaining");
+            _active = false;
+            roundController.LastEnemyDestroyed();
         }
 
-        public void ClearLivingEnemies()
+        private void ClearLivingEnemies()
         {
-            foreach (Enemy enemy in livingEnemies)
+            // Debug only NOT CURRENTLY WORKING PROPERLY
+            for (int i = 0; i < livingEnemies.Count; i++)
             {
-                enemy.Die(true);
+                if (livingEnemies[i] != null)
+                {
+                    livingEnemies[i].Die(true);
+                }
             }
+
+            Debug.Log("All enemies destroyed by debug command.");
         }
 
         public void SpawnEnemy(Transform spawnPosition = null, string enemyType = null)
@@ -80,9 +86,9 @@ namespace Controllers
             newEnemy.transform.position = newPosition;
         }
 
-        public void SpawnRound(int enemiesToSpawn)
+        public void SpawnRound()
         {
-            _currentWave = roundController.NextWave();
+            _currentWave = roundController.GetNextWave();
 
             for (int i = 0; i < _currentWave.numberOfPuffballs; i++)
             {
@@ -98,6 +104,8 @@ namespace Controllers
             {
                 SpawnEnemy(enemyType: "Mushroom");
             }
+
+            _active = true;
         }
 
         public Enemy GetEnemyType(string enemyType = null)
@@ -118,6 +126,8 @@ namespace Controllers
                     newEnemy = enemyList[2];
                     break;
             }
+
+            if (newEnemy != null) newEnemy.EcRef = this;
 
             return newEnemy;
         }

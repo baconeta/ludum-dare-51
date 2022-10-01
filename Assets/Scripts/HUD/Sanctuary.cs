@@ -1,7 +1,6 @@
-using System;
+using Controllers;
 using Player;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace HUD
@@ -9,6 +8,7 @@ namespace HUD
     public class Sanctuary : MonoBehaviour
     {
         public GameObject sanctuaryUI;
+        public GameController gameController;
         public TextMeshProUGUI scoreText;
         public TextMeshProUGUI currencyText;
         public Player.Player player;
@@ -17,10 +17,10 @@ namespace HUD
         public GameObject upgradeWeaponDamageButton;
         public GameObject upgradeWeaponSpeedButton;
         public GameObject upgradeWeaponRangeButton;
-        
+
         private void Start()
         {
-            if(!player) player = FindObjectOfType<Player.Player>();
+            if (!player) player = FindObjectOfType<Player.Player>();
         }
 
         public void ShowSanctuary()
@@ -31,14 +31,15 @@ namespace HUD
 
         public void CloseSanctuary()
         {
+            gameController.Continue();
             sanctuaryUI.SetActive(false);
         }
 
-        public void UpdateSanctuary()
+        private void UpdateSanctuary()
         {
             //Get player stats
             PlayerStats stats = player.GetPlayerStats();
-            
+
             //Update score and currency HUD text
             SetScoreText(stats.GetScore().ToString());
             SetCurrencyText(stats.GetCurrency().ToString());
@@ -50,27 +51,23 @@ namespace HUD
             //player.GetPlayerCombat().UpgradeCost blah blah
             Debug.Log("Buy Max Health");
         }
-        
+
         public void BuyUpgradeWeaponDamage()
         {
             Debug.Log("Buy WeaponDamage");
-
         }
-        
+
         public void BuyUpgradeWeaponRange()
         {
             Debug.Log("Buy WeaponRange");
-
         }
-        
+
         public void BuyUpgradeWeaponSpeed()
         {
             Debug.Log("Buy WeaponSpeed");
-
         }
-        
-        
-        
+
+
         public void SetScoreText(string text)
         {
             scoreText.SetText("Score: " + text);

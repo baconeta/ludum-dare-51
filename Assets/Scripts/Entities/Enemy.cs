@@ -27,6 +27,8 @@ namespace Entities
         protected Rigidbody2D _rigidbody2D;
         private GameController _gameController;
 
+        public EnemyController EcRef { get; set; }
+
         protected abstract void EnemyMovement();
         protected abstract void Attack();
 
@@ -127,6 +129,12 @@ namespace Entities
                 SpawnLoot();
             }
 
+            if (EcRef == default)
+            {
+                EcRef = FindObjectOfType<EnemyController>();
+            }
+
+            EcRef.livingEnemies.Remove(this);
             RemoveEventSubscriptions();
             Destroy(gameObject);
         }
