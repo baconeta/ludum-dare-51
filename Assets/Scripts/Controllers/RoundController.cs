@@ -42,7 +42,12 @@ namespace Controllers
 
         public WaveData GetNextWave()
         {
-            return waves[CurrentRound];
+            if (waves.Length > CurrentRound)
+            {
+                return waves[CurrentRound];
+            }
+
+            return new WaveData(); // TODO this should return and handle the boss fight somehow?
         }
 
         public void StartNextWave()
