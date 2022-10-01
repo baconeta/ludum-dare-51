@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,20 +8,33 @@ namespace Collectables
     // Parent class.
     public class Collectable : MonoBehaviour
     {
+        
+        public int value;
+
+        private SpriteRenderer _sr;
+        private Rigidbody2D _rb;
+        
         // Start is called before the first frame update
         void Start()
         {
-            /*
-             * This is a stub.
-             */
+            _sr = GetComponent<SpriteRenderer>();
+            _rb = GetComponent<Rigidbody2D>();
         }
 
-        // Update is called once per frame
-        void Update()
+        private void OnCollisionEnter2D(Collision2D col)
         {
-            /*
-             * This is a stub.
-             */
+            if (col.gameObject.CompareTag("Player"))
+            {
+                OnCollectablePickup();
+            }
+        }
+
+        public void OnCollectablePickup()
+        {
+            //Do effect
+            
+            //Consume
+            Destroy(gameObject);
         }
     }
 }

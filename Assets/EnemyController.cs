@@ -26,7 +26,7 @@ public class EnemyController : MonoBehaviour
         boundX = spawnableArea.GetComponent<SpriteRenderer>().size.x / 2;
         boundY = spawnableArea.GetComponent<SpriteRenderer>().size.y / 2;
         
-        //Start round
+        //Start round - Arbitrary number of enemies to spawn
         SpawnRound(10);
     }
 

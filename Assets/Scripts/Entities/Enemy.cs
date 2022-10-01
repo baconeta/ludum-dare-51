@@ -25,7 +25,7 @@ public abstract class Enemy : MonoBehaviour
     private float _timeOfLastAttack;
 
     //Components
-    protected Player _player;
+    protected PlayerCombat _player;
     protected Rigidbody2D _rigidbody2D;
 
     protected abstract void EnemyMovement();
@@ -43,7 +43,7 @@ public abstract class Enemy : MonoBehaviour
 
         if (!_player)
         {
-            _player = FindObjectOfType<Player>();
+            _player = FindObjectOfType<PlayerCombat>();
         }
         
         //Set health to max
@@ -71,12 +71,15 @@ public abstract class Enemy : MonoBehaviour
             if (distanceToPlayer < aggravationRange) Aggravate();
             return;
         }
+        else
+        {
+            if (distanceToPlayer > aggravationRange) DeAggravate();
+        }
         
         //If its in light mode
         if (!_isDarkMode)
         {
             return;
-
         }
         //Else its in dark mode
         
@@ -97,6 +100,11 @@ public abstract class Enemy : MonoBehaviour
         }
 
         
+    }
+
+    private void DeAggravate()
+    {
+        _isAggravated = false;
     }
 
     private void Aggravate()
