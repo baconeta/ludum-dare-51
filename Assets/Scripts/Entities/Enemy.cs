@@ -1,3 +1,4 @@
+using Controllers;
 using UnityEngine;
 
 namespace Entities
@@ -24,6 +25,7 @@ namespace Entities
         //Components
         protected Player.Player player;
         protected Rigidbody2D _rigidbody2D;
+        private GameController _gameController;
 
         protected abstract void EnemyMovement();
         protected abstract void Attack();
@@ -40,6 +42,13 @@ namespace Entities
             {
                 player = FindObjectOfType<Player.Player>();
             }
+
+            if (!_gameController)
+            {
+                _gameController = FindObjectOfType<GameController>();
+            }
+
+            SetupEventSubscriptions();
 
             //Set health to max
             _currentHealth = maxHealth;
@@ -118,6 +127,7 @@ namespace Entities
                 SpawnLoot();
             }
 
+            RemoveEventSubscriptions();
             Destroy(gameObject);
         }
 
@@ -136,6 +146,21 @@ namespace Entities
 
             Gizmos.color = Color.yellow;
             Gizmos.DrawWireSphere(transform.position, aggravationRange);
+        }
+
+        private void SetupEventSubscriptions()
+        {
+            _gameController.timer.OnPhaseChange.AddListener(SetWorldPhase);
+        }
+
+        private void RemoveEventSubscriptions()
+        {
+            _gameController.timer.OnPhaseChange.RemoveListener(SetWorldPhase);
+        }
+
+        private void SetWorldPhase(EWorldPhase newPhase)
+        {
+            _isDarkMode = newPhase == EWorldPhase.DARK;
         }
     }
 }
