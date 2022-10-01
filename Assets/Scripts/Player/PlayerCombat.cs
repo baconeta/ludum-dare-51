@@ -67,6 +67,8 @@ public class PlayerCombat : MonoBehaviour {
 
     private bool _playing = true;
     protected bool attacking = false;
+    protected bool attackOnCooldown = false;
+    
     
     // Start is called before the first frame update
     void Start()
