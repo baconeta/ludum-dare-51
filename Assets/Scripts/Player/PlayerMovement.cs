@@ -18,6 +18,11 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         movementSpeedActual = movementSpeedInitial;
+
+        //If missing components
+        if (!rb) rb = GetComponent<Rigidbody2D>();
+        if (!animator) animator = GetComponent<Animator>();
+
     }
 
     void Update()
