@@ -15,6 +15,7 @@ public class PlayerCombat : MonoBehaviour {
     protected int healthLevel = 0;
     
     // Use me for calculations.
+    protected int healthMax;
     protected int healthActual;
     
     /*
@@ -119,7 +120,8 @@ public class PlayerCombat : MonoBehaviour {
 
     public void RecalculateStats()
     {
-        healthActual = healthInitial + (healthLevel * healthGrowthPerLevel);
+        healthMax = healthInitial + (healthLevel * healthGrowthPerLevel);
+        healthActual = healthMax;
         attackDamageActual = attackDamageInitial + (attackDamageLevel * attackDamageGrowthPerLevel);
         attackSpeedActual = attackSpeedInitial + (attackSpeedLevel * attackSpeedGrowthPerLevel);
         attackRangeActual = attackRangeInitial + (attackRangeLevel * attackRangeGrowthPerLevel);
@@ -129,6 +131,14 @@ public class PlayerCombat : MonoBehaviour {
     public int GetPlayerHealth()
     {
         return healthActual;
+    }
+
+    public void HealPlayer(int healing)
+    {
+        if (healthActual < healthMax)
+        {
+            healthActual += healing;
+        }
     }
 
     public void DamagePlayer(int damage)
