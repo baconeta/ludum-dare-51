@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Collectables
@@ -8,22 +5,21 @@ namespace Collectables
     // Parent class.
     public abstract class Collectable : MonoBehaviour
     {
-
         public float value;
-        
+
         public Sprite sprite;
-        protected SpriteRenderer _sr;
-        protected Rigidbody2D _rb;
-        protected Player.Player _player;
-        
+        protected SpriteRenderer sr;
+        protected Rigidbody2D rb;
+        protected Player.Player player;
+
         protected abstract void OnCollectablePickup();
-        
+
         // Start is called before the first frame update
         void Start()
         {
-            _player = FindObjectOfType<Player.Player>();
-            _sr = GetComponent<SpriteRenderer>();
-            _rb = GetComponent<Rigidbody2D>();
+            player = FindObjectOfType<Player.Player>();
+            sr = GetComponent<SpriteRenderer>();
+            rb = GetComponent<Rigidbody2D>();
         }
 
         private void OnCollisionEnter2D(Collision2D col)
@@ -33,8 +29,5 @@ namespace Collectables
                 OnCollectablePickup();
             }
         }
-
-        
-
     }
 }

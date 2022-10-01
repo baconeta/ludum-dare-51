@@ -11,7 +11,7 @@ namespace Collectables
         protected override void OnCollectablePickup()
         {
             //Give player value
-            _player.GetPlayerStats().AddCurrency((int)value);
+            player.GetPlayerStats().AddCurrency((int)value);
             Destroy(gameObject);
         }
     }

@@ -1,43 +1,42 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerStats : MonoBehaviour
+namespace Player
 {
-    
-    public int currency = 0;
-    
-    public int score = 0;
-    
-    public void AddCurrency(int value)
+    public class PlayerStats : MonoBehaviour
     {
-        currency += value;
-        Debug.Log(value + " added to player wallet!");
+        public int currency = 0;
 
-    }
+        public int score = 0;
 
-    public bool SpendCurrency(int value)
-    {
-        //Check has enough currency
-        if (currency - value < 0) return false;
-          
-        //Spend currency
-        currency -= value;
-        return true;
-    }
+        public void AddCurrency(int value)
+        {
+            currency += value;
+            Debug.Log(value + " added to player wallet!");
+        }
 
-    public int GetCurrency()
-    {
-        return currency;
-    }
+        public bool SpendCurrency(int value)
+        {
+            //Check has enough currency
+            if (currency - value < 0) return false;
 
-    public int GetScore()
-    {
-        return score;
-    }
+            //Spend currency
+            currency -= value;
+            return true;
+        }
 
-    public void AddScore(int scoreToAdd)
-    {
-        score += scoreToAdd;
+        public int GetCurrency()
+        {
+            return currency;
+        }
+
+        public int GetScore()
+        {
+            return score;
+        }
+
+        public void AddScore(int scoreToAdd)
+        {
+            score += scoreToAdd;
+        }
     }
 }

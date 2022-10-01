@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Entities;
 using UnityEngine;
 
 public class Puffball : Enemy
@@ -50,10 +51,10 @@ public class Puffball : Enemy
         _positionOfLastJump = transform.position;
 
         //Get direction of player
-        Vector3 directionToPlayer = (_player.transform.position - transform.position).normalized;
+        Vector3 directionToPlayer = (player.transform.position - transform.position).normalized;
 
         //Get distance of player
-        float distanceToPlayer = Vector3.Distance(_positionOfLastJump, _player.transform.position);
+        float distanceToPlayer = Vector3.Distance(_positionOfLastJump, player.transform.position);
         
         //Move to player in jumps
         Vector3 jumpTarget;

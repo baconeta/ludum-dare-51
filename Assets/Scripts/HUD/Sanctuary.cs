@@ -1,4 +1,5 @@
 using System;
+using Player;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -10,7 +11,7 @@ namespace HUD
         public GameObject sanctuaryUI;
         public TextMeshProUGUI scoreText;
         public TextMeshProUGUI currencyText;
-        public Player player;
+        public Player.Player player;
 
         public GameObject upgradeMaxHealthButton;
         public GameObject upgradeWeaponDamageButton;
@@ -21,7 +22,7 @@ namespace HUD
         
         private void Start()
         {
-            if(!player) player = FindObjectOfType<Player>();
+            if(!player) player = FindObjectOfType<Player.Player>();
         }
 
         public void ShowSanctuary()

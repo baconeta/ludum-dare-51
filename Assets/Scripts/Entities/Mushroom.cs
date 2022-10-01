@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Entities;
 using UnityEngine;
 
 public class Mushroom : Enemy
@@ -11,7 +12,7 @@ public class Mushroom : Enemy
         //Move to linearly
         
         //Get direction of player
-        Vector3 directionToPlayer = (_player.transform.position - transform.position).normalized;
+        Vector3 directionToPlayer = (player.transform.position - transform.position).normalized;
         
         //Move to player
         transform.position +=  moveSpeed * Time.deltaTime * directionToPlayer;
