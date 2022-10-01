@@ -12,6 +12,7 @@ namespace Controllers
 
     public class RoundController : MonoBehaviour
     {
+        [SerializeField] private GameController _gc; 
         [SerializeField] private EnemyController enemyController;
         [SerializeField] public WaveData[] waves;
 
@@ -31,6 +32,7 @@ namespace Controllers
         private void LastEnemyDestroyed() // This may need to be renamed or rewritten as it should be a listener 
         {
             // Tell the GameController the round ended so it can inform the elements in the world and the timer
+            _gc.RoundEnded(CurrentRound); // Tells the game controller which round just finished and to handle that
             // Which should also then show the sanctuary menu on the screen 
         }
 

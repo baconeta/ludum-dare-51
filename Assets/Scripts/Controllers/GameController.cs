@@ -9,8 +9,7 @@ namespace Controllers
         [SerializeField] private Sanctuary sanctuary;
         public bool GameRunning { get; set; }
 
-        [HideInInspector] 
-        public GameTimer Timer;
+        [HideInInspector] public GameTimer Timer;
 
         private void Awake()
         {
@@ -31,7 +30,7 @@ namespace Controllers
             {
                 hud.GameStart();
             }
-        
+
             if (Timer)
                 Timer.StartTimer();
         }
@@ -56,6 +55,13 @@ namespace Controllers
         {
             BroadcastMessage("onGameEnd");
             GameRunning = false;
+        }
+
+        public void RoundEnded(int currentRound)
+        {
+            Debug.Log("Round " + currentRound + " completed successfully.");
+            sanctuary.ShowSanctuary();
+            // Also we should pause the game and all elements here including input!!
         }
     }
 }
