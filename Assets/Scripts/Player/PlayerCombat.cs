@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Player
 {
@@ -7,6 +8,7 @@ namespace Player
     {
         [Header("Unity References")] public Animator animator;
 
+        public PlayerInput playerInput;
         private PlayerWeapon _weapon;
         public AudioClip attackSound;
 
@@ -122,6 +124,7 @@ namespace Player
         {
             if (!animator) GetComponent<Animator>();
             _weapon = gameObject.GetComponentInChildren<PlayerWeapon>();
+            if (!playerInput) playerInput = GetComponent<PlayerInput>();
 
             RecalculateStats();
         }
@@ -133,6 +136,11 @@ namespace Player
             {
                 // If user is left-clicking.
                 // TODO Replace this check for analog 2.
+                if (Controllers)
+                {
+                    
+                }
+                Vector2 playerMovement = playerInput.actions["Move"].ReadValue<Vector2>();
                 attacking = Input.GetButton("Fire1") || Input.GetMouseButton(1);
 
                 // Update the animator.

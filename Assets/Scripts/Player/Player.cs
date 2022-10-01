@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
+
 
 namespace Player
 {
@@ -7,15 +9,20 @@ namespace Player
         public PlayerCombat playerCombat;
         public PlayerMovement playerMovement;
         public PlayerStats playerStats;
+        public PlayerInput playerInput;
 
         private void Awake()
         {
             playerCombat = GetComponent<PlayerCombat>();
             playerMovement = GetComponent<PlayerMovement>();
             playerStats = GetComponent<PlayerStats>();
+            playerInput = GetComponent<PlayerInput>();
         }
 
-
+        public PlayerInput GetPlayerInput()
+        {
+            return playerInput;
+        }
         public PlayerCombat GetPlayerCombat()
         {
             return playerCombat;
