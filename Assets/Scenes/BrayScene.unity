@@ -512,6 +512,7 @@ GameObject:
   - component: {fileID: 1288501713}
   - component: {fileID: 1288501712}
   - component: {fileID: 1288501714}
+  - component: {fileID: 1288501715}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -647,7 +648,7 @@ MonoBehaviour:
   attackRangeInitial: 100
   attackRangeGrowthPerLevel: 12
   attackRangeMaxLevel: 5
-  animator: {fileID: 0}
+  animator: {fileID: 1288501715}
 --- !u!114 &1288501713
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -679,6 +680,26 @@ MonoBehaviour:
   currency: 0
   playerCombat: {fileID: 0}
   playerMovement: {fileID: 0}
+--- !u!95 &1288501715
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1288501707}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9fa6992ce2ac71a4d8d10f2e9ef5456f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1319607055
 GameObject:
   m_ObjectHideFlags: 0

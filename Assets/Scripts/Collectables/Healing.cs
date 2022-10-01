@@ -10,7 +10,7 @@ namespace Collectables
         protected override void OnCollectablePickup()
         {
             Debug.Log(value + " health healed!");
-            _player.GetPlayerCombat();//.Heal(healValue);
+            //_player.GetPlayerCombat().heal
             Destroy(gameObject);
         }
     }
