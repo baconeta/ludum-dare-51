@@ -78,6 +78,12 @@ public class PlayerCombat : MonoBehaviour {
 
         // Update the animator.
         animator.SetBool("Attacking", attacking);
+        
+        // Temporary function to damage the player when SPACE is pressed.
+        if (Input.GetButton("Space"))
+        {
+            DamagePlayer(1);
+        }
     }
 
     void FixedUpdate()
