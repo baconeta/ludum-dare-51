@@ -138,6 +138,9 @@ public class PlayerCombat : MonoBehaviour {
         if (healthActual < healthMax)
         {
             healthActual += healing;
+            // Prevent over-healing.
+            if (healthActual >= healthMax)
+                healthActual = healthMax;
         }
     }
 
