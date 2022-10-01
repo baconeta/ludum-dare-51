@@ -13,15 +13,16 @@ public abstract class Enemy : MonoBehaviour
 
     public float moveSpeed = 1;
     public float maxHealth = 1;
-    
     private float _currentHealth;
+    public float aggravationRange = 10;
+    private bool _isAggravated = false;
     private bool _isDarkMode = true;
     
     [Header("Attack Stats")]
     public float attackRadius = 1;
     public float attackSpeed = 1;
     public float attackDamage = 1;
-    private float timeOfLastAttack;
+    private float _timeOfLastAttack;
 
     //Components
     protected Player _player;
@@ -63,40 +64,64 @@ public abstract class Enemy : MonoBehaviour
     
     protected virtual void FixedUpdate()
     {
-        //If in dark mode, move.
-        if (_isDarkMode)
+        float distanceToPlayer = Vector3.Distance(transform.position, _player.transform.position);
+        
+        if (!_isAggravated)
         {
-            float distanceToPlayer = Vector3.Distance(transform.position, _player.transform.position);
-            
-            //If in range
-            if (distanceToPlayer <= attackRadius)
-            {
-                if (Time.time > timeOfLastAttack + attackSpeed)
-                {
-                    timeOfLastAttack = Time.time;
-                    Attack();
-                }
-            }
-            else //(Out of range)
-            {
-                EnemyMovement();
-            }
-            
+            if (distanceToPlayer < aggravationRange) Aggravate();
+            return;
         }
         
-        // Else in light mode!
+        //If its in light mode
+        if (!_isDarkMode)
+        {
+            return;
+
+        }
+        //Else its in dark mode
+        
+            
+        //If in range
+        if (distanceToPlayer <= attackRadius)
+        {
+            //If ready to attack
+            if (Time.time > _timeOfLastAttack + attackSpeed)
+            {
+                _timeOfLastAttack = Time.time;
+                Attack();
+            }
+        }
+        else //(Out of range)
+        {
+            EnemyMovement();
+        }
 
         
     }
 
-    private void Die()
+    private void Aggravate()
     {
+        _isAggravated = true;
+    }
+
+    //Despawning variable for if no rewards should be given
+    public void Die(bool isDespawning = false)
+    {
+        if (!isDespawning)
+        {
+            //Rewards
+        }
         Destroy(gameObject);
+
+
     }
 
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRadius);
+        
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, aggravationRange);
     }
 }
