@@ -9,6 +9,7 @@ namespace Controllers
         [SerializeField] private Sanctuary sanctuary;
         public bool GameRunning { get; set; }
 
+        [HideInInspector] 
         public GameTimer Timer;
 
         private void Awake()
