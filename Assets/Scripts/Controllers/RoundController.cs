@@ -31,7 +31,13 @@ namespace Controllers
         private void LastEnemyDestroyed() // This may need to be renamed or rewritten
         {
             // Tell the GameController the round ended so it can inform the elements in the world and the timer
-            // Which should also then show the sanctuary
+            // Which should also then show the sanctuary menu on the screen 
+        }
+
+        public WaveData NextWave()
+        {
+            CurrentRound += 1;
+            return waves[CurrentRound - 1];
         }
     }
 }
