@@ -85,6 +85,9 @@ public class Player : MonoBehaviour {
         {
             attacking = true;
         }
+
+        // Update the animator.
+        animator.SetBool("Attacking", attacking);
     }
 
     void FixedUpdate()
