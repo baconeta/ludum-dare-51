@@ -127,6 +127,7 @@ namespace Entities
                 SpawnLoot();
             }
 
+            RemoveEventSubscriptions();
             Destroy(gameObject);
         }
 
@@ -150,6 +151,11 @@ namespace Entities
         private void SetupEventSubscriptions()
         {
             _gameController.timer.OnPhaseChange.AddListener(SetWorldPhase);
+        }
+
+        private void RemoveEventSubscriptions()
+        {
+            _gameController.timer.OnPhaseChange.RemoveListener(SetWorldPhase);
         }
 
         private void SetWorldPhase(EWorldPhase newPhase)
