@@ -8,6 +8,7 @@ namespace HUD
     public class Sanctuary : MonoBehaviour
     {
         public GameObject sanctuaryUI;
+        public GameController gameController;
         public TextMeshProUGUI scoreText;
         public TextMeshProUGUI currencyText;
         public Player.Player player;
@@ -30,7 +31,7 @@ namespace HUD
 
         public void CloseSanctuary()
         {
-            FindObjectOfType<GameController>().Continue();
+            gameController.Continue();
             sanctuaryUI.SetActive(false);
         }
 

@@ -12,6 +12,7 @@ namespace Controllers
         public GameObject spawnableArea;
         public List<Enemy> livingEnemies;
 
+        private bool _active;
         private WaveData _currentWave;
         [SerializeField] private RoundController roundController;
 
@@ -39,24 +40,23 @@ namespace Controllers
 
         public void Update()
         {
-            if (livingEnemies.Count == 0)
-            {
-                Debug.Log("All enemies destroyed - tell round controller");
-                roundController.LastEnemyDestroyed();
-            }
+            if (!_active) return;
+            if (livingEnemies.Count > 0) return;
 
-            if (Input.GetButtonDown("Debug Reset"))
-            {
-                ClearLivingEnemies();
-            }
+            Debug.Log("No enemies remaining");
+            _active = false;
+            roundController.LastEnemyDestroyed();
         }
 
         private void ClearLivingEnemies()
         {
-            // Debug only
-            foreach (Enemy enemy in livingEnemies)
+            // Debug only NOT CURRENTLY WORKING PROPERLY
+            for (int i = 0; i < livingEnemies.Count; i++)
             {
-                enemy.Die(true);
+                if (livingEnemies[i] != null)
+                {
+                    livingEnemies[i].Die(true);
+                }
             }
 
             Debug.Log("All enemies destroyed by debug command.");
@@ -104,6 +104,8 @@ namespace Controllers
             {
                 SpawnEnemy(enemyType: "Mushroom");
             }
+
+            _active = true;
         }
 
         public Enemy GetEnemyType(string enemyType = null)

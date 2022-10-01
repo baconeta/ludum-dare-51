@@ -126,7 +126,7 @@ namespace Entities
                 EcRef = FindObjectOfType<EnemyController>();
             }
 
-            EcRef.enemyList.Remove(this);
+            EcRef.livingEnemies.Remove(this);
             Destroy(gameObject);
         }
 

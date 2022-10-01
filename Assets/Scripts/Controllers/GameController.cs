@@ -21,6 +21,8 @@ namespace Controllers
         // Start is called before the first frame update
         private void Start()
         {
+            _rc = FindObjectOfType<RoundController>();
+
             if (sanctuary == default)
             {
                 Debug.Log("Add a sanctuary ref to the game controller");
@@ -28,6 +30,7 @@ namespace Controllers
 
             GameRunning = true;
             HUDController hud = FindObjectOfType<HUDController>();
+
             if (hud != null)
             {
                 hud.GameStart();
@@ -69,9 +72,9 @@ namespace Controllers
         public void Continue()
         {
             // This function will start the next wave and unpause the controls and game systems/timer
-            // unpause everything and then spawn the next wave
-            
-            _rc.GetNextWave();
+            // TODO unpause everything and then spawn the next wave
+
+            _rc.StartNextWave();
         }
     }
 }
