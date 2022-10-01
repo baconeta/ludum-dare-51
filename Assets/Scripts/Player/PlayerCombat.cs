@@ -13,13 +13,17 @@ namespace Player
         /*
      * Player health.
      */
-        [Header("Health")] [Tooltip("Starting player health.")] [SerializeField]
+        [Header("Health")]
+        [Tooltip("Starting player health.")]
+        [SerializeField]
         protected int healthInitial = 5;
 
-        [Tooltip("How much player health increases per upgrade level.")] [SerializeField]
+        [Tooltip("How much player health increases per upgrade level.")]
+        [SerializeField]
         protected int healthGrowthPerLevel = 1;
 
-        [Tooltip("How many times the player can upgrade health.")] [SerializeField]
+        [Tooltip("How many times the player can upgrade health.")]
+        [SerializeField]
         protected int healthMaxLevel = 5;
 
         protected int healthLevel = 0;
@@ -36,10 +40,12 @@ namespace Player
         [SerializeField]
         protected float attackDamageInitial = 1.0F;
 
-        [Tooltip("By how much the player's attack damage increases per level.")] [SerializeField]
+        [Tooltip("By how much the player's attack damage increases per level.")]
+        [SerializeField]
         protected float attackDamageGrowthPerLevel = 0.2F;
 
-        [Tooltip("How many times the player can upgrade attack damage.")] [SerializeField]
+        [Tooltip("How many times the player can upgrade attack damage.")]
+        [SerializeField]
         protected int attackDamageMaxLevel = 5;
 
         protected int attackDamageLevel = 0;
@@ -55,10 +61,12 @@ namespace Player
         [SerializeField]
         protected float attackSpeedInitial = 2.0F;
 
-        [Tooltip("By how much the player's attack speed increases per level.")] [SerializeField]
+        [Tooltip("By how much the player's attack speed increases per level.")]
+        [SerializeField]
         protected float attackSpeedGrowthPerLevel = 0.667F;
 
-        [Tooltip("How many times the player can upgrade attack speed.")] [SerializeField]
+        [Tooltip("How many times the player can upgrade attack speed.")]
+        [SerializeField]
         protected int attackSpeedMaxLevel = 5;
 
         protected int attackSpeedLevel = 0;
@@ -77,10 +85,12 @@ namespace Player
         [SerializeField]
         protected float attackRangeInitial = 100.0F;
 
-        [Tooltip("By how much the player's attack range increases per level.")] [SerializeField]
+        [Tooltip("By how much the player's attack range increases per level.")]
+        [SerializeField]
         protected float attackRangeGrowthPerLevel = 12.0F;
 
-        [Tooltip("How many times the player can upgrade attack range.")] [SerializeField]
+        [Tooltip("How many times the player can upgrade attack range.")]
+        [SerializeField]
         protected int attackRangeMaxLevel = 5;
 
         protected int attackRangeLevel = 0;
@@ -119,17 +129,14 @@ namespace Player
         // Update is called once per frame
         private void Update()
         {
-            // If user is left-clicking.
-            // TODO Replace this check for analog 2.
-            attacking = Input.GetButton("Fire1") || Input.GetMouseButton(1);
-
-            // Update the animator.
-            animator.SetBool("Attacking", attacking);
-
-            // Temporary function to damage the player when SPACE is pressed.
-            if (Input.GetButton("Jump"))
+            if (Controllers.GameController.IsPlayerInputEnabled)
             {
-                DamagePlayer(1);
+                // If user is left-clicking.
+                // TODO Replace this check for analog 2.
+                attacking = Input.GetButton("Fire1") || Input.GetMouseButton(1);
+
+                // Update the animator.
+                animator.SetBool("Attacking", attacking);
             }
         }
 
