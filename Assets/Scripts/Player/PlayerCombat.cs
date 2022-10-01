@@ -2,81 +2,96 @@ using System.Collections;
 using Player;
 using UnityEngine;
 
-public class PlayerCombat : MonoBehaviour {
-    
-    [Header("Unity References")]
-    public Animator animator;
+public class PlayerCombat : MonoBehaviour
+{
+    [Header("Unity References")] public Animator animator;
 
-    public PlayerWeapon weapon;
+    private PlayerWeapon _weapon;
     public AudioClip attackSound;
-    
+
     /*
      * Player health.
      */
-    [Header("Health")]
-    [Tooltip("Starting player health.")] [SerializeField]
+    [Header("Health")] [Tooltip("Starting player health.")] [SerializeField]
     protected int healthInitial = 5;
+
     [Tooltip("How much player health increases per upgrade level.")] [SerializeField]
     protected int healthGrowthPerLevel = 1;
+
     [Tooltip("How many times the player can upgrade health.")] [SerializeField]
     protected int healthMaxLevel = 5;
+
     protected int healthLevel = 0;
-    
+
     // Use me for calculations.
     protected int healthMax;
     protected int healthActual;
-    
+
     /*
      * Player attack damage.
      */
     [Header("Attack Damage")]
-    [Tooltip("How much damage the player deals to enemies per swing attack.")] [SerializeField]
+    [Tooltip("How much damage the player deals to enemies per swing attack.")]
+    [SerializeField]
     protected float attackDamageInitial = 1.0F;
+
     [Tooltip("By how much the player's attack damage increases per level.")] [SerializeField]
     protected float attackDamageGrowthPerLevel = 0.2F;
+
     [Tooltip("How many times the player can upgrade attack damage.")] [SerializeField]
     protected int attackDamageMaxLevel = 5;
+
     protected int attackDamageLevel = 0;
-    
+
     // Use me for calculations.
     protected float attackDamageActual;
-    
+
     /*
      * Player attack speed.
      */
     [Header("Attack Speed")]
-    [Tooltip("How many times per second that the player can attack with their weapon.")] [SerializeField]
+    [Tooltip("How many times per second that the player can attack with their weapon.")]
+    [SerializeField]
     protected float attackSpeedInitial = 2.0F;
+
     [Tooltip("By how much the player's attack speed increases per level.")] [SerializeField]
     protected float attackSpeedGrowthPerLevel = 0.667F;
+
     [Tooltip("How many times the player can upgrade attack speed.")] [SerializeField]
     protected int attackSpeedMaxLevel = 5;
+
     protected int attackSpeedLevel = 0;
-    
+
     // Use me for calculations.
     protected float attackSpeedActual;
-    
+
     // Used to calculate how long it has been since the last attack.
     protected float timeOfLastAttack = 0.0F;
-    
+
     /*
      * Player attack range.
      */
     [Header("Attack Range")]
-    [Tooltip("How far in game units that the player can reach enemies with their weapon.")] [SerializeField]
+    [Tooltip("How far in game units that the player can reach enemies with their weapon.")]
+    [SerializeField]
     protected float attackRangeInitial = 100.0F;
+
     [Tooltip("By how much the player's attack range increases per level.")] [SerializeField]
     protected float attackRangeGrowthPerLevel = 12.0F;
+
     [Tooltip("How many times the player can upgrade attack range.")] [SerializeField]
     protected int attackRangeMaxLevel = 5;
+
     protected int attackRangeLevel = 0;
 
     // Use me for calculations.
     protected float attackRangeActual;
 
     private bool _playing = true;
+
     // True if the player is trying to attack.
     protected bool attacking = false;
+
     // True if the player can't attack because they have recently attacked.
     protected bool attackOnCooldown = false;
 
@@ -87,17 +102,20 @@ public class PlayerCombat : MonoBehaviour {
         Left,
         Right,
     }
+
     protected FacingDirection facingDirection;
-    
+
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        RecalculateStats();
         if (!animator) GetComponent<Animator>();
+        _weapon = GetComponent<PlayerWeapon>();
+
+        RecalculateStats();
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         // If user is left-clicking.
         // TODO Replace this check for analog 2.
@@ -105,7 +123,7 @@ public class PlayerCombat : MonoBehaviour {
 
         // Update the animator.
         animator.SetBool("Attacking", attacking);
-        
+
         // Temporary function to damage the player when SPACE is pressed.
         if (Input.GetButton("Jump"))
         {
@@ -113,11 +131,11 @@ public class PlayerCombat : MonoBehaviour {
         }
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         // Only update if the game is in play.
         if (!_playing) return;
-        
+
         // If the player is trying to attack, and the attack isn't on cooldown, initiate an attack.
         if (attacking && !attackOnCooldown)
         {
@@ -129,7 +147,7 @@ public class PlayerCombat : MonoBehaviour {
     private void Attack()
     {
         attackOnCooldown = true;
-        weapon.DoAttack();
+        _weapon.DoAttack();
         StartCoroutine(ResetAttackCooldown());
     }
 
@@ -140,7 +158,7 @@ public class PlayerCombat : MonoBehaviour {
         attackOnCooldown = false;
     }
 
-    public void RecalculateStats()
+    private void RecalculateStats()
     {
         healthMax = healthInitial + (healthLevel * healthGrowthPerLevel);
         healthActual = healthMax;
@@ -148,7 +166,7 @@ public class PlayerCombat : MonoBehaviour {
         attackSpeedActual = attackSpeedInitial + (attackSpeedLevel * attackSpeedGrowthPerLevel);
         attackRangeActual = attackRangeInitial + (attackRangeLevel * attackRangeGrowthPerLevel);
         animator.ResetTrigger("Dead");
-        weapon.RecalculateStats();
+        _weapon.RecalculateStats();
     }
 
     public int GetPlayerHealth()
@@ -202,6 +220,7 @@ public class PlayerCombat : MonoBehaviour {
     {
         return healthLevel;
     }
+
     public void IncreaseHealthLevel()
     {
         if (healthLevel < healthMaxLevel)
@@ -213,6 +232,7 @@ public class PlayerCombat : MonoBehaviour {
     {
         return attackDamageLevel;
     }
+
     public void IncreaseAttackDamageLevel()
     {
         if (attackDamageLevel < attackDamageMaxLevel)
@@ -224,6 +244,7 @@ public class PlayerCombat : MonoBehaviour {
     {
         return attackSpeedLevel;
     }
+
     public void IncreaseAttackSpeedLevel()
     {
         if (attackSpeedLevel < attackSpeedMaxLevel)

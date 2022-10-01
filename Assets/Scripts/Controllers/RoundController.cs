@@ -12,7 +12,7 @@ namespace Controllers
 
     public class RoundController : MonoBehaviour
     {
-        [SerializeField] private GameController _gc; 
+        [SerializeField] private GameController gameController;
         [SerializeField] private EnemyController enemyController;
         [SerializeField] public WaveData[] waves;
 
@@ -26,20 +26,20 @@ namespace Controllers
                 Debug.Log("Have you attached the enemy controller ref to the round controller?");
             }
 
-            CurrentRound = 1;
+            CurrentRound = 0;
         }
 
-        private void LastEnemyDestroyed() // This may need to be renamed or rewritten as it should be a listener 
+        public void LastEnemyDestroyed() // could this be an event listener?
         {
-            // Tell the GameController the round ended so it can inform the elements in the world and the timer
-            _gc.RoundEnded(CurrentRound); // Tells the game controller which round just finished and to handle that
-            // Which should also then show the sanctuary menu on the screen 
+            CurrentRound += 1; // round data is indexed by 0 and display round numbers indexes by 1 so this is safe
+
+            // Tells the game controller which round just finished and to handle that
+            gameController.RoundEnded(CurrentRound);
         }
 
         public WaveData NextWave()
         {
-            CurrentRound += 1;
-            return waves[CurrentRound - 1];
+            return waves[CurrentRound];
         }
     }
 }

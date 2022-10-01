@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Entities;
+using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -11,11 +12,19 @@ namespace Controllers
         public GameObject spawnableArea;
         public List<Enemy> livingEnemies;
 
+        private WaveData _currentWave;
+        [SerializeField] private RoundController roundController;
+
         private float boundX;
         private float boundY;
 
         private void Start()
         {
+            if (roundController == default)
+            {
+                Debug.Log("Set a ref to the RoundController on the EnemyController");
+            }
+
             livingEnemies = new List<Enemy>();
 
             if (!spawnableArea)
@@ -35,7 +44,7 @@ namespace Controllers
         {
             if (livingEnemies.Count == 0)
             {
-                SpawnRound(10);
+                roundController.LastEnemyDestroyed();
             }
         }
 
@@ -47,10 +56,10 @@ namespace Controllers
             }
         }
 
-        public void SpawnEnemy(Transform spawnPosition = null)
+        public void SpawnEnemy(Transform spawnPosition = null, string enemyType = null)
         {
             //Spawn new enemy
-            Enemy newEnemy = Instantiate(GetEnemyType());
+            Enemy newEnemy = Instantiate(GetEnemyType(enemyType));
             //Save reference in living enemies
             livingEnemies.Add(newEnemy);
 
@@ -73,9 +82,21 @@ namespace Controllers
 
         public void SpawnRound(int enemiesToSpawn)
         {
-            for (int i = 0; i < enemiesToSpawn; i++)
+            _currentWave = roundController.NextWave();
+
+            for (int i = 0; i < _currentWave.numberOfPuffballs; i++)
             {
-                SpawnEnemy();
+                SpawnEnemy(enemyType: "Puffball");
+            }
+
+            for (int i = 0; i < _currentWave.numberOfSeeds; i++)
+            {
+                SpawnEnemy(enemyType: "Seed");
+            }
+
+            for (int i = 0; i < _currentWave.numberOfMushrooms; i++)
+            {
+                SpawnEnemy(enemyType: "Mushroom");
             }
         }
 

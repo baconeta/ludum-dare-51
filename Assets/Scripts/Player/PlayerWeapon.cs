@@ -6,7 +6,7 @@ namespace Player
 {
     public class PlayerWeapon : MonoBehaviour
     {
-        public PlayerCombat pc;
+        private PlayerCombat _playerCombat;
 
         [Tooltip("Per swing, how long should the weapon be \"hot\" for, as a percentage.")] [SerializeField]
         private float weaponIsDamagingDurationPercentage = 70.0F;
@@ -16,8 +16,9 @@ namespace Player
         // True if collisions with the weapon will damage enemies.
         protected bool weaponIsDamaging = false;
 
-        void Start()
+        private void Start()
         {
+            _playerCombat = GetComponent<PlayerCombat>();
             RecalculateStats();
         }
 
@@ -25,7 +26,8 @@ namespace Player
         public void RecalculateStats()
         {
             // Attack Period (how long a full attack rotation takes) * "Hot" percentage (how long the weapon is hot for).
-            _weaponIsDamagingDurationActual = (1 / pc.GetAttackSpeed()) * (weaponIsDamagingDurationPercentage / 100F);
+            _weaponIsDamagingDurationActual =
+                (1 / _playerCombat.GetAttackSpeed()) * (weaponIsDamagingDurationPercentage / 100F);
         }
 
         public void DoAttack()
@@ -46,7 +48,7 @@ namespace Player
         {
             if (weaponIsDamaging && other.CompareTag("Enemy"))
             {
-                other.GetComponent<Enemy>().TakeDamage(pc.GetAttackDamage());
+                other.GetComponent<Enemy>().TakeDamage(_playerCombat.GetAttackDamage());
                 // Optional, for if we get injure animations for enemies.
                 //other.GetComponent<Animator>().SetTrigger("Hit");
             }

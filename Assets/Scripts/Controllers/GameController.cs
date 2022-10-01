@@ -9,11 +9,11 @@ namespace Controllers
         [SerializeField] private Sanctuary sanctuary;
         public bool GameRunning { get; set; }
 
-        [HideInInspector] public GameTimer Timer;
+        [HideInInspector] public GameTimer timer;
 
         private void Awake()
         {
-            Timer = gameObject.AddComponent<GameTimer>();
+            timer = gameObject.AddComponent<GameTimer>();
         }
 
         // Start is called before the first frame update
@@ -31,8 +31,8 @@ namespace Controllers
                 hud.GameStart();
             }
 
-            if (Timer)
-                Timer.StartTimer();
+            if (timer)
+                timer.StartTimer();
         }
 
         public void ResetGame()

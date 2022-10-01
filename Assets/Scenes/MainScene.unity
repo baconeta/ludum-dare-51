@@ -645,6 +645,7 @@ Transform:
   - {fileID: 1319607056}
   - {fileID: 399779815}
   - {fileID: 519420032}
+  - {fileID: 478616205}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -694,6 +695,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 297036109}
+  - component: {fileID: 297036110}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -716,6 +718,21 @@ Transform:
   m_Father: {fileID: 256700353}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &297036110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 297036108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a129d5d6285e1754987ccf25769ae70a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isInvincible: 0
+  sanctuary: {fileID: 1319607057}
+  timer: {fileID: 0}
 --- !u!1 &299027152
 GameObject:
   m_ObjectHideFlags: 0
@@ -885,6 +902,60 @@ MonoBehaviour:
   - {fileID: 7151240252480087818, guid: cb35bd557bd91944aa9e3f16a783cdd4, type: 3}
   spawnableArea: {fileID: 1766467999}
   livingEnemies: []
+  roundController: {fileID: 478616206}
+--- !u!1 &478616204
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 478616205}
+  - component: {fileID: 478616206}
+  m_Layer: 0
+  m_Name: RoundController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &478616205
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 478616204}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 256700353}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &478616206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 478616204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7dc6b3a627980444b20ac05c705c814, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameController: {fileID: 297036110}
+  enemyController: {fileID: 399779816}
+  waves:
+  - numberOfPuffballs: 10
+    numberOfSeeds: 12
+    numberOfMushrooms: 4
+  - numberOfPuffballs: 15
+    numberOfSeeds: 15
+    numberOfMushrooms: 8
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -2304,6 +2375,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 375893899820495542, guid: adb2cd2b963d29c4f8ebec31626cee0e, type: 3}
+      propertyPath: playerStats
+      value: 
+      objectReference: {fileID: 1378147127}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: adb2cd2b963d29c4f8ebec31626cee0e, type: 3}
 --- !u!4 &1378147119 stripped
