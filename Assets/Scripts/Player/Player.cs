@@ -16,7 +16,7 @@ public class Player : MonoBehaviour
     protected int healthLevel = 0;
     
     // Use me for calculations.
-    public int healthActual;
+    protected int healthActual;
     
     /*
      * Player attack damage.
@@ -30,7 +30,7 @@ public class Player : MonoBehaviour
     protected int attackDamageLevel = 0;
     
     // Use me for calculations.
-    public float attackDamageActual;
+    protected float attackDamageActual;
     
     /*
      * Player attack speed.
@@ -44,7 +44,7 @@ public class Player : MonoBehaviour
     protected int attackSpeedLevel = 0;
     
     // Use me for calculations.
-    public float attackSpeedActual;
+    protected float attackSpeedActual;
     
     /*
      * Player attack range.
@@ -58,7 +58,7 @@ public class Player : MonoBehaviour
     protected int attackRangeLevel = 0;
 
     // Use me for calculations.
-    public float attackRangeActual;
+    protected float attackRangeActual;
     
     // Start is called before the first frame update
     void Start()
@@ -85,6 +85,26 @@ public class Player : MonoBehaviour
         attackDamageActual = attackDamageInitial + (attackDamageLevel * attackDamageGrowthPerLevel);
         attackSpeedActual = attackSpeedInitial + (attackSpeedLevel * attackSpeedGrowthPerLevel);
         attackRangeActual = attackRangeInitial + (attackRangeLevel * attackRangeGrowthPerLevel);
+    }
+
+    public int GetPlayerHealth()
+    {
+        return healthActual;
+    }
+
+    public float GetAttackDamage()
+    {
+        return attackDamageActual;
+    }
+
+    public float GetAttackSpeed()
+    {
+        return attackSpeedActual;
+    }
+
+    public float GetAttackRange()
+    {
+        return attackRangeActual;
     }
 
     public int GetHealthLevel()
