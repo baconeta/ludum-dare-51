@@ -1,4 +1,5 @@
 using System.Collections;
+using Player;
 using UnityEngine;
 
 public class PlayerCombat : MonoBehaviour {
