@@ -26,11 +26,6 @@ namespace Entities
         protected Player.Player player;
         protected Rigidbody2D _rigidbody2D;
 
-        protected Enemy(EnemyController eCRef)
-        {
-            EcRef = eCRef;
-        }
-
         public EnemyController EcRef { get; set; }
 
         protected abstract void EnemyMovement();
