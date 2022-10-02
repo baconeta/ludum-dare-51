@@ -1,11 +1,6 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Text;
 using Player;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
@@ -28,14 +23,19 @@ public class Customization : MonoBehaviour
     [SerializeField][Tooltip("The default text to show as a placeholder. Won't be used as a name. Ignored if the above is set to true.")]
     private string defaultPlaceholderText = "Name";
 
-    private static string cachedName = "";
+    private static string _cachedName = "";
 
     private void Start()
     {
         // This object will destroy itself once it finds a player to off-load stats to.
         DontDestroyOnLoad(gameObject);
+
         // Setup the initial placeholder text name.
-        if (generatePlaceholdersImmediately)
+        if (!string.IsNullOrWhiteSpace(_cachedName))
+        {
+            UpdatePlaceholderName(_cachedName);
+        }
+        else if (generatePlaceholdersImmediately)
         {
             GenerateRandomPlaceholderName();
         }
@@ -112,12 +112,12 @@ public class Customization : MonoBehaviour
 
     public void CacheCustomization()
     {
-        cachedName = GetCurrentName();
+        _cachedName = GetCurrentName();
     }
 
     // Finds the player stat tracker, and copies vital information across.
     public void SaveCacheToPlayer()
     {
-        FindObjectOfType<PlayerStats>().SetName(cachedName);
+        FindObjectOfType<PlayerStats>().SetName(_cachedName);
     }
 }
