@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 357654020248760065}
   - component: {fileID: 357654020248760064}
   - component: {fileID: -1426180550469058963}
-  - component: {fileID: 6719306115129990092}
   m_Layer: 0
   m_Name: Seed
   m_TagString: Untagged
@@ -77,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: 31cfd2946b8df564ba26524e09f1f280, type: 3}
   m_Color: {r: 0.8396226, g: 0.7132666, b: 0.1782218, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -98,7 +97,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -139,17 +138,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   value: 3
   pickupTimer: 1
---- !u!114 &6719306115129990092
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 357654020248760077}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 35b02b94f7f545cc89b479ca7d06cbd9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lightSprite: {fileID: 0}
-  darkSprite: {fileID: 21300000, guid: 96b311f6a6df06d499200918d634608e, type: 3}
