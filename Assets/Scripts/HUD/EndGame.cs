@@ -15,6 +15,11 @@ namespace HUD
             _gameController = FindObjectOfType<GameController>();
         }
 
+        public void ShowEndGameUI()
+        {
+            endGameUI.SetActive(true);
+        }
+
         public void GoToMainMenu()
         {
             SceneManager.LoadScene("Scenes/Menu");

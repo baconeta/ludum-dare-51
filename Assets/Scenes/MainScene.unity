@@ -1264,6 +1264,7 @@ MonoBehaviour:
   isInvincible: 0
   sanctuary: {fileID: 770312883}
   _globalScoreManager: {fileID: 1142364623}
+  _endGame: {fileID: 1898022973}
   timer: {fileID: 0}
 --- !u!114 &1142364621
 MonoBehaviour:
@@ -2789,6 +2790,10 @@ PrefabInstance:
     - target: {fileID: 4315930364405930999, guid: c7705d7e1e5497b4b9964ae79e793892, type: 3}
       propertyPath: m_Name
       value: EndGameUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 4315930364405930999, guid: c7705d7e1e5497b4b9964ae79e793892, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8870383275670373041, guid: c7705d7e1e5497b4b9964ae79e793892, type: 3}
       propertyPath: m_Pivot.x
