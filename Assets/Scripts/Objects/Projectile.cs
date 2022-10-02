@@ -64,12 +64,13 @@ namespace Objects
             if (other.CompareTag("Player"))
             {
                 //Get enemy damage
-                int enemyDamage = (int)_source.GetComponent<Entities.Enemy>().attackDamage;
-                
-                //Player takes damage
-                other.GetComponent<PlayerCombat>().DamagePlayer(enemyDamage);
-                
-                DestroyProjectile();
+                if (_source != null)
+                {
+                    int enemyDamage = _source.GetComponent<Entities.Enemy>().attackDamage; //Player takes damage
+                    other.GetComponent<PlayerCombat>().DamagePlayer(enemyDamage);
+
+                    DestroyProjectile();
+                }
             }
         }
 
