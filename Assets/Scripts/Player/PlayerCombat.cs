@@ -6,8 +6,10 @@ namespace Player
 {
     public class PlayerCombat : MonoBehaviour
     {
+        /*
+         * Unity References
+         */
         [Header("Unity References")]
-        
         [SerializeField][Tooltip("The animator object for the player sprite.")]
         private Animator _animator;
         [SerializeField][Tooltip("The analog control for player input.")]
@@ -28,7 +30,7 @@ namespace Player
         [SerializeField][Tooltip("How much player health increases per upgrade level.")]
         protected int healthGrowthPerLevel = 1;
 
-        [SerializeField] [Tooltip("How many times the player can upgrade health.")]
+        [SerializeField][Tooltip("How many times the player can upgrade health.")]
         protected int healthMaxLevel = 5;
 
 
