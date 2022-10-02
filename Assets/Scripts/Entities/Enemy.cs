@@ -9,11 +9,8 @@ namespace Entities
         public GameObject lootOnDeath;
 
         public GameObject HealthLoot;
-        [SerializeField]
-        [Range(0, 100)]
-        private int HealthLootChance = 50;
-        [SerializeField]
-        private float LootDropOffset = 2f;
+        [SerializeField] [Range(0, 100)] private int HealthLootChance = 50;
+        [SerializeField] private float LootDropOffset = 2f;
 
         [Header("Enemy Stats")] public string enemyName;
 

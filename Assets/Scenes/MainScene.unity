@@ -1373,10 +1373,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 375893899820495529, guid: adb2cd2b963d29c4f8ebec31626cee0e, type: 3}
-      propertyPath: m_Constraints
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 375893899820495535, guid: adb2cd2b963d29c4f8ebec31626cee0e, type: 3}
       propertyPath: m_Name
       value: Player
@@ -1389,18 +1385,6 @@ PrefabInstance:
       propertyPath: _playerFacing
       value: 
       objectReference: {fileID: 1173181170}
-    - target: {fileID: 375893899820495540, guid: adb2cd2b963d29c4f8ebec31626cee0e, type: 3}
-      propertyPath: healthInitial
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 375893899820495540, guid: adb2cd2b963d29c4f8ebec31626cee0e, type: 3}
-      propertyPath: attackRangeInitial
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 375893899820495541, guid: adb2cd2b963d29c4f8ebec31626cee0e, type: 3}
-      propertyPath: rb
-      value: 
-      objectReference: {fileID: 1173181164}
     - target: {fileID: 375893899820495541, guid: adb2cd2b963d29c4f8ebec31626cee0e, type: 3}
       propertyPath: animator
       value: 
@@ -1418,37 +1402,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1142364620}
     - target: {fileID: 3870772335738054938, guid: adb2cd2b963d29c4f8ebec31626cee0e, type: 3}
+      propertyPath: _circleCollider
+      value: 
+      objectReference: {fileID: 1359287528}
+    - target: {fileID: 3870772335738054938, guid: adb2cd2b963d29c4f8ebec31626cee0e, type: 3}
       propertyPath: weaponAudioSource
       value: 
       objectReference: {fileID: 1359287525}
-    - target: {fileID: 3870772335738054938, guid: adb2cd2b963d29c4f8ebec31626cee0e, type: 3}
-      propertyPath: hitSounds.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3870772335738054938, guid: adb2cd2b963d29c4f8ebec31626cee0e, type: 3}
-      propertyPath: hitSoundPitchShiftMax
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3870772335738054938, guid: adb2cd2b963d29c4f8ebec31626cee0e, type: 3}
-      propertyPath: hitSoundPitchShiftMin
-      value: -0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3870772335738054938, guid: adb2cd2b963d29c4f8ebec31626cee0e, type: 3}
-      propertyPath: hitSounds.Array.data[0]
+    - target: {fileID: 8510581180561397376, guid: adb2cd2b963d29c4f8ebec31626cee0e, type: 3}
+      propertyPath: playerInput
       value: 
-      objectReference: {fileID: 8300000, guid: ec94a90c11db0ab44a870d574d673bcb, type: 3}
-    - target: {fileID: 3870772335738054938, guid: adb2cd2b963d29c4f8ebec31626cee0e, type: 3}
-      propertyPath: hitSounds.Array.data[1]
-      value: 
-      objectReference: {fileID: 8300000, guid: 79048d3a56fcba742bec3e5e3f728838, type: 3}
-    - target: {fileID: 3870772335738054938, guid: adb2cd2b963d29c4f8ebec31626cee0e, type: 3}
-      propertyPath: hitSounds.Array.data[2]
-      value: 
-      objectReference: {fileID: 8300000, guid: b903e834c077e9f46872159d4006d9fc, type: 3}
-    - target: {fileID: 6565891818112425706, guid: adb2cd2b963d29c4f8ebec31626cee0e, type: 3}
-      propertyPath: m_Radius
-      value: 7
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1173181159}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: adb2cd2b963d29c4f8ebec31626cee0e, type: 3}
 --- !u!114 &1173181156 stripped
@@ -1507,16 +1471,10 @@ Animator:
   m_CorrespondingSourceObject: {fileID: 375893899820495543, guid: adb2cd2b963d29c4f8ebec31626cee0e, type: 3}
   m_PrefabInstance: {fileID: 1173181155}
   m_PrefabAsset: {fileID: 0}
---- !u!50 &1173181164 stripped
-Rigidbody2D:
-  m_CorrespondingSourceObject: {fileID: 375893899820495529, guid: adb2cd2b963d29c4f8ebec31626cee0e, type: 3}
-  m_PrefabInstance: {fileID: 1173181155}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1173181170
+--- !u!114 &1173181170 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 8510581180561397376, guid: adb2cd2b963d29c4f8ebec31626cee0e, type: 3}
+  m_PrefabInstance: {fileID: 1173181155}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1173181157}
   m_Enabled: 1
@@ -1524,9 +1482,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a84de7e17f96b349a8ba536bb54fc9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camera: {fileID: 736482727}
-  animator: {fileID: 1173181161}
-  playerInput: {fileID: 1173181159}
 --- !u!1 &1232269058
 GameObject:
   m_ObjectHideFlags: 0
@@ -1705,6 +1660,11 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!58 &1359287528 stripped
+CircleCollider2D:
+  m_CorrespondingSourceObject: {fileID: 6565891818112425706, guid: adb2cd2b963d29c4f8ebec31626cee0e, type: 3}
+  m_PrefabInstance: {fileID: 1173181155}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1370163089 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7369678367153055671, guid: 1f794f3f39fee51499b78d5c49b8607e, type: 3}

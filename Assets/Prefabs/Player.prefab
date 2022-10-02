@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 375893899820495542}
   - component: {fileID: 375893899820495543}
   - component: {fileID: 1378147127}
+  - component: {fileID: 8510581180561397376}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -128,7 +129,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &375893899820495541
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -145,7 +146,6 @@ MonoBehaviour:
   movementSpeedActual: 0
   playerInput: {fileID: 0}
   rb: {fileID: 375893899820495529}
-  animator: {fileID: 375893899820495543}
   mContactOffset: 0.05
   mMaxIterations: 2
   mMovementFilter:
@@ -175,10 +175,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 375893899820495543}
-  _playerInput: {fileID: 0}
-  _weapon: {fileID: 0}
+  _playerFacing: {fileID: 0}
+  _weapon: {fileID: 3870772335738054938}
   _attackSound: {fileID: 0}
-  healthInitial: 5
+  healthInitial: 50
   healthGrowthPerLevel: 1
   healthMaxLevel: 5
   attackDamageInitial: 1
@@ -187,8 +187,8 @@ MonoBehaviour:
   attackSpeedInitial: 2
   attackSpeedGrowthPerLevel: 0.667
   attackSpeedMaxLevel: 5
-  attackRangeInitial: 100
-  attackRangeGrowthPerLevel: 12
+  attackRangeInitial: 7
+  attackRangeGrowthPerLevel: 3
   attackRangeMaxLevel: 5
   firstUpgradeCost: 3
   secondUpgradeCost: 7
@@ -250,10 +250,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aceb22ac9c06fe84aa0a782734ff2a28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerName: 
-  favouriteAnimal: 
-  currency: 0
-  score: 0
+--- !u!114 &8510581180561397376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 375893899820495535}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a84de7e17f96b349a8ba536bb54fc9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameCamera: {fileID: 0}
+  animator: {fileID: 375893899820495543}
+  playerInput: {fileID: 0}
 --- !u!1 &5022368985573105852
 GameObject:
   m_ObjectHideFlags: 0
@@ -299,12 +310,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c97affb631f6d5b46a199aa00217bb9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  filter:
+    useTriggers: 0
+    useLayerMask: 1
+    useDepth: 0
+    useOutsideDepth: 0
+    useNormalAngle: 0
+    useOutsideNormalAngle: 0
+    layerMask:
+      serializedVersion: 2
+      m_Bits: 8
+    minDepth: 0
+    maxDepth: 0
+    minNormalAngle: 0
+    maxNormalAngle: 0
   weaponIsDamagingDurationPercentage: 70
   hitAngle: 60
   weaponAudioSource: {fileID: 0}
-  hitSounds: []
-  hitSoundPitchShiftMin: 0
-  hitSoundPitchShiftMax: 0
+  hitSounds:
+  - {fileID: 8300000, guid: ec94a90c11db0ab44a870d574d673bcb, type: 3}
+  - {fileID: 8300000, guid: 79048d3a56fcba742bec3e5e3f728838, type: 3}
+  - {fileID: 8300000, guid: b903e834c077e9f46872159d4006d9fc, type: 3}
+  hitSoundPitchShiftMin: -0.3
+  hitSoundPitchShiftMax: 0.3
 --- !u!58 &6565891818112425706
 CircleCollider2D:
   m_ObjectHideFlags: 0
