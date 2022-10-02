@@ -126,34 +126,35 @@ namespace Player
         // Update is called once per frame
         private void Update()
         {
+            // Check if the player can be moved.
             if (Controllers.GameController.IsPlayerInputEnabled)
             {
-                // If user is left-clicking.
-                // TODO Replace this check for analog 2.
-                if (Controllers.InputController.isMobile) //Mobile Controls
+                // Mobile Controls
+                if (Controllers.InputController.isMobile)
                 {
                     Vector2 playerAttack = playerInput.actions["Attack"].ReadValue<Vector2>();
 
-                    //Only if stick is in use
+                    // Only if stick is in use
                     if (playerAttack != Vector2.zero)
                     {
-                        //Face direction and Attack!
                         //playerAttack <-- Use this Vector2 for player-to-enemy direction
+                        // Face direction and Attack!
                         attacking = true;
                     }
                 }
-                else //keyboard controls
+                // Keyboard controls
+                else
                 {
-                    //Attack is pressed
+                    // Attack is pressed
                     if (playerInput.actions["Attack"].IsPressed())
                     {
-                        //Attack in direction of the mouse
+                        // Attack in direction of the mouse
                         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                         Vector2 attackDirection = mousePosition - (Vector2) transform.position;
-                        //Final attack direction to face player to mouse
+                        // Final attack direction to face player to mouse
                         attackDirection = transform.position + (Vector3) attackDirection;
 
-                        //Attack!
+                        // Attack!
                         attacking = true;
                     }
                 }
