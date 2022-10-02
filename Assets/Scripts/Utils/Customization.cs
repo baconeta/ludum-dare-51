@@ -28,8 +28,7 @@ public class Customization : MonoBehaviour
     [SerializeField][Tooltip("The default text to show as a placeholder. Won't be used as a name. Ignored if the above is set to true.")]
     private string defaultPlaceholderText = "Name";
 
-
-    private string cachedName = "";
+    private static string cachedName = "";
 
     private void Start()
     {
@@ -38,7 +37,7 @@ public class Customization : MonoBehaviour
         // Setup the initial placeholder text name.
         if (generatePlaceholdersImmediately)
         {
-            UpdatePlaceholderName(GeneratePlayerName());
+            GenerateRandomPlaceholderName();
         }
         else
         {
