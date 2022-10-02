@@ -65,7 +65,6 @@ namespace Controllers
                 //Show loss/death screen
             }
             
-
             // Not sure what this does Currently errors
             // if (!isInvincible)
             // {
@@ -88,11 +87,11 @@ namespace Controllers
 
         public IEnumerator RoundTransition()
         {
-            float lightTimer;
-            lightTimer = timer.GetTimeToNextDark();
-            Debug.Log(lightTimer);
+            
+            timer.JumpToLightPhase();
+            float phaseTimer = timer.GetTimer();
             //TODO Wait until end of NEXT light mode.
-            yield return new WaitForSeconds(lightTimer);
+            yield return new WaitForSeconds(phaseTimer);
             
             //End and move to sanctuary
             timer.StopTimer();

@@ -44,27 +44,38 @@ public class GameTimer : MonoBehaviour
 
             if (timer <= 0f)
             {
-                worldPhase++;
-                if (worldPhase >= EWorldPhase.DEFAULT_LAST)
-                {
-                    worldPhase = 0;
-                }
-
-                Camera.main.GetComponent<PlayerCamera>().Flash();
-                OnPhaseChange.Invoke(worldPhase);
-                timer = phaseTime;
-
-                if (Application.isEditor)
-                    Debug.Log("Phase: " + worldPhase);
+                ChangePhase();
             }
         }
     }
 
-    public float GetTimeToNextDark()
+    public void ChangePhase()
     {
-        if (worldPhase is EWorldPhase.DARK) return timer + phaseTime;
+        worldPhase++;
+        if (worldPhase >= EWorldPhase.DEFAULT_LAST)
+        {
+            worldPhase = 0;
+        }
+
+        Camera.main.GetComponent<PlayerCamera>().Flash();
+        OnPhaseChange.Invoke(worldPhase);
+        timer = phaseTime;
+
+        if (Application.isEditor)
+            Debug.Log("Phase: " + worldPhase);
+    }
+
+    public float GetTimer()
+    {
+        return timer;
+    }
+
+    public void JumpToLightPhase()
+    {
+        if (worldPhase is EWorldPhase.LIGHT) return;
         
-        else return (timer);
+        //Its dark, change phase
+        ChangePhase();
     }
 }
 
