@@ -31,11 +31,6 @@ namespace Player
         [SerializeField] [Tooltip("How many times the player can upgrade health.")]
         protected int healthMaxLevel = 5;
 
-        protected int healthLevel = 0;
-
-        // Use me for calculations.
-        protected int healthMax;
-        protected int healthActual;
 
         /*
          * Player attack damage.
@@ -50,10 +45,6 @@ namespace Player
         [SerializeField][Tooltip("How many times the player can upgrade attack damage.")]
         protected int attackDamageMaxLevel = 5;
 
-        protected int attackDamageLevel = 0;
-
-        // Use me for calculations.
-        protected float attackDamageActual;
 
         /*
          * Player attack speed.
@@ -68,13 +59,6 @@ namespace Player
         [SerializeField][Tooltip("How many times the player can upgrade attack speed.")]
         protected int attackSpeedMaxLevel = 5;
 
-        protected int attackSpeedLevel = 0;
-
-        // Use me for calculations.
-        protected float attackSpeedActual;
-
-        // Used to calculate how long it has been since the last attack.
-        protected float timeOfLastAttack = 0.0F;
 
         /*
          * Player attack range.
@@ -89,10 +73,7 @@ namespace Player
         [SerializeField][Tooltip("How many times the player can upgrade attack range.")]
         protected int attackRangeMaxLevel = 5;
 
-        protected int attackRangeLevel = 0;
 
-        // Use me for calculations.
-        protected float attackRangeActual;
 
 
         /*
@@ -111,6 +92,25 @@ namespace Player
         public int fifthUpgradeCost = 25;
 
 
+        /*
+         * Player stat levels.
+         */
+        private int _healthLevel = 0;
+        private int _attackDamageLevel = 0;
+        private int _attackSpeedLevel = 0;
+        private int _attackRangeLevel = 0;
+
+
+        /*
+         * Player stat values.
+         * Use us for calculations!
+         */
+        public int healthMax;
+        public int healthActual;
+        public float attackDamageActual;
+        public float attackSpeedActual;
+        public float attackRangeActual;
+        
         /*
          * Other variables.
          */
