@@ -156,7 +156,7 @@ namespace Player
                         else facingDirection = FacingDirection.Up;
 
                         attacking = true;
-                        facingDirection = CalculateFacingDirection(playerAttack);
+                        // facingDirection = CalculateFacingDirection(playerAttackDirection);
                     }
                 }
                 // Keyboard controls
