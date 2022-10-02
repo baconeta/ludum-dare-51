@@ -139,6 +139,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   value: 1
   pickupTimer: 1
+  pickupSound: {fileID: 8300000, guid: 30f448f270ad2f245a4371196547eb88, type: 3}
+  darkHeartSound: {fileID: 0}
 --- !u!114 &8369803014100115017
 MonoBehaviour:
   m_ObjectHideFlags: 0

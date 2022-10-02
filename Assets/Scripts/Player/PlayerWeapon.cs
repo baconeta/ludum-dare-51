@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Entities;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Player
 {
@@ -18,6 +19,14 @@ namespace Player
         private float _weaponIsDamagingDurationActual;
 
         [SerializeField] float hitAngle = 60f;
+        
+        [Header("Audio")]
+        public AudioSource weaponAudioSource;
+        public List<AudioClip> hitSounds;
+        [Range(-1f, 0f)]
+        public float hitSoundPitchShiftMin = 0f;
+        [Range(0f, 1f)]
+        public float hitSoundPitchShiftMax = 0f;
 
         
         // True if collisions with the weapon will damage enemies.
@@ -52,6 +61,20 @@ namespace Player
             if (CircleCollider is not null)
                 CircleCollider.enabled = true;
 
+            //Audio Trigger
+            if (!weaponAudioSource.isPlaying)
+            {
+                //Get & set new Pitch-shift
+                float newPitch = 1 + Random.Range(hitSoundPitchShiftMin, hitSoundPitchShiftMax
+                );
+                weaponAudioSource.pitch = newPitch;
+            
+                //Get random sound
+                AudioClip hitSound = hitSounds[Random.Range(0, hitSounds.Count)];
+                //Play sound
+                weaponAudioSource.PlayOneShot(hitSound);
+            }
+            
             // TODO Trigger animation/visibility here.
             StartCoroutine(DisableMeleeDamage());
             

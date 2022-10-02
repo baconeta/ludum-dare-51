@@ -8,11 +8,17 @@ namespace Collectables
     public class Healing : Collectable
     {
         private GameController _gameController;
+        
+        //Ambient Sound for when heart is dark
+        public AudioClip darkHeartSound;
 
         protected override void OnCollectablePickup()
         {
-            Debug.Log(value + " health healed!");
+            //Play pick up sound
+            AudioSource.PlayClipAtPoint(pickupSound, transform.position);
+            
             FindObjectOfType<Player.Player>().GetPlayerCombat().HealPlayer(value);
+            
             Destroy(gameObject);
         }
 
