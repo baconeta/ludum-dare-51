@@ -43,4 +43,15 @@ public class GameUI : MonoBehaviour
         currencyText.SetText("Currency: " + player.GetPlayerStats().GetCurrency());
         healthText.SetText("Health: " + player.GetPlayerCombat().GetPlayerHealth());
     }
+
+    public void UpdateCurrency()
+    {
+        currencyText.SetText("Currency: " + player.GetPlayerStats().GetCurrency());
+    }
+
+    public void UpdateHealth()
+    {
+        healthText.SetText("Health: " + player.GetPlayerCombat().GetPlayerHealth());
+
+    }
 }

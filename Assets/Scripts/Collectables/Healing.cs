@@ -1,3 +1,5 @@
+using System.Collections;
+using Controllers;
 using UnityEngine;
 
 namespace Collectables
@@ -5,11 +7,43 @@ namespace Collectables
     // Item that heals the player upon pickup.
     public class Healing : Collectable
     {
+        private GameController _gameController;
+
         protected override void OnCollectablePickup()
         {
             Debug.Log(value + " health healed!");
-            //_player.GetPlayerCombat().heal
+            FindObjectOfType<Player.Player>().GetPlayerCombat().HealPlayer(value);
             Destroy(gameObject);
+        }
+
+        private void Awake()
+        {
+            _gameController = FindObjectOfType<GameController>();
+            if (_gameController != null)
+            {
+                _gameController.timer.OnPhaseChange.AddListener(SetPhaseMode);
+                _gameController.timer.OnTimerStart.AddListener(SetPhaseMode);
+            }
+
+            SetPhaseMode(_gameController.timer.GetWorldPhase());
+        }
+
+        private void SetPhaseMode(EWorldPhase worldPhase)
+        {
+            isInteractable = worldPhase switch
+            {
+                EWorldPhase.LIGHT => true,
+                EWorldPhase.DARK => false,
+                _ => isInteractable
+            };
+        }
+
+
+        protected override IEnumerator InteractableDelay()
+        {
+            isInteractable = false;
+            
+            yield return null;
         }
     }
 }

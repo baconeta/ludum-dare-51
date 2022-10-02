@@ -1,4 +1,6 @@
+using System;
 using System.Collections;
+using Controllers;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,28 +11,29 @@ namespace Player
         /*
          * Unity References
          */
-        [Header("Unity References")]
-        [SerializeField][Tooltip("The animator object for the player sprite.")]
+        [Header("Unity References")] [SerializeField] [Tooltip("The animator object for the player sprite.")]
         private Animator _animator;
-        [SerializeField][Tooltip("The analog control for player input.")]
+
+        [SerializeField] [Tooltip("The analog control for player input.")]
         private PlayerInput _playerInput;
-        [SerializeField][Tooltip("The weapon object that the player uses to perform attacks with.")]
+
+        [SerializeField] [Tooltip("The weapon object that the player uses to perform attacks with.")]
         private PlayerWeapon _weapon;
-        [SerializeField][Tooltip("The sound to be played when the player attacks.")]
+
+        [SerializeField] [Tooltip("The sound to be played when the player attacks.")]
         private AudioClip _attackSound;
 
 
         /*
          * Player health.
          */
-        [Header("Player Health")]
-        [SerializeField][Tooltip("Starting player health.")]
+        [Header("Player Health")] [SerializeField] [Tooltip("Starting player health.")]
         protected int healthInitial = 5;
 
-        [SerializeField][Tooltip("How much player health increases per upgrade level.")]
+        [SerializeField] [Tooltip("How much player health increases per upgrade level.")]
         protected int healthGrowthPerLevel = 1;
 
-        [SerializeField][Tooltip("How many times the player can upgrade health.")]
+        [SerializeField] [Tooltip("How many times the player can upgrade health.")]
         protected int healthMaxLevel = 5;
 
 
@@ -38,13 +41,14 @@ namespace Player
          * Player attack damage.
          */
         [Header("Attack Damage")]
-        [SerializeField][Tooltip("How much damage the player deals to enemies per swing attack.")]
+        [SerializeField]
+        [Tooltip("How much damage the player deals to enemies per swing attack.")]
         protected float attackDamageInitial = 1.0F;
 
-        [SerializeField][Tooltip("By how much the player's attack damage increases per level.")]
+        [SerializeField] [Tooltip("By how much the player's attack damage increases per level.")]
         protected float attackDamageGrowthPerLevel = 0.2F;
 
-        [SerializeField][Tooltip("How many times the player can upgrade attack damage.")]
+        [SerializeField] [Tooltip("How many times the player can upgrade attack damage.")]
         protected int attackDamageMaxLevel = 5;
 
 
@@ -52,13 +56,14 @@ namespace Player
          * Player attack speed.
          */
         [Header("Attack Speed")]
-        [SerializeField][Tooltip("How many times per second that the player can attack with their weapon.")]
+        [SerializeField]
+        [Tooltip("How many times per second that the player can attack with their weapon.")]
         protected float attackSpeedInitial = 2.0F;
 
-        [SerializeField][Tooltip("By how much the player's attack speed increases per level.")]
+        [SerializeField] [Tooltip("By how much the player's attack speed increases per level.")]
         protected float attackSpeedGrowthPerLevel = 0.667F;
 
-        [SerializeField][Tooltip("How many times the player can upgrade attack speed.")]
+        [SerializeField] [Tooltip("How many times the player can upgrade attack speed.")]
         protected int attackSpeedMaxLevel = 5;
 
 
@@ -66,31 +71,35 @@ namespace Player
          * Player attack range.
          */
         [Header("Attack Range")]
-        [SerializeField][Tooltip("How far in game units that the player can reach enemies with their weapon.")]
+        [SerializeField]
+        [Tooltip("How far in game units that the player can reach enemies with their weapon.")]
         protected float attackRangeInitial = 100.0F;
 
-        [SerializeField][Tooltip("By how much the player's attack range increases per level.")]
+        [SerializeField] [Tooltip("By how much the player's attack range increases per level.")]
         protected float attackRangeGrowthPerLevel = 12.0F;
 
-        [SerializeField][Tooltip("How many times the player can upgrade attack range.")]
+        [SerializeField] [Tooltip("How many times the player can upgrade attack range.")]
         protected int attackRangeMaxLevel = 5;
-
-
 
 
         /*
          * Upgrade Costs.
          */
         [Header("Upgrade Costs")]
-        [SerializeField][Tooltip("How much currency it costs to upgrade from level 0 to level 1")]
+        [SerializeField]
+        [Tooltip("How much currency it costs to upgrade from level 0 to level 1")]
         public int firstUpgradeCost = 3;
-        [SerializeField][Tooltip("How much currency it costs to upgrade from level 1 to level 2")]
+
+        [SerializeField] [Tooltip("How much currency it costs to upgrade from level 1 to level 2")]
         public int secondUpgradeCost = 7;
-        [SerializeField][Tooltip("How much currency it costs to upgrade from level 2 to level 3")]
+
+        [SerializeField] [Tooltip("How much currency it costs to upgrade from level 2 to level 3")]
         public int thirdUpgradeCost = 12;
-        [SerializeField][Tooltip("How much currency it costs to upgrade from level 3 to level 4")]
+
+        [SerializeField] [Tooltip("How much currency it costs to upgrade from level 3 to level 4")]
         public int fourthUpgradeCost = 18;
-        [SerializeField][Tooltip("How much currency it costs to upgrade from level 4 to level 5")]
+
+        [SerializeField] [Tooltip("How much currency it costs to upgrade from level 4 to level 5")]
         public int fifthUpgradeCost = 25;
 
 
@@ -109,20 +118,37 @@ namespace Player
          */
         public int healthMax;
         public int healthActual;
+
+        private int HealthActual
+        {
+            get => healthActual;
+            set
+            {
+                healthActual = value;
+                _gameUI.UpdateHealth();
+            }
+        }
+
         public float attackDamageActual;
         public float attackSpeedActual;
         public float attackRangeActual;
-        
+
         /*
          * Other variables.
          */
         private bool _playing = true;
+
         // True if the player is trying to attack.
         protected bool attacking = false;
+
         // True if the player can't attack because they have recently attacked.
         protected bool attackOnCooldown = false;
+
         //Direction of the attack
         protected Vector2 playerAttackDirection = Vector2.zero;
+
+        private bool isDead = false;
+        private GameUI _gameUI;
 
         public enum FacingDirection
         {
@@ -145,6 +171,7 @@ namespace Player
             if (!_animator) GetComponent<Animator>();
             _weapon = gameObject.GetComponentInChildren<PlayerWeapon>();
             if (!_playerInput) _playerInput = GetComponent<PlayerInput>();
+            _gameUI = GetComponent<Player>().gameUI;
 
             RecalculateStats();
         }
@@ -152,6 +179,12 @@ namespace Player
         // Update is called once per frame
         private void Update()
         {
+            //For testing mostly
+            if (healthActual <= 0)
+            {
+                if (!isDead) Die();
+            }
+
             // Check if the player can be moved.
             if (Controllers.GameController.IsPlayerInputEnabled)
             {
@@ -254,7 +287,7 @@ namespace Player
         private void RecalculateStats()
         {
             healthMax = healthInitial + (_healthLevel * healthGrowthPerLevel);
-            healthActual = healthMax;
+            HealthActual = healthMax;
             attackDamageActual = attackDamageInitial + (_attackDamageLevel * attackDamageGrowthPerLevel);
             attackSpeedActual = attackSpeedInitial + (_attackSpeedLevel * attackSpeedGrowthPerLevel);
             attackRangeActual = attackRangeInitial + (_attackRangeLevel * attackRangeGrowthPerLevel);
@@ -264,36 +297,42 @@ namespace Player
 
         public int GetPlayerHealth()
         {
-            return healthActual;
+            return HealthActual;
         }
 
         public void HealPlayer(int healing)
         {
-            if (healthActual < healthMax)
+            if (HealthActual < healthMax)
             {
-                healthActual += healing;
+                HealthActual += healing;
                 // Prevent over-healing.
-                if (healthActual >= healthMax)
-                    healthActual = healthMax;
+                if (HealthActual >= healthMax)
+                    HealthActual = healthMax;
             }
         }
 
         public void DamagePlayer(int damage)
         {
-            healthActual -= damage;
+            //Clamp to 0
+            HealthActual -= damage;
+            if (HealthActual < 0)
+                HealthActual = 0;
+
             // TODO Give visual indication?
-            // TODO Update HUD?
-            if (healthActual <= 0)
+
+            if (HealthActual <= 0)
             {
-                Die();
+                if (!isDead) Die();
             }
         }
 
         private void Die()
         {
+            isDead = true;
             // Make sure that health doesn't go negative.
-            healthActual = 0;
-            // Stop the game. TODO Hook into the controllers later.
+            HealthActual = 0;
+            // Stop the game.
+            GetComponent<Player>().gameController.EndGame();
             _playing = false;
             // Trigger the death animation for the player.
             _animator.SetTrigger("Dead");

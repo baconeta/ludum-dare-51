@@ -1,3 +1,4 @@
+using Player;
 using UnityEngine;
 
 namespace Objects
@@ -59,10 +60,17 @@ namespace Objects
 
         private void OnTriggerEnter2D(Collider2D other)
         {
+            //It hits player!
             if (other.CompareTag("Player"))
             {
-                //Player takes damage
-                DestroyProjectile();
+                //Get enemy damage
+                if (_source != null)
+                {
+                    int enemyDamage = _source.GetComponent<Entities.Enemy>().attackDamage; //Player takes damage
+                    other.GetComponent<PlayerCombat>().DamagePlayer(enemyDamage);
+
+                    DestroyProjectile();
+                }
             }
         }
 
