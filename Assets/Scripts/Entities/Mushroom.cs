@@ -40,6 +40,8 @@ namespace Entities
         private IEnumerator Jump()
         {
             _isJumping = true;
+            animator.SetFloat("JumpSpeed", 1/jumpSpeed);
+            animator.SetBool("IsJumping", true);
         
             //Set current position (Jump start)
             _positionOfLastJump = transform.position;
@@ -102,8 +104,8 @@ namespace Entities
             _timeOfLastJump = Time.time;
         
             _isJumping = false;
-            NotifyAnimator(Vector3.zero);
-        
+            animator.SetBool("IsJumping", false);
+
             yield return null;
         }
     }
