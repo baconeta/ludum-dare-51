@@ -24,6 +24,7 @@ namespace Entities
         protected override void Attack()
         {
             //Player take damage
+            player.GetPlayerCombat().DamagePlayer(attackDamage);
         }
 
         
