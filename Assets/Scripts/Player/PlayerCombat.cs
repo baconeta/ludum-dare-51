@@ -140,9 +140,6 @@ namespace Player
         // True if the player can't attack because they have recently attacked.
         protected bool attackOnCooldown = false;
 
-        //Direction of the attack
-        protected Vector2 playerAttackDirection = Vector2.zero;
-
         private bool isDead = false;
         private GameUI _gameUI;
 
@@ -185,8 +182,20 @@ namespace Player
         private void Attack()
         {
             attackOnCooldown = true;
-            _weapon.DoAttack(playerAttackDirection);
+            _weapon.DoAttack(GetAttackDirection());
             StartCoroutine(ResetAttackCooldown());
+        }
+
+        private Vector2 GetAttackDirection()
+        {
+            return _playerFacing.GetFacingDirection() switch
+            {
+                PlayerFacing.FacingDirection.Down => Vector2.down,
+                PlayerFacing.FacingDirection.Up => Vector2.up,
+                PlayerFacing.FacingDirection.Left => Vector2.left,
+                PlayerFacing.FacingDirection.Right => Vector2.right,
+                _ => new Vector2()
+            };
         }
 
         // This function resets the attack cooldown after the cooldown period ends.

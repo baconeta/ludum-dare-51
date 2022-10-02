@@ -101,16 +101,13 @@ namespace Player
             _circleCollider.OverlapCollider(filter, results);
 
             //For each object the weapon collider overlaps
-            foreach (Collider2D result in results)
+            foreach (Collider2D result in results) //TODO might need to change to a regular for loop
             {
                 if (!weaponIsDamaging) return;
 
-                //Enemies only
-                if (!result.CompareTag("Enemy")) return;
-
                 //Direction player to Enemy
                 Vector2 dir = (result.transform.position - transform.position).normalized;
-
+                Debug.Log(Vector2.Dot(dir, attackDirection));
                 //Enemy is within a "Pie Slice" of the player.
                 //0 is 90 degrees to the click angle.
                 //1 is facing directly towards the enemy.
