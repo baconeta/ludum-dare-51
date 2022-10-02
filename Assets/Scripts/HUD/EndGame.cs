@@ -25,6 +25,7 @@ namespace HUD
             SceneManager.LoadScene("Scenes/Menu");
         }
 
+        //Note: Not being used as Replay functionality has been removed. This doesn't work as-is.
         public void Replay()
         {
             _gameController.ResetGame();
