@@ -15,7 +15,7 @@ namespace Collectables
         protected override void OnCollectablePickup()
         {
             //Play pick up sound
-            AudioSource.PlayClipAtPoint(pickupSound, transform.position);
+            AudioSource.PlayClipAtPoint(pickupSound, transform.position, 0.15f);
             
             FindObjectOfType<Player.Player>().GetPlayerCombat().HealPlayer(value);
             

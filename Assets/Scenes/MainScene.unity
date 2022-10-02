@@ -1749,10 +1749,6 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 375893899820495540, guid: adb2cd2b963d29c4f8ebec31626cee0e, type: 3}
-      propertyPath: _animator
-      value: 
-      objectReference: {fileID: 1173181161}
-    - target: {fileID: 375893899820495540, guid: adb2cd2b963d29c4f8ebec31626cee0e, type: 3}
       propertyPath: playerInput
       value: 
       objectReference: {fileID: 1173181159}
@@ -1973,7 +1969,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.05
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -2125,7 +2121,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -2425,7 +2421,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7369678367256390203, guid: 1f794f3f39fee51499b78d5c49b8607e, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -14.999954
+      value: -14.999939
       objectReference: {fileID: 0}
     - target: {fileID: 7369678367256390203, guid: 1f794f3f39fee51499b78d5c49b8607e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
