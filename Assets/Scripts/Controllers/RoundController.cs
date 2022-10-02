@@ -17,7 +17,7 @@ namespace Controllers
         [SerializeField] private EnemyController enemyController;
         [SerializeField] public WaveData[] waves;
 
-        private bool isBossRound;
+        public bool isBossRound;
 
         private int CurrentRound { get; set; }
 
@@ -40,7 +40,6 @@ namespace Controllers
             CurrentRound += 1; // round data is indexed by 0 and display round numbers indexes by 1 so this is safe
             
             // Tells the game controller which round just finished and to handle that
-            
             gameController.RoundEnded(CurrentRound);
             
         }

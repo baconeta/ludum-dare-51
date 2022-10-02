@@ -52,7 +52,7 @@ namespace Controllers
         // Update is called once per frame
         public void EndGame(float delay = 0f)
         {
-            ;
+            
             if (!isInvincible)
             {
                 Invoke(nameof(BroadcastGameOver), delay);
@@ -94,10 +94,14 @@ namespace Controllers
             IsPlayerInputEnabled = true;
             timer.StartTimer();
             //If before boss wave
-            _rc.StartNextWave();
+            if(!_rc.isBossRound) _rc.StartNextWave();
+            else //if after boss wave
+            {
+                //Show scoreboard
+                Debug.Log("End of Game!");
+            }
             
-            //if after boss wave
-            //Show scoreboard
+            
         }
     }
 }
