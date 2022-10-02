@@ -1,1 +1,1 @@
-Horse,Goose,Gecko,Cat,Dog,Bird,Rabbit,Rat,Spider,Fish,Frog
+Horse,Goose,Gecko,Cat,Dog,Bird,Rabbit,Rat,Spider,Fish,Frog,Dodo,Kiwi,Kea,Hummingbird,Kakapo,Fantail,Tui,Dingo,Kangaroo,Dropbear,Koala,Bear,Bigfoot,Swan,Platypus,Corgi,Moose,Beaver,Walrus,Lynx

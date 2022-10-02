@@ -12,7 +12,7 @@ using Random = UnityEngine.Random;
 public class Customization : MonoBehaviour
 {
     [Header("Placeholder Lists")]
-    public TextAsset namePlaceholders;
+    public TextAsset colourPlaceholders;
     public TextAsset animalPlaceholders;
 
     [Header("Player Inputs")]
@@ -39,7 +39,7 @@ public class Customization : MonoBehaviour
     public void RandomAnimalPlaceholder()
     {
         //Get random animal
-        string randomName = GetRandomFromFile("animal");
+        string randomName = GetRandomFromFile("animals");
         
         //Get placeholder text to random animal
         favouriteAnimalInput.placeholder.GetComponent<TextMeshProUGUI>().text = randomName;
@@ -52,7 +52,7 @@ public class Customization : MonoBehaviour
     public void RandomPlayerNamePlaceholder()
     {
         //Get random name
-        string randomName = GetRandomFromFile("playername");
+        string randomName = GetRandomFromFile("colours");
         
         //Get placeholder text to random name
         playerNameInput.placeholder.GetComponent<TextMeshProUGUI>().text = randomName;
@@ -68,11 +68,11 @@ public class Customization : MonoBehaviour
         string result = "";
         switch (type)
         {
-            case "playername": // Get random player name
-                placeholderText = namePlaceholders.text.Split(",");
+            case "colours": // Get random player name
+                placeholderText = colourPlaceholders.text.Split(",");
                 result = placeholderText[Random.Range(0, placeholderText.Length)];
                 break;
-            case "animal": // Get random animal name
+            case "animals": // Get random animal name
                 //Split CSV
                 placeholderText = animalPlaceholders.text.Split(",");
                 //Get random from CSV list
