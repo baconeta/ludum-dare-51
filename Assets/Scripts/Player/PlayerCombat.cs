@@ -11,13 +11,10 @@ namespace Player
         /*
          * Unity References
          */
-        [Header("Unity References")]
-        
-        [SerializeField] [Tooltip("The animator object for the player sprite.")]
+        [Header("Unity References")] [SerializeField] [Tooltip("The animator object for the player sprite.")]
         private Animator _animator;
 
-        [SerializeField] [Tooltip("")]
-        private PlayerFacing _playerFacing;
+        [SerializeField] [Tooltip("")] private PlayerFacing _playerFacing;
 
         [SerializeField] [Tooltip("The weapon object that the player uses to perform attacks with.")]
         private PlayerWeapon _weapon;
@@ -173,14 +170,13 @@ namespace Player
         {
             // Only update if the game is in play.
             if (!_playing) return;
-            
+
             // Check if the player can be moved.
-            if (!Controllers.GameController.IsPlayerInputEnabled) return;
+            if (!GameController.IsPlayerInputEnabled) return;
 
             // If the player is trying to attack, and the attack isn't on cooldown, initiate an attack.
             if (_playerFacing.IsPlayerAttacking() && !attackOnCooldown)
             {
-                Debug.Log("Attack!");
                 Attack();
             }
         }
