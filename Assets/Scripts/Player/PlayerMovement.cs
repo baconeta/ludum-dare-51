@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -6,12 +5,10 @@ using UnityEngine.InputSystem;
 namespace Player
 {
     public class PlayerMovement : MonoBehaviour
-    { 
-        
-        
+    {
         /*
-     * Player movement speed.
-     */
+        * Player movement speed.
+        */
         [Tooltip("How far in game units that the player can move per tick.")] [SerializeField]
         public float movementSpeedInitial = 2F;
 
@@ -49,22 +46,20 @@ namespace Player
             if (!playerInput) playerInput = GetComponent<PlayerInput>();
         }
 
-        void Update()
+        private void Update()
         {
-            if (Controllers.GameController.IsPlayerInputEnabled)
-            {
-                Vector2 playerMovement = playerInput.actions["Move"].ReadValue<Vector2>();
-                // Debug.Log(playerMovement);
-                _movement.x = playerMovement.x;
-                _movement.y = playerMovement.y;
+            if (!Controllers.GameController.IsPlayerInputEnabled) return;
 
-                animator.SetFloat("Horizontal", _movement.x);
-                animator.SetFloat("Vertical", _movement.y);
-                animator.SetFloat("Velocity", _movement.sqrMagnitude);
-            }
+            Vector2 playerMovement = playerInput.actions["Move"].ReadValue<Vector2>();
+            _movement.x = playerMovement.x;
+            _movement.y = playerMovement.y;
+
+            animator.SetFloat("Horizontal", _movement.x);
+            animator.SetFloat("Vertical", _movement.y);
+            animator.SetFloat("Velocity", _movement.sqrMagnitude);
         }
 
-        void FixedUpdate()
+        private void FixedUpdate()
         {
             // Don't perform any work if no movement is required.
             if (_movement.sqrMagnitude <= Mathf.Epsilon)
@@ -130,7 +125,6 @@ namespace Player
                 distanceRemaining -= distance;
             }
 
-
             // Reset the input movement.
             _movement = Vector2.zero;
 
@@ -138,7 +132,6 @@ namespace Player
             // NOTE: We can avoid this setting of the Rigidbody2D position by a different choice of query.
             var targetPosition = rb.position;
             rb.position = startPosition;
-            
 
             rb.MovePosition(targetPosition);
         }
