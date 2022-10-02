@@ -6,22 +6,24 @@ namespace Player
 {
     public class PlayerCombat : MonoBehaviour
     {
-        [Header("Unity References")] public Animator animator;
+        [Header("Unity References")]
+        public Animator animator;
 
         public PlayerInput playerInput;
         private PlayerWeapon _weapon;
         public AudioClip attackSound;
 
         /*
-     * Player health.
-     */
-        [Header("Health")] [Tooltip("Starting player health.")] [SerializeField]
+         * Player health.
+         */
+        [Header("Health")]
+        [SerializeField][Tooltip("Starting player health.")]
         protected int healthInitial = 5;
 
-        [Tooltip("How much player health increases per upgrade level.")] [SerializeField]
+        [SerializeField][Tooltip("How much player health increases per upgrade level.")]
         protected int healthGrowthPerLevel = 1;
 
-        [Tooltip("How many times the player can upgrade health.")] [SerializeField]
+        [SerializeField][Tooltip("How many times the player can upgrade health.")]
         protected int healthMaxLevel = 5;
 
         protected int healthLevel = 0;
@@ -31,17 +33,16 @@ namespace Player
         protected int healthActual;
 
         /*
-     * Player attack damage.
-     */
-        [Header("Attack Damage")]
-        [Tooltip("How much damage the player deals to enemies per swing attack.")]
-        [SerializeField]
+         * Player attack damage.
+         */
+        [Header("Attack Damage")] 
+        [SerializeField][Tooltip("How much damage the player deals to enemies per swing attack.")]
         protected float attackDamageInitial = 1.0F;
 
-        [Tooltip("By how much the player's attack damage increases per level.")] [SerializeField]
+        [SerializeField][Tooltip("By how much the player's attack damage increases per level.")]
         protected float attackDamageGrowthPerLevel = 0.2F;
 
-        [Tooltip("How many times the player can upgrade attack damage.")] [SerializeField]
+        [SerializeField][Tooltip("How many times the player can upgrade attack damage.")]
         protected int attackDamageMaxLevel = 5;
 
         protected int attackDamageLevel = 0;
@@ -50,17 +51,16 @@ namespace Player
         protected float attackDamageActual;
 
         /*
-     * Player attack speed.
-     */
+         * Player attack speed.
+         */
         [Header("Attack Speed")]
-        [Tooltip("How many times per second that the player can attack with their weapon.")]
-        [SerializeField]
+        [SerializeField][Tooltip("How many times per second that the player can attack with their weapon.")]
         protected float attackSpeedInitial = 2.0F;
 
-        [Tooltip("By how much the player's attack speed increases per level.")] [SerializeField]
+        [SerializeField][Tooltip("By how much the player's attack speed increases per level.")]
         protected float attackSpeedGrowthPerLevel = 0.667F;
 
-        [Tooltip("How many times the player can upgrade attack speed.")] [SerializeField]
+        [SerializeField][Tooltip("How many times the player can upgrade attack speed.")]
         protected int attackSpeedMaxLevel = 5;
 
         protected int attackSpeedLevel = 0;
@@ -72,17 +72,16 @@ namespace Player
         protected float timeOfLastAttack = 0.0F;
 
         /*
-     * Player attack range.
-     */
+         * Player attack range.
+         */
         [Header("Attack Range")]
-        [Tooltip("How far in game units that the player can reach enemies with their weapon.")]
-        [SerializeField]
+        [SerializeField][Tooltip("How far in game units that the player can reach enemies with their weapon.")]
         protected float attackRangeInitial = 100.0F;
 
-        [Tooltip("By how much the player's attack range increases per level.")] [SerializeField]
+        [SerializeField][Tooltip("By how much the player's attack range increases per level.")]
         protected float attackRangeGrowthPerLevel = 12.0F;
 
-        [Tooltip("How many times the player can upgrade attack range.")] [SerializeField]
+        [SerializeField][Tooltip("How many times the player can upgrade attack range.")]
         protected int attackRangeMaxLevel = 5;
 
         protected int attackRangeLevel = 0;
@@ -149,9 +148,9 @@ namespace Player
                     {
                         //Attack in direction of the mouse
                         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                        Vector2 attackDirection = mousePosition - (Vector2) transform.position;
+                        Vector2 attackDirection = mousePosition - (Vector2)transform.position;
                         //Final attack direction to face player to mouse
-                        attackDirection = transform.position + (Vector3) attackDirection;
+                        attackDirection = transform.position + (Vector3)attackDirection;
 
                         //Attack!
                         attacking = true;
@@ -191,6 +190,9 @@ namespace Player
             attackOnCooldown = false;
         }
 
+        /*
+         * Recalculate the -Actual variables of this classes based on (primarily) levels. Also resets health between levels.
+         */
         private void RecalculateStats()
         {
             healthMax = healthInitial + (healthLevel * healthGrowthPerLevel);
@@ -234,6 +236,9 @@ namespace Player
             }
         }
 
+        /*
+         * Getters and setters for instance variables.
+         */
         public float GetAttackDamage()
         {
             return attackDamageActual;
