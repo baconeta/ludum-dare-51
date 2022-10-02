@@ -354,6 +354,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameUI
       objectReference: {fileID: 0}
+    - target: {fileID: 4246011513451755483, guid: 360b3c3530aca3b47ae78910ac1ff0b0, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4246011513559368774, guid: 360b3c3530aca3b47ae78910ac1ff0b0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -1229,6 +1233,17 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 40, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &1016803950 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8889446534007764803, guid: c7705d7e1e5497b4b9964ae79e793892, type: 3}
+  m_PrefabInstance: {fileID: 8889989590705831574}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1142364619
 GameObject:
   m_ObjectHideFlags: 0
@@ -2558,6 +2573,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   endGameUI: {fileID: 8889989590705831580}
+  scoreElement: {fileID: 1016803950}
 --- !u!1 &1919679629
 GameObject:
   m_ObjectHideFlags: 0
@@ -2794,7 +2810,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4315930364405930999, guid: c7705d7e1e5497b4b9964ae79e793892, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8870383275670373041, guid: c7705d7e1e5497b4b9964ae79e793892, type: 3}
       propertyPath: m_Pivot.x

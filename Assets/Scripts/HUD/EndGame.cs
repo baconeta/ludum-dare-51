@@ -1,4 +1,5 @@
 ﻿using Controllers;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,6 +8,7 @@ namespace HUD
     public class EndGame : MonoBehaviour
     {
         public GameObject endGameUI;
+        public TMP_Text scoreElement;
 
         private GameController _gameController;
 
@@ -15,8 +17,9 @@ namespace HUD
             _gameController = FindObjectOfType<GameController>();
         }
 
-        public void ShowEndGameUI()
+        public void ShowEndGameUI(int finalScore)
         {
+            scoreElement.text = finalScore.ToString();
             endGameUI.SetActive(true);
         }
 

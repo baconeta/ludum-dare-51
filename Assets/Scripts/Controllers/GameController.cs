@@ -77,10 +77,11 @@ namespace Controllers
             
             // Submit the score to the score server.
             PlayerStats stats = FindObjectOfType<PlayerStats>();
-            _globalScoreManager.SubmitScore(stats.GetName(), stats.GetScore());
+            var finalScore = stats.GetScore();
+            _globalScoreManager.SubmitScore(stats.GetName(), finalScore);
 
             gameUI.HideUI();
-            endGame.ShowEndGameUI();
+            endGame.ShowEndGameUI(finalScore);
         }
 
         private void BroadcastGameOver()
