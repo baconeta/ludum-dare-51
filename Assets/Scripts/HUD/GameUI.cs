@@ -9,6 +9,10 @@ public class GameUI : MonoBehaviour
     public Player.Player player;
     public GameObject mobileUI;
 
+    
+
+    
+
     public void Start()
     {
         player = FindObjectOfType<Player.Player>();
@@ -16,6 +20,8 @@ public class GameUI : MonoBehaviour
         if (Controllers.InputController.isMobile) ShowMobileUI();
         else HideMobileUI();
     }
+
+    
 
     public void ShowMobileUI()
     {
