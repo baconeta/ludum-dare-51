@@ -95,6 +95,16 @@ public class GlobalScoreManager : MonoBehaviour
     // Post a user's score to the server.
     public void SubmitScore(string user, int score)
     {
+        if (user == default)
+        {
+            Debug.Log("Not submitting a score as there is no player name.");
+            return;
+        }
+        if (score == default)
+        {
+            Debug.Log("Not submitting the score as there is no score.");
+            return;
+        }
         StartCoroutine(SubmitScoreCoroutine(user, score));
     }
 
