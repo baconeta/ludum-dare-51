@@ -7,7 +7,7 @@ namespace Collectables
     public abstract class Collectable : MonoBehaviour
     {
         public int value;
-        private bool isInteractable;
+        protected bool isInteractable;
 
         [Tooltip("Timer before the item is interactable (by the player)")]
         public float pickupTimer = 0;
@@ -17,7 +17,7 @@ namespace Collectables
         protected abstract void OnCollectablePickup();
 
         // Start is called before the first frame update
-        void Start()
+        protected void Start()
         {
             player = FindObjectOfType<Player.Player>();
 
@@ -27,7 +27,7 @@ namespace Collectables
             }
         }
 
-        IEnumerator InteractableDelay()
+        protected virtual IEnumerator InteractableDelay()
         {
             //Disable interactable
             isInteractable = false;
@@ -42,13 +42,12 @@ namespace Collectables
 
         private void OnTriggerEnter2D(Collider2D col)
         {
-            if (isInteractable)
+            if (!isInteractable) return;
+
+            if (col.gameObject.CompareTag("Player"))
             {
-                if (col.gameObject.CompareTag("Player"))
-                {
-                    //TODO Needs to check if within player pickup radius
-                    OnCollectablePickup();
-                }
+                //TODO Needs to check if within player pickup radius
+                OnCollectablePickup();
             }
         }
     }
