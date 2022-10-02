@@ -1,7 +1,1 @@
-Horse
-Goose
-Gecko
-Cat
-Dog
-Bird
-Rabbit
+Horse,Goose,Gecko,Cat,Dog,Bird,Rabbit,Rat,Spider,Fish,Frog
