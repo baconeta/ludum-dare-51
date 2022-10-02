@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Entities;
@@ -40,13 +41,15 @@ namespace Player
             // Attack Period (how long a full attack rotation takes) * "Hot" percentage (how long the weapon is hot for).
             _weaponIsDamagingDurationActual =
                 (1 / _playerCombat.GetAttackSpeed()) * (weaponIsDamagingDurationPercentage / 100F);
+            CircleCollider.radius = _playerCombat.GetAttackRange();
+
         }
 
         public void DoAttack()
         {
             weaponIsDamaging = true;
 
-            if (CircleCollider != null)
+            if (CircleCollider is not null)
                 CircleCollider.enabled = true;
 
             // TODO Trigger animation/visibility here.
@@ -61,19 +64,17 @@ namespace Player
             yield return new WaitForSeconds(_weaponIsDamagingDurationActual);
             weaponIsDamaging = false;
 
-            if (CircleCollider != null)
+            if (CircleCollider is not null)
                 CircleCollider.enabled = false;
         }
 
         private void SweepCollider()
         {
-            if (CircleCollider == null)
+            if (CircleCollider is null)
             {
                 Debug.LogError("CircleCollider ref was null");
                 return;
             }
-            //Get range
-            float range = _playerCombat.GetAttackRange();
 
             ContactFilter2D filter = new ContactFilter2D().NoFilter();
             List<Collider2D> results = new List<Collider2D>();
@@ -107,7 +108,7 @@ namespace Player
 
         private Vector2 GetCurrentDirection()
         {
-            if (_playerCombat == null)
+            if (_playerCombat is null)
             {
                 Debug.LogError("PlayerCombat ref was null");
             }
