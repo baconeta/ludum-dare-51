@@ -101,6 +101,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lootOnDeath: {fileID: 357654020248760077, guid: 8a95e7913e576564f9b683e766cdc2a1, type: 3}
+  HealthLoot: {fileID: 357654020248760077, guid: 9cc22239e32d0e34fbcca8f645f8535a, type: 3}
+  HealthLootChance: 50
   enemyName: Mushroom
   moveSpeed: 1
   maxHealth: 1
