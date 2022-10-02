@@ -63,8 +63,6 @@ public class PlayerFacing : MonoBehaviour
                 attackDirection = (Vector2) (camera.ScreenToWorldPoint(Input.mousePosition) - transform.position);
             }
 
-            Debug.Log(attackDirection);
-
             // Check which axis has greater magnitude, then check if that axis is positive or negative.
             if (Mathf.Abs(attackDirection.x) > Mathf.Abs(attackDirection.y))
             {
@@ -83,8 +81,6 @@ public class PlayerFacing : MonoBehaviour
         {
             // Get the attack direction for the player, then use it later to calculate our facing direction.
             Vector2 motionDirection;
-
-            Debug.Log(motionDirection);
             motionDirection = playerInput.actions["Move"].ReadValue<Vector2>();
 
             // Check which axis has greater magnitude, then check if that axis is positive or negative.
