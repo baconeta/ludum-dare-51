@@ -19,7 +19,7 @@ namespace Controllers
         {
             playerInput.SwitchCurrentActionMap("PlayerMobile");
             isMobile = true;
-            
+
             //Show Mobile UI
             gameUI.ShowMobileUI();
         }
@@ -28,7 +28,7 @@ namespace Controllers
         {
             playerInput.SwitchCurrentActionMap("Player");
             isMobile = false;
-            
+
             //Hide mobile UI
             gameUI.HideMobileUI();
         }
