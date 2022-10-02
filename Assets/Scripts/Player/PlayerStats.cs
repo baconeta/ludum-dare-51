@@ -59,5 +59,25 @@ namespace Player
         {
             _score = 0;
         }
+        public void CalculateScore()
+        {
+            // puffball, mushroom, seed need counter that increases on kill
+            // puffball score 10
+            // seed score 12
+            // mushroom score 15
+            // boss score 50
+            // minus overall time to complete game
+            
+            //var puffballScore = puffballsKilled+puffsCollected*10;
+            //var seedScore = seedsKilled+seedsCollected*12;
+            //var mushroomScore = mushroomsKilled+seedsCollected*15;
+            //var bossScore = bossKilled*50;
+            //var overallTime = timetoComplete;
+            
+            
+            
+            //var overallScore = puffballScore + seedScore + mushroomScore + bossScore - overallTime;
+            // AddScore(overallScore);
+        }
     }
 }
