@@ -237,6 +237,7 @@ namespace Player
                     _animator.SetFloat("Horizontal", playerAttackDirection.x);
                     _animator.SetFloat("Vertical", playerAttackDirection.y);
                 }
+
             }
         }
 
