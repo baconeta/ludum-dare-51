@@ -106,7 +106,7 @@ namespace Player
             Right,
         }
 
-        private FacingDirection facingDirection;
+        private FacingDirection facingDirection = FacingDirection.Up;
 
         public FacingDirection GetFacingDirection()
         {
@@ -126,6 +126,7 @@ namespace Player
         // Update is called once per frame
         private void Update()
         {
+            // Check if the player can be moved.
             if (Controllers.GameController.IsPlayerInputEnabled)
             {
                 if (Controllers.InputController.isMobile) //Mobile Controls
@@ -142,21 +143,23 @@ namespace Player
                         animator.SetFloat("Horizontal", playerAttack.x);
                         animator.SetFloat("Vertical", playerAttack.y);
                         attacking = true;
+                        facingDirection = CalculateFacingDirection(playerAttack);
                     }
                 }
-                else //keyboard controls
+                // Keyboard controls
+                else
                 {
-                    //Attack is pressed
+                    // Attack is pressed
                     if (playerInput.actions["Attack"].IsPressed())
                     {
-                        //Attack in direction of the mouse
+                        // Attack in direction of the mouse
                         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                         Vector2 attackDirection = (mousePosition - (Vector2) transform.position).normalized;
-                        
+
                         //Final attack direction to face player to mouse
                         //attackDirection = transform.position + (Vector3) attackDirection;
 
-                        //Attack!
+                        // Attack!
                         attacking = true;
                         animator.SetFloat("Horizontal", attackDirection.x);
                         animator.SetFloat("Vertical", attackDirection.y);
@@ -165,6 +168,21 @@ namespace Player
 
                 // Update the animator.
                 animator.SetBool("Attacking", attacking);
+                switch (facingDirection)
+                {
+                    case FacingDirection.Up:
+                        animator.SetFloat("FacingDirection", 0F);
+                        break;
+                    case FacingDirection.Down:
+                        animator.SetFloat("FacingDirection", 1F);
+                        break;
+                    case FacingDirection.Left:
+                        animator.SetFloat("FacingDirection", 2F);
+                        break;
+                    case FacingDirection.Right:
+                        animator.SetFloat("FacingDirection", 3F);
+                        break;
+                }
             }
         }
 
@@ -183,10 +201,10 @@ namespace Player
         // Declare an attack.
         private void Attack()
         {
+            attacking = false;
             attackOnCooldown = true;
             _weapon.DoAttack();
             StartCoroutine(ResetAttackCooldown());
-            attacking = false;
         }
 
         // This function resets the attack cooldown after the cooldown period ends.
@@ -194,6 +212,22 @@ namespace Player
         {
             yield return new WaitForSeconds(1 / attackSpeedActual);
             attackOnCooldown = false;
+        }
+
+        private static FacingDirection CalculateFacingDirection(Vector2 direction)
+        {
+            // If the absolute value of X is larger than Y.
+            if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
+            {
+                // If X is positive, the facing direction is Right. Otherwise it is Left.
+                return (direction.x > 0F ? FacingDirection.Right : FacingDirection.Left);
+            }
+            // else, the absolute value of Y is larger.
+            else
+            {
+                // If Y is positive, the facing direction is Up. Otherwise it is Down.
+                return (direction.y > 0F ? FacingDirection.Up : FacingDirection.Down);
+            }
         }
 
         private void RecalculateStats()
