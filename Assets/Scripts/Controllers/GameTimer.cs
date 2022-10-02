@@ -34,6 +34,8 @@ public class GameTimer : MonoBehaviour
     public void ResumeTimer() { isTimerRunning = true; }
     public void StopTimer() { isTimerRunning = false; OnTimerStop.Invoke(timer); }
     public bool Running() { return isTimerRunning; }
+
+    public float GetTime() { return timer; }
     public EWorldPhase GetWorldPhase() { return worldPhase; }
 
     private void Update()
