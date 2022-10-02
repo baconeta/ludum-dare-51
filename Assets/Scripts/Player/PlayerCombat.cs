@@ -160,6 +160,21 @@ namespace Player
 
                 // Update the animator.
                 animator.SetBool("Attacking", attacking);
+                switch (facingDirection)
+                {
+                    case FacingDirection.Up:
+                        animator.SetFloat("FacingDirection", 0F);
+                        break;
+                    case FacingDirection.Down:
+                        animator.SetFloat("FacingDirection", 1F);
+                        break;
+                    case FacingDirection.Left:
+                        animator.SetFloat("FacingDirection", 2F);
+                        break;
+                    case FacingDirection.Right:
+                        animator.SetFloat("FacingDirection", 3F);
+                        break;
+                }
             }
         }
 
