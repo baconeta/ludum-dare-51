@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Text;
 using Player;
 using TMPro;
 using Unity.VisualScripting;
@@ -11,141 +12,113 @@ using Random = UnityEngine.Random;
 
 public class Customization : MonoBehaviour
 {
-    [Header("Placeholder Lists")]
-    public TextAsset colourPlaceholders;
-    public TextAsset animalPlaceholders;
-
-    [Header("Player Inputs")]
-    public bool generatePlaceholdersImmediately = false;
-    public string playerName;
-    public string favouriteAnimal;
+    [Header("Word Lists")]
+    [SerializeField][Tooltip("The comma-separated list of descriptors to generate names from.")]
+    private TextAsset listOfAdjectives;
+    [SerializeField][Tooltip("The comma-separated list of nouns to generate names from.")]
+    private TextAsset listOfNouns;
     
     [Header("UI Input Fields")]
-    public TMP_InputField playerNameInput;
-    public TMP_InputField favouriteAnimalInput;
+    [SerializeField][Tooltip("The input field for names.")]
+    private TMP_InputField playerNameInput;
 
+    [Header("Settings")]
+    [SerializeField][Tooltip("Generate a random name IMMEDIATELY.")]
+    private bool generatePlaceholdersImmediately = false;
+    [SerializeField][Tooltip("The default text to show as a placeholder. Won't be used as a name. Ignored if the above is set to true.")]
+    private string defaultPlaceholderText = "Name";
+
+
+    private string cachedName = "";
 
     private void Start()
     {
+        // This object will destroy itself once it finds a player to off-load stats to.
         DontDestroyOnLoad(gameObject);
+        // Setup the initial placeholder text name.
         if (generatePlaceholdersImmediately)
         {
-            RandomAnimalPlaceholder();
-            RandomPlayerNamePlaceholder();
+            UpdatePlaceholderName(GeneratePlayerName());
+        }
+        else
+        {
+            UpdatePlaceholderName(defaultPlaceholderText);
         }
     }
 
-    
-    public void RandomAnimalPlaceholder()
+    // We run this on FixedUpdate to reduce the amount of checks per second.
+    private void FixedUpdate()
     {
-        //Get random animal
-        string randomName = GetRandomFromFile("animals");
+        // Once we are in the main scene (instead of the start screen).
+        if (SceneManager.GetActiveScene().name == "MainScene")
+        {
+            // Save the currently-stored changes.
+            SaveCacheToPlayer();
         
-        //Get placeholder text to random animal
-        favouriteAnimalInput.placeholder.GetComponent<TextMeshProUGUI>().text = randomName;
-        
-        //Clear any existing inputted text
-        if(favouriteAnimalInput.text is not "")
-            favouriteAnimalInput.text = "";
+            // Unity version of "destroy this".
+            Destroy(gameObject);
+        }
     }
 
-    public void RandomPlayerNamePlaceholder()
+    public void GenerateRandomPlaceholderName()
     {
-        //Get random name
-        string randomName = GetRandomFromFile("colours");
+        UpdatePlaceholderName(GeneratePlayerName());
+    }
+
+    public void UpdatePlaceholderName(string newName)
+    {
+        // Set placeholder text to the new name.
+        playerNameInput.placeholder.GetComponent<TextMeshProUGUI>().text = newName;
         
-        //Get placeholder text to random name
-        playerNameInput.placeholder.GetComponent<TextMeshProUGUI>().text = randomName;
-        
-        //Clear any existing inputted text
-        if(playerNameInput.text is not "")
+        // Clear any text from the user input field.
+        if (playerNameInput.text is not "")
             playerNameInput.text = "";
     }
 
-    private string GetRandomFromFile(string type)
+    public string GeneratePlayerName()
     {
-        string[] placeholderText;
-        string result = "";
-        switch (type)
-        {
-            case "colours": // Get random player name
-                placeholderText = colourPlaceholders.text.Split(",");
-                result = placeholderText[Random.Range(0, placeholderText.Length)];
-                break;
-            case "animals": // Get random animal name
-                //Split CSV
-                placeholderText = animalPlaceholders.text.Split(",");
-                //Get random from CSV list
-                result = placeholderText[Random.Range(0, placeholderText.Length)];
-                break;
-                
-        }
+        // Get random name
+        StringBuilder generatedName = new StringBuilder();
+        generatedName.Append(GetRandomAdjectiveFromFile());
+        generatedName.Append(GetRandomNounFromFile());
 
-        return result;
+        return generatedName.ToString();
     }
 
-
-    public void ConfirmChoices()
+    private string GetRandomAdjectiveFromFile()
     {
-        //First text field
-        //If custom text box is empty
+        string[] words = listOfAdjectives.text.Split(",");
+        return words[Random.Range(0, words.Length)];
+    }
+
+    private string GetRandomNounFromFile()
+    {
+        string[] words = listOfNouns.text.Split(",");
+        return words[Random.Range(0, words.Length)];
+    }
+
+    public string GetCurrentName()
+    {
+        // Check if the text field is empty.
         if (string.IsNullOrWhiteSpace(playerNameInput.text))
         {
-            //Get placeholder name
-            string placeholderName = playerNameInput.placeholder.GetComponent<TextMeshProUGUI>().text;
-            //If no placeholder - Get random placeholder
-            if (placeholderName == "Name")
-            {
-                RandomPlayerNamePlaceholder();
-                placeholderName = playerNameInput.placeholder.GetComponent<TextMeshProUGUI>().text;
-            }
-            playerName = placeholderName;
+            // Get placeholder name
+            var placeholderName = playerNameInput.placeholder.GetComponent<TextMeshProUGUI>().text;
+            // If no placeholder - Get random placeholder
+            return (placeholderName == defaultPlaceholderText) ? GeneratePlayerName() : placeholderName;
         }
-        else //Use player choice
-        {
-            playerName = playerNameInput.text;
-        }
-        
-        //Second text field
-        //If custom text box is empty
-        if (string.IsNullOrWhiteSpace(favouriteAnimalInput.text))
-        {
-            
-            //Get placeholder name
-            string placeholderAnimal = favouriteAnimalInput.placeholder.GetComponent<TextMeshProUGUI>().text;
-            //If no placeholder - Get random placeholder
-            if (placeholderAnimal == "Favourite Animal")
-            {
-                RandomAnimalPlaceholder();
-                placeholderAnimal = favouriteAnimalInput.placeholder.GetComponent<TextMeshProUGUI>().text;
-
-            }
-            favouriteAnimal = placeholderAnimal;
-        }
-        else //Use player choice
-        {
-            favouriteAnimal = favouriteAnimalInput.text;
-        }
-
+        // Else, use player choice.
+        return playerNameInput.text;
     }
 
-    private void FixedUpdate()
+    public void CacheCustomization()
     {
-        //If Main scene check
-        if (SceneManager.GetActiveScene().name == "MainScene")
-        {
-            SaveCustomizationToPlayer();
-        }
-        
+        cachedName = GetCurrentName();
     }
 
-    //Finds player stats and copies vital information across
-    public void SaveCustomizationToPlayer()
+    // Finds the player stat tracker, and copies vital information across.
+    public void SaveCacheToPlayer()
     {
-        //Save variables to player stats
-        FindObjectOfType<PlayerStats>().SetPlayerInfo(playerName, favouriteAnimal);
-        
-        //Destroy this
-        Destroy(gameObject);
+        FindObjectOfType<PlayerStats>().SetName(cachedName);
     }
 }
