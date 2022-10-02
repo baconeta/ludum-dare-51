@@ -83,9 +83,9 @@ public class PlayerFacing : MonoBehaviour
         {
             // Get the attack direction for the player, then use it later to calculate our facing direction.
             Vector2 motionDirection;
-            motionDirection = playerInput.actions["Attack"].ReadValue<Vector2>();
 
             Debug.Log(motionDirection);
+            motionDirection = playerInput.actions["Move"].ReadValue<Vector2>();
 
             // Check which axis has greater magnitude, then check if that axis is positive or negative.
             if (Mathf.Abs(motionDirection.x) > Mathf.Abs(motionDirection.y))
