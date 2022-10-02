@@ -19,8 +19,6 @@ namespace Player
 
         private float _weaponIsDamagingDurationActual;
 
-        [SerializeField] float hitAngle = 60f;
-
         [Header("Audio")] public AudioSource weaponAudioSource;
         public List<AudioClip> hitSounds;
         [Range(-1f, 0f)] public float hitSoundPitchShiftMin = 0f;
@@ -105,14 +103,18 @@ namespace Player
             {
                 if (!weaponIsDamaging) return;
 
+                Vector2 rawDirection = result.transform.position - transform.position;
+
                 //Direction player to Enemy
-                Vector2 dir = (result.transform.position - transform.position).normalized;
-                Debug.Log(Vector2.Dot(dir, attackDirection));
+                Vector2 dirNormalized = rawDirection.normalized;
+
                 //Enemy is within a "Pie Slice" of the player.
                 //0 is 90 degrees to the click angle.
                 //1 is facing directly towards the enemy.
                 //-1 is directly the opposite direction.
-                if (Vector2.Dot(dir, attackDirection) > 0.5f)
+                var dotProd = Vector2.Dot(dirNormalized, attackDirection);
+
+                if (dotProd > 0.7f || (dotProd > 0 && rawDirection.magnitude < 1f))
                 {
                     //Damage enemy
                     result.GetComponent<Enemy>().TakeDamage(_playerCombat.GetAttackDamage());

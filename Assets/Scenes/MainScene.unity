@@ -1385,14 +1385,6 @@ PrefabInstance:
       propertyPath: _playerFacing
       value: 
       objectReference: {fileID: 1173181170}
-    - target: {fileID: 375893899820495540, guid: adb2cd2b963d29c4f8ebec31626cee0e, type: 3}
-      propertyPath: attackRangeInitial
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 375893899820495540, guid: adb2cd2b963d29c4f8ebec31626cee0e, type: 3}
-      propertyPath: attackRangeGrowthPerLevel
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 375893899820495541, guid: adb2cd2b963d29c4f8ebec31626cee0e, type: 3}
       propertyPath: animator
       value: 

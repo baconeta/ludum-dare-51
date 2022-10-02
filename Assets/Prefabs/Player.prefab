@@ -187,8 +187,8 @@ MonoBehaviour:
   attackSpeedInitial: 2
   attackSpeedGrowthPerLevel: 0.667
   attackSpeedMaxLevel: 5
-  attackRangeInitial: 10
-  attackRangeGrowthPerLevel: 4
+  attackRangeInitial: 7
+  attackRangeGrowthPerLevel: 3
   attackRangeMaxLevel: 5
   firstUpgradeCost: 3
   secondUpgradeCost: 7
