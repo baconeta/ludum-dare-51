@@ -8,27 +8,33 @@ public class FlashImage : MonoBehaviour
 {
 
     public AnimationCurve fadeCurve;
-    public Image flashImage;
+    public SpriteRenderer flashSpriteRenderer;
     public float flashDuration;
     public Color flashColor;
 
+    private bool isFlashing;
+
     private void Start()
     {
-        flashImage = GetComponent<Image>();
-        Flash();
+        flashSpriteRenderer = GetComponent<SpriteRenderer>();
+        
     }
 
     public void Flash()
     {
-        StartCoroutine(FlashRoutine());
+        //If not mid flash, then flash.
+        if(!isFlashing) StartCoroutine(FlashRoutine());
     }
 
     private IEnumerator FlashRoutine()
     {
-        
+        Debug.Log("test");
+        isFlashing = true;
         float t = 0;
+        
         //Half for flash in, half for flash out.
         float halfFlashDuration = flashDuration / 2;
+        
         //Fade in
         while (t < halfFlashDuration)
         {
@@ -37,14 +43,14 @@ public class FlashImage : MonoBehaviour
             lerp *= fadeCurve.Evaluate(t / halfFlashDuration);
             //Set opacity to lerp
             flashColor.a = lerp;
-            flashImage.color = flashColor;
+            flashSpriteRenderer.color = flashColor;
             //Increment t
             t += Time.deltaTime;
             yield return null;
         }
         
         //Fade out
-        while (t < flashDuration)
+        while (t > 0)
         {
             //Lerp backwards to 0
             float lerp = Mathf.Lerp(0, 1, t / halfFlashDuration);
@@ -52,13 +58,15 @@ public class FlashImage : MonoBehaviour
             
             //Set opacity to lerp
             flashColor.a = lerp;
-            flashImage.color = flashColor;
+            flashSpriteRenderer.color = flashColor;
             //Increment t
             t -= Time.deltaTime;
             yield return null;
 
         }
 
+        //Finish
+        isFlashing = false;
         yield return null;
     }
 }

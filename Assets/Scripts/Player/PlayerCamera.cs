@@ -21,11 +21,14 @@ public class PlayerCamera : MonoBehaviour
     [SerializeField]
     private float TopLimit = 25f;
 
+    public FlashImage screenFlash;
+
 
     // Start is called before the first frame update
     void Start()
     {
         Player = FindObjectOfType<Player.Player>();
+        if (!screenFlash) screenFlash = GetComponentInChildren<FlashImage>();
     }
 
     // Update is called once per frame
@@ -49,6 +52,11 @@ public class PlayerCamera : MonoBehaviour
         {
             Debug.LogWarning("Player Ref was null");
         }
+    }
+
+    public void Flash()
+    {
+        screenFlash.Flash();
     }
 
     private void OnDrawGizmos()

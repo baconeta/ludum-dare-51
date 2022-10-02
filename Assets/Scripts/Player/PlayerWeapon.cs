@@ -19,7 +19,7 @@ namespace Player
 
         [SerializeField] float hitAngle = 60f;
 
-
+        
         // True if collisions with the weapon will damage enemies.
         protected bool weaponIsDamaging = false;
 
@@ -46,6 +46,7 @@ namespace Player
 
         public void DoAttack(Vector2 attackDirection)
         {
+
             weaponIsDamaging = true;
 
             if (CircleCollider is not null)
