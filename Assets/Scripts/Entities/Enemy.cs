@@ -30,14 +30,14 @@ namespace Entities
 
         [Header("Attack Stats")] public float attackRadius = 1;
         public float attackSpeed = 1;
-        public float attackDamage = 1;
+        public int attackDamage = 1;
         private float _timeOfLastAttack;
 
         //Components
         protected Player.Player player;
         protected Rigidbody2D _rigidbody2D;
         private GameController _gameController;
-        private Animator _animator;
+        protected Animator animator;
 
         public EnemyController EcRef { get; set; }
 
@@ -50,8 +50,8 @@ namespace Entities
             if (!_rigidbody2D)
                 _rigidbody2D = GetComponent<Rigidbody2D>();
 
-            if (!_animator)
-                _animator = GetComponent<Animator>();
+            if (!animator)
+                animator = GetComponent<Animator>();
 
             if (!player)
                 player = FindObjectOfType<Player.Player>();
@@ -104,6 +104,7 @@ namespace Entities
                 {
                     _timeOfLastAttack = Time.time;
                     Attack();
+                    animator.SetTrigger("Attacked");
                 }
             }
             else //(Out of range)
@@ -208,7 +209,7 @@ namespace Entities
         private void SetWorldPhase(EWorldPhase newPhase)
         {
             WorldPhase = newPhase;
-            _animator.SetBool("IsDark", WorldPhase == EWorldPhase.DARK);
+            animator.SetBool("IsDark", WorldPhase == EWorldPhase.DARK);
         }
 
         protected void NotifyAnimator(Vector3 movement)
@@ -218,9 +219,9 @@ namespace Entities
 
         private void UpdateAnimator()
         {
-            _animator.SetFloat("Horizontal", _lastMovement.x);
-            _animator.SetFloat("Vertical", _lastMovement.y);
-            _animator.SetFloat("Velocity", _lastMovement.magnitude);
+            animator.SetFloat("Horizontal", _lastMovement.x);
+            animator.SetFloat("Vertical", _lastMovement.y);
+            animator.SetFloat("Velocity", _lastMovement.magnitude);
         }
     }
 }

@@ -34,6 +34,8 @@ public class GameTimer : MonoBehaviour
     public void ResumeTimer() { isTimerRunning = true; }
     public void StopTimer() { isTimerRunning = false; OnTimerStop.Invoke(timer); }
     public bool Running() { return isTimerRunning; }
+
+    public float GetTime() { return timer; }
     public EWorldPhase GetWorldPhase() { return worldPhase; }
 
     private void Update()
@@ -44,20 +46,38 @@ public class GameTimer : MonoBehaviour
 
             if (timer <= 0f)
             {
-                worldPhase++;
-                if (worldPhase >= EWorldPhase.DEFAULT_LAST)
-                {
-                    worldPhase = 0;
-                }
-
-                Camera.main.GetComponent<PlayerCamera>().Flash();
-                OnPhaseChange.Invoke(worldPhase);
-                timer = phaseTime;
-
-                if (Application.isEditor)
-                    Debug.Log("Phase: " + worldPhase);
+                ChangePhase();
             }
         }
+    }
+
+    public void ChangePhase()
+    {
+        worldPhase++;
+        if (worldPhase >= EWorldPhase.DEFAULT_LAST)
+        {
+            worldPhase = 0;
+        }
+
+        Camera.main.GetComponent<PlayerCamera>().Flash();
+        OnPhaseChange.Invoke(worldPhase);
+        timer = phaseTime;
+
+        if (Application.isEditor)
+            Debug.Log("Phase: " + worldPhase);
+    }
+
+    public float GetTimer()
+    {
+        return timer;
+    }
+
+    public void JumpToLightPhase()
+    {
+        if (worldPhase is EWorldPhase.LIGHT) return;
+        
+        //Its dark, change phase
+        ChangePhase();
     }
 }
 

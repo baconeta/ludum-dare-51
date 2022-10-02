@@ -934,12 +934,13 @@ MonoBehaviour:
   gameController: {fileID: 1142364620}
   enemyController: {fileID: 667146669}
   waves:
+  - numberOfPuffballs: 5
+    numberOfSeeds: 5
+    numberOfMushrooms: 5
   - numberOfPuffballs: 10
     numberOfSeeds: 10
-    numberOfMushrooms: 4
-  - numberOfPuffballs: 15
-    numberOfSeeds: 15
-    numberOfMushrooms: 8
+    numberOfMushrooms: 5
+  isBossRound: 0
 --- !u!1 &644319211
 GameObject:
   m_ObjectHideFlags: 0
@@ -1652,6 +1653,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1173181159}
     - target: {fileID: 375893899820495540, guid: adb2cd2b963d29c4f8ebec31626cee0e, type: 3}
+      propertyPath: healthInitial
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 375893899820495540, guid: adb2cd2b963d29c4f8ebec31626cee0e, type: 3}
       propertyPath: attackRangeInitial
       value: 7
       objectReference: {fileID: 0}
@@ -1671,6 +1676,10 @@ PrefabInstance:
       propertyPath: playerInput
       value: 
       objectReference: {fileID: 1173181159}
+    - target: {fileID: 375893899820495542, guid: adb2cd2b963d29c4f8ebec31626cee0e, type: 3}
+      propertyPath: gameController
+      value: 
+      objectReference: {fileID: 1142364620}
     - target: {fileID: 6565891818112425706, guid: adb2cd2b963d29c4f8ebec31626cee0e, type: 3}
       propertyPath: m_Radius
       value: 7
@@ -2034,7 +2043,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7369678367256390203, guid: 1f794f3f39fee51499b78d5c49b8607e, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -15.000015
+      value: -14.9999695
       objectReference: {fileID: 0}
     - target: {fileID: 7369678367256390203, guid: 1f794f3f39fee51499b78d5c49b8607e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
