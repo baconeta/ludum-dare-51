@@ -1,3 +1,4 @@
+using Controllers;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,6 +11,7 @@ namespace Player
         public PlayerMovement playerMovement;
         public PlayerStats playerStats;
         public PlayerInput playerInput;
+        public GameController gameController;
 
         private void Awake()
         {
@@ -17,6 +19,7 @@ namespace Player
             playerMovement = GetComponent<PlayerMovement>();
             playerStats = GetComponent<PlayerStats>();
             playerInput = GetComponent<PlayerInput>();
+            gameController = FindObjectOfType<GameController>();
         }
 
         public PlayerInput GetPlayerInput()

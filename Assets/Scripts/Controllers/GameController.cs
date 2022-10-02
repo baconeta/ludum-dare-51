@@ -1,3 +1,4 @@
+using System.Collections;
 using HUD;
 using UnityEngine;
 
@@ -47,15 +48,28 @@ namespace Controllers
             BroadcastMessage("onGameReset");
             GameRunning = true;
         }
-
-        // Update is called once per frame
-        public void EndGame(float delay = 0f)
+        
+        public void EndGame(bool victory = false, float delay = 0f)
         {
-            ;
-            if (!isInvincible)
+            
+            Debug.Log("End of Game!");
+
+            if (victory)
             {
-                Invoke(nameof(BroadcastGameOver), delay);
+                Debug.Log("You Win! You conquered CORN!");
+                //Show Scoreboard now
             }
+            else
+            {
+                Debug.Log("You Lost! CORN conquered You!");
+                //Show loss/death screen
+            }
+            
+            // Not sure what this does Currently errors
+            // if (!isInvincible)
+            // {
+            //     Invoke(nameof(BroadcastGameOver), delay);
+            // }
         }
 
         private void BroadcastGameOver()
@@ -67,16 +81,40 @@ namespace Controllers
         public void RoundEnded(int currentRound)
         {
             Debug.Log("Round " + currentRound + " completed successfully.");
+            
+            StartCoroutine(RoundTransition());
+        }
+
+        public IEnumerator RoundTransition()
+        {
+            
+            timer.JumpToLightPhase();
+            float phaseTimer = timer.GetTimer();
+            //TODO Wait until end of NEXT light mode.
+            yield return new WaitForSeconds(phaseTimer);
+            
+            //End and move to sanctuary
             timer.StopTimer();
             IsPlayerInputEnabled = false;
-            sanctuary.ShowSanctuary();           
+            sanctuary.ShowSanctuary();
+            yield return null;
         }
+        
+        
 
         public void Continue()
         {
             IsPlayerInputEnabled = true;
             timer.StartTimer();
-            _rc.StartNextWave();
+            //If before boss wave
+            if(!_rc.isBossRound) _rc.StartNextWave();
+            else //if after boss wave
+            {
+                
+                EndGame(true);
+            }
+            
+            
         }
     }
 }
