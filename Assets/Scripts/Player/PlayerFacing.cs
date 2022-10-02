@@ -59,7 +59,8 @@ public class PlayerFacing : MonoBehaviour
             }
             else
             {
-                attackDirection = (Vector2)camera.ScreenToWorldPoint(Input.mousePosition);
+                // Vector between mouse position and player position in-world.
+                attackDirection = (Vector2) (camera.ScreenToWorldPoint(Input.mousePosition) - transform.position);
             }
 
             Debug.Log(attackDirection);
