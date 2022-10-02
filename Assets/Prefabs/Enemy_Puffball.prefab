@@ -100,6 +100,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lootOnDeath: {fileID: 357654020248760077, guid: 8a95e7913e576564f9b683e766cdc2a1, type: 3}
+  HealthLoot: {fileID: 357654020248760077, guid: 9cc22239e32d0e34fbcca8f645f8535a, type: 3}
+  HealthLootChance: 50
   enemyName: Puffball
   moveSpeed: 1
   maxHealth: 1
@@ -107,33 +109,6 @@ MonoBehaviour:
   attackRadius: 0.3
   attackSpeed: 2
   attackDamage: 1
-  jumpCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 2
-      outSlope: 2
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  jumpDistance: 0.3
-  jumpSpeed: 0.4
-  jumpCooldown: 0.4
 --- !u!58 &1400654487774292806
 CircleCollider2D:
   m_ObjectHideFlags: 0

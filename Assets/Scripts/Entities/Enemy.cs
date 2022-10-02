@@ -8,6 +8,13 @@ namespace Entities
         //Enemy collectable
         public GameObject lootOnDeath;
 
+        public GameObject HealthLoot;
+        [SerializeField]
+        [Range(0, 100)]
+        private int HealthLootChance = 50;
+        [SerializeField]
+        private float LootDropOffset = 2f;
+
         [Header("Enemy Stats")] public string enemyName;
 
         public float moveSpeed = 1;
@@ -150,10 +157,34 @@ namespace Entities
 
         private void SpawnLoot()
         {
-            //Spawn loot
-            GameObject newLoot = Instantiate(lootOnDeath);
-            //Move loot to die position
-            newLoot.transform.position = transform.position;
+            Vector3 offset = (player.gameObject.transform.position - gameObject.transform.position).normalized;
+            offset *= LootDropOffset;
+
+            if (lootOnDeath != null)
+            {
+                //Spawn loot
+                GameObject newLoot = Instantiate(lootOnDeath);
+                //Move loot to die position
+                newLoot.transform.position = transform.position + offset;
+            }
+            else
+            {
+                Debug.LogWarning("lootOnDeath prefab ref was null, cannot instantiate");
+            }
+
+            if (HealthLoot != null)
+            {
+                int random = Random.Range(0, 100);
+                if (random <= HealthLootChance)
+                {
+                    GameObject healthLoot = Instantiate(HealthLoot);
+                    healthLoot.transform.position = transform.position + offset;
+                }
+            }
+            else
+            {
+                Debug.LogWarning("HealthLoot prefab ref was null, cannot instantiate");
+            }
         }
 
         private void OnDrawGizmos()

@@ -20,6 +20,7 @@ namespace Utils
             }
 
             spriteRender = GetComponent<SpriteRenderer>();
+            SetPhaseMode(gameController.timer.GetWorldPhase());
         }
 
         private void SetPhaseMode(EWorldPhase worldPhase)
@@ -35,6 +36,12 @@ namespace Utils
                         spriteRender.sprite = darkSprite;
                     break;
             }
+        }
+
+        private void OnDestroy()
+        {
+            gameController.timer.OnPhaseChange.RemoveListener(SetPhaseMode);
+            gameController.timer.OnTimerStart.RemoveListener(SetPhaseMode);
         }
     }
 }

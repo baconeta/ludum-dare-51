@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 357654020248760065}
   - component: {fileID: 357654020248760064}
   - component: {fileID: 5487155024048940910}
+  - component: {fileID: -8503707269048079338}
   m_Layer: 0
   m_Name: Collectable_Heal
   m_TagString: Untagged
@@ -136,5 +137,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a839f3dafcdeb54d9ba470e880b00c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  value: 0
   sprite: {fileID: 0}
-  healValue: 5
+--- !u!114 &-8503707269048079338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 357654020248760077}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35b02b94f7f545cc89b479ca7d06cbd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lightSprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  darkSprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
