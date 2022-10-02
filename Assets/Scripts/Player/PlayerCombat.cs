@@ -15,17 +15,13 @@ namespace Player
         /*
      * Player health.
      */
-        [Header("Health")]
-        [Tooltip("Starting player health.")]
-        [SerializeField]
+        [Header("Health")] [Tooltip("Starting player health.")] [SerializeField]
         protected int healthInitial = 5;
 
-        [Tooltip("How much player health increases per upgrade level.")]
-        [SerializeField]
+        [Tooltip("How much player health increases per upgrade level.")] [SerializeField]
         protected int healthGrowthPerLevel = 1;
 
-        [Tooltip("How many times the player can upgrade health.")]
-        [SerializeField]
+        [Tooltip("How many times the player can upgrade health.")] [SerializeField]
         protected int healthMaxLevel = 5;
 
         protected int healthLevel = 0;
@@ -42,12 +38,10 @@ namespace Player
         [SerializeField]
         protected float attackDamageInitial = 1.0F;
 
-        [Tooltip("By how much the player's attack damage increases per level.")]
-        [SerializeField]
+        [Tooltip("By how much the player's attack damage increases per level.")] [SerializeField]
         protected float attackDamageGrowthPerLevel = 0.2F;
 
-        [Tooltip("How many times the player can upgrade attack damage.")]
-        [SerializeField]
+        [Tooltip("How many times the player can upgrade attack damage.")] [SerializeField]
         protected int attackDamageMaxLevel = 5;
 
         protected int attackDamageLevel = 0;
@@ -63,12 +57,10 @@ namespace Player
         [SerializeField]
         protected float attackSpeedInitial = 2.0F;
 
-        [Tooltip("By how much the player's attack speed increases per level.")]
-        [SerializeField]
+        [Tooltip("By how much the player's attack speed increases per level.")] [SerializeField]
         protected float attackSpeedGrowthPerLevel = 0.667F;
 
-        [Tooltip("How many times the player can upgrade attack speed.")]
-        [SerializeField]
+        [Tooltip("How many times the player can upgrade attack speed.")] [SerializeField]
         protected int attackSpeedMaxLevel = 5;
 
         protected int attackSpeedLevel = 0;
@@ -87,12 +79,10 @@ namespace Player
         [SerializeField]
         protected float attackRangeInitial = 100.0F;
 
-        [Tooltip("By how much the player's attack range increases per level.")]
-        [SerializeField]
+        [Tooltip("By how much the player's attack range increases per level.")] [SerializeField]
         protected float attackRangeGrowthPerLevel = 12.0F;
 
-        [Tooltip("How many times the player can upgrade attack range.")]
-        [SerializeField]
+        [Tooltip("How many times the player can upgrade attack range.")] [SerializeField]
         protected int attackRangeMaxLevel = 5;
 
         protected int attackRangeLevel = 0;
@@ -117,7 +107,11 @@ namespace Player
         }
 
         private FacingDirection facingDirection;
-        public FacingDirection GetFacingDirection() { return facingDirection; }
+
+        public FacingDirection GetFacingDirection()
+        {
+            return facingDirection;
+        }
 
         // Start is called before the first frame update
         private void Start()
@@ -139,7 +133,7 @@ namespace Player
                 if (Controllers.InputController.isMobile) //Mobile Controls
                 {
                     Vector2 playerAttack = playerInput.actions["Attack"].ReadValue<Vector2>();
-                    
+
                     //Only if stick is in use
                     if (playerAttack != Vector2.zero)
                     {
@@ -151,14 +145,14 @@ namespace Player
                 else //keyboard controls
                 {
                     //Attack is pressed
-                    if(playerInput.actions["Attack"].IsPressed())
+                    if (playerInput.actions["Attack"].IsPressed())
                     {
                         //Attack in direction of the mouse
                         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                        Vector2 attackDirection = mousePosition - (Vector2)transform.position;
+                        Vector2 attackDirection = mousePosition - (Vector2) transform.position;
                         //Final attack direction to face player to mouse
-                        attackDirection = transform.position + (Vector3)attackDirection;
-                        
+                        attackDirection = transform.position + (Vector3) attackDirection;
+
                         //Attack!
                         attacking = true;
                     }

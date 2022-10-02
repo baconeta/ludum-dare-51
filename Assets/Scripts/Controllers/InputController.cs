@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,16 +8,14 @@ namespace Controllers
         public PlayerInput playerInput;
         public static bool isMobile = false;
 
-        
-        void SetControlsToMobile()
+        private void SetControlsToMobile()
         {
             playerInput.SwitchCurrentActionMap("PlayerMobile");
             isMobile = true;
             //Show Mobile UI
-
         }
 
-        void SetControlsToKeyboard()
+        private void SetControlsToKeyboard()
         {
             playerInput.SwitchCurrentActionMap("Player");
             isMobile = false;
@@ -28,9 +24,9 @@ namespace Controllers
 
         public void UseMobileControls(bool toggle)
         {
-            if(toggle) SetControlsToMobile();
+            if (toggle) SetControlsToMobile();
             else SetControlsToKeyboard();
-            
+
             Debug.Log(playerInput.currentActionMap);
         }
 
@@ -38,6 +34,5 @@ namespace Controllers
         {
             return isMobile;
         }
-    
-}
+    }
 }
