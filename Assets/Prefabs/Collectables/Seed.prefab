@@ -138,3 +138,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   value: 3
   pickupTimer: 1
+  pickupSound: {fileID: 8300000, guid: 265b0badde0d2934a80ae3b694485f68, type: 3}
