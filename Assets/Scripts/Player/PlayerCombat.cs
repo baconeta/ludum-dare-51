@@ -289,9 +289,15 @@ namespace Player
 
         public void DamagePlayer(int damage)
         {
+            //Clamp to 0
             healthActual -= damage;
+            if (healthActual < 0) healthActual = 0;
+            
             // TODO Give visual indication?
-            // TODO Update HUD?
+            
+            // Update HUD
+            GetComponent<Player>().gameUI.UpdateHealth();
+            
             if (healthActual <= 0)
             {
                 if(!isDead) Die();
