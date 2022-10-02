@@ -11,6 +11,8 @@ namespace Controllers
         [SerializeField] private Sanctuary sanctuary;
         // This is used to submit and receive scores to and from the server.
         [SerializeField] private GlobalScoreManager _globalScoreManager;
+        [SerializeField] private EndGame endGame;
+        [SerializeField] GameUI gameUI;
 
         private RoundController _rc;
         public bool GameRunning { get; set; }
@@ -75,7 +77,11 @@ namespace Controllers
             
             // Submit the score to the score server.
             PlayerStats stats = FindObjectOfType<PlayerStats>();
-            _globalScoreManager.SubmitScore(stats.GetName(), stats.GetScore());
+            var finalScore = stats.GetScore();
+            _globalScoreManager.SubmitScore(stats.GetName(), finalScore);
+
+            gameUI.HideUI();
+            endGame.ShowEndGameUI(finalScore);
         }
 
         private void BroadcastGameOver()
