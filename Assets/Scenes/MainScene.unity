@@ -1470,6 +1470,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerInput: {fileID: 1173181159}
+  gameUI: {fileID: 1401540131}
 --- !u!4 &1142364622
 Transform:
   m_ObjectHideFlags: 0
@@ -1714,6 +1715,7 @@ MonoBehaviour:
   currencyText: {fileID: 109111629}
   healthText: {fileID: 109111628}
   player: {fileID: 1173181156}
+  mobileUI: {fileID: 308951369}
 --- !u!4 &1401540132
 Transform:
   m_ObjectHideFlags: 0

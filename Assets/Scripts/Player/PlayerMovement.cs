@@ -50,12 +50,18 @@ namespace Player
         {
             if (!Controllers.GameController.IsPlayerInputEnabled) return;
 
+            //Get input value of Move
             Vector2 playerMovement = playerInput.actions["Move"].ReadValue<Vector2>();
             _movement.x = playerMovement.x;
             _movement.y = playerMovement.y;
 
-            animator.SetFloat("Horizontal", _movement.x);
-            animator.SetFloat("Vertical", _movement.y);
+            //TODO temp fix for checking if attack is in progress.
+            //If an attack is not in progress
+            if (!playerInput.actions["Attack"].IsPressed())
+            {
+                animator.SetFloat("Horizontal", _movement.x);
+                animator.SetFloat("Vertical", _movement.y);
+            }
             animator.SetFloat("Velocity", _movement.sqrMagnitude);
         }
 
