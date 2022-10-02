@@ -28,7 +28,6 @@ public class FlashImage : MonoBehaviour
 
     private IEnumerator FlashRoutine()
     {
-        Debug.Log("test");
         isFlashing = true;
         float t = 0;
         

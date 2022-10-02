@@ -50,6 +50,7 @@ public class GameTimer : MonoBehaviour
                     worldPhase = 0;
                 }
 
+                Camera.main.GetComponent<PlayerCamera>().Flash();
                 OnPhaseChange.Invoke(worldPhase);
                 timer = phaseTime;
 

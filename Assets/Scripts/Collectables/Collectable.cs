@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 namespace Collectables
@@ -6,10 +7,10 @@ namespace Collectables
     public abstract class Collectable : MonoBehaviour
     {
         public float value;
-
-        public Sprite sprite;
-        protected SpriteRenderer sr;
-        protected Rigidbody2D rb;
+        private bool isInteractable;
+        [Tooltip("Timer before the item is interactable (by the player)")]
+        public float pickupTimer = 0;
+        
         protected Player.Player player;
 
         protected abstract void OnCollectablePickup();
@@ -18,10 +19,26 @@ namespace Collectables
         void Start()
         {
             player = FindObjectOfType<Player.Player>();
-            sr = GetComponent<SpriteRenderer>();
-            rb = GetComponent<Rigidbody2D>();
+
+            if (pickupTimer > 0)
+            {
+                StartCoroutine(InteractableDelay());
+            }
         }
 
+        IEnumerator InteractableDelay()
+        {
+            //Disable interactable
+            isInteractable = false;
+            GetComponent<CircleCollider2D>().enabled = isInteractable;
+            
+            yield return new WaitForSeconds(pickupTimer);
+            
+            //Re-enable Interactable
+            isInteractable = true;
+            GetComponent<CircleCollider2D>().enabled = isInteractable;
+        }
+        
         private void OnCollisionEnter2D(Collision2D col)
         {
             if (col.gameObject.CompareTag("Player"))
