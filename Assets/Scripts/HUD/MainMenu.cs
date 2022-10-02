@@ -11,7 +11,7 @@ namespace HUD
         public void NewGame()
         {
             Destroy(GameObject.Find("MainCamera"));
-            customization.ConfirmChoices();
+            customization.CacheCustomization();
             SceneManager.LoadScene("Scenes/MainScene");
         }
     }

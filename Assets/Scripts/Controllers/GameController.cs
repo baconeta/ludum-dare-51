@@ -1,5 +1,6 @@
 using System.Collections;
 using HUD;
+using Player;
 using UnityEngine;
 
 namespace Controllers
@@ -8,6 +9,8 @@ namespace Controllers
     {
         [SerializeField] private bool isInvincible;
         [SerializeField] private Sanctuary sanctuary;
+        // This is used to submit and receive scores to and from the server.
+        [SerializeField] private GlobalScoreManager _globalScoreManager;
 
         private RoundController _rc;
         public bool GameRunning { get; set; }
@@ -69,6 +72,10 @@ namespace Controllers
             // {
             //     Invoke(nameof(BroadcastGameOver), delay);
             // }
+            
+            // Submit the score to the score server.
+            PlayerStats stats = FindObjectOfType<PlayerStats>();
+            _globalScoreManager.SubmitScore(stats.GetName(), stats.GetScore());
         }
 
         private void BroadcastGameOver()
