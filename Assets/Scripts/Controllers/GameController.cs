@@ -12,6 +12,7 @@ namespace Controllers
         // This is used to submit and receive scores to and from the server.
         [SerializeField] private GlobalScoreManager _globalScoreManager;
         [SerializeField] private EndGame endGame;
+        [SerializeField] GameUI gameUI;
 
         private RoundController _rc;
         public bool GameRunning { get; set; }
@@ -78,6 +79,7 @@ namespace Controllers
             PlayerStats stats = FindObjectOfType<PlayerStats>();
             _globalScoreManager.SubmitScore(stats.GetName(), stats.GetScore());
 
+            gameUI.HideUI();
             endGame.ShowEndGameUI();
         }
 

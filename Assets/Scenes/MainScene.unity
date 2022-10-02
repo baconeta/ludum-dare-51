@@ -1264,7 +1264,8 @@ MonoBehaviour:
   isInvincible: 0
   sanctuary: {fileID: 770312883}
   _globalScoreManager: {fileID: 1142364623}
-  _endGame: {fileID: 1898022973}
+  endGame: {fileID: 1898022973}
+  gameUI: {fileID: 1401540131}
   timer: {fileID: 0}
 --- !u!114 &1142364621
 MonoBehaviour:

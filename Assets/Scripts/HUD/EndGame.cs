@@ -28,6 +28,7 @@ namespace HUD
         public void Replay()
         {
             _gameController.ResetGame();
+            endGameUI.SetActive(false);
         }
     }
 }
