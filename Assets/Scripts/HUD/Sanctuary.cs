@@ -11,6 +11,7 @@ namespace HUD
         public GameController gameController;
         public TextMeshProUGUI scoreText;
         public TextMeshProUGUI currencyText;
+        public TextMeshProUGUI nameText;
         public Player.Player player;
 
         public GameObject upgradeMaxHealthButton;
@@ -43,6 +44,7 @@ namespace HUD
             //Update score and currency HUD text
             SetScoreText(stats.GetScore().ToString());
             SetCurrencyText(stats.GetCurrency().ToString());
+            SetNameText(stats.GetName());
         }
 
         public void BuyUpgradeMaxHealth()
@@ -68,6 +70,10 @@ namespace HUD
         }
 
 
+        public void SetNameText(string newName)
+        {
+            nameText.SetText(newName);
+        }
         public void SetScoreText(string text)
         {
             scoreText.SetText("Score: " + text);
