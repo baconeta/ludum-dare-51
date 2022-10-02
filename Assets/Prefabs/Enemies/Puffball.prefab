@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 1400654487774292807}
   - component: {fileID: 1400654487774292806}
   - component: {fileID: 1400654487774292805}
-  - component: {fileID: -1354354980584419819}
+  - component: {fileID: 7422638329624416164}
   m_Layer: 3
-  m_Name: Puffball
+  m_Name: Enemy_Puffball
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30,8 +30,8 @@ Transform:
   m_GameObject: {fileID: 1400654487774292810}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.012, y: 0.973, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.15, y: 0.15, z: 0.15}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -78,7 +78,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f922e839bcdb82743b4e0053104c1c23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lootOnDeath: {fileID: 357654020248760077, guid: 3b4b3f1bca533794a95bb67902cb9148, type: 3}
+  lootOnDeath: {fileID: 357654020248760077, guid: 8a95e7913e576564f9b683e766cdc2a1, type: 3}
   enemyName: Puffball
   moveSpeed: 1
   maxHealth: 1
@@ -145,7 +145,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
---- !u!95 &-1354354980584419819
+--- !u!95 &7422638329624416164
 Animator:
   serializedVersion: 4
   m_ObjectHideFlags: 0
@@ -155,7 +155,7 @@ Animator:
   m_GameObject: {fileID: 1400654487774292810}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 6d10333e88b53584f944aa8bd79d1619, type: 2}
+  m_Controller: {fileID: 9100000, guid: 47192c573c0ebf641a29abe33bf12ecd, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

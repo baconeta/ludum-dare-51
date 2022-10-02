@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
-using UnityEditor.Search;
 using UnityEngine;
 
 public class GameUI : MonoBehaviour
@@ -16,7 +13,7 @@ public class GameUI : MonoBehaviour
     {
         player = FindObjectOfType<Player.Player>();
         ShowUI();
-        if(Controllers.InputController.isMobile) ShowMobileUI();
+        if (Controllers.InputController.isMobile) ShowMobileUI();
         else HideMobileUI();
     }
 
@@ -29,7 +26,7 @@ public class GameUI : MonoBehaviour
     {
         mobileUI.SetActive(false);
     }
-    
+
     public void ShowUI()
     {
         gameUI.SetActive(true);
@@ -45,6 +42,5 @@ public class GameUI : MonoBehaviour
     {
         currencyText.SetText("Currency: " + player.GetPlayerStats().GetCurrency());
         healthText.SetText("Health: " + player.GetPlayerCombat().GetPlayerHealth());
-
     }
 }

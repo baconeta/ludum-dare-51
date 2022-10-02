@@ -109,7 +109,7 @@ namespace Player
             Right,
         }
 
-        private FacingDirection facingDirection;
+        private FacingDirection facingDirection = FacingDirection.Up;
 
         public FacingDirection GetFacingDirection()
         {
@@ -129,10 +129,11 @@ namespace Player
         // Update is called once per frame
         private void Update()
         {
+            // Check if the player can be moved.
             if (Controllers.GameController.IsPlayerInputEnabled)
             {
                 playerAttackDirection = Vector2.zero;
-                
+
                 if (Controllers.InputController.isMobile) //Mobile Controls
                 {
                     //Get Input for playerAttack joystick
@@ -149,23 +150,25 @@ namespace Player
                         //Horizontal
                         if (playerAttackDirection.x < 0) facingDirection = FacingDirection.Left;
                         else facingDirection = FacingDirection.Right;
-                        
+
                         //Vertical
                         if (playerAttackDirection.y < 0) facingDirection = FacingDirection.Down;
                         else facingDirection = FacingDirection.Up;
-                        
+
                         attacking = true;
+                        facingDirection = CalculateFacingDirection(playerAttack);
                     }
                 }
-                else //keyboard controls
+                // Keyboard controls
+                else
                 {
-                    //Attack is pressed
+                    // Attack is pressed
                     if (playerInput.actions["Attack"].IsPressed())
                     {
-                        //Attack in direction of the mouse
+                        // Attack in direction of the mouse
                         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                         playerAttackDirection = (mousePosition - (Vector2) transform.position).normalized;
-                        
+
                         //Attack!
                         attacking = true;
                     }
@@ -196,10 +199,10 @@ namespace Player
         // Declare an attack.
         private void Attack()
         {
+            attacking = false;
             attackOnCooldown = true;
             _weapon.DoAttack(playerAttackDirection);
             StartCoroutine(ResetAttackCooldown());
-            attacking = false;
         }
 
         // This function resets the attack cooldown after the cooldown period ends.
@@ -207,6 +210,22 @@ namespace Player
         {
             yield return new WaitForSeconds(1 / attackSpeedActual);
             attackOnCooldown = false;
+        }
+
+        private static FacingDirection CalculateFacingDirection(Vector2 direction)
+        {
+            // If the absolute value of X is larger than Y.
+            if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
+            {
+                // If X is positive, the facing direction is Right. Otherwise it is Left.
+                return (direction.x > 0F ? FacingDirection.Right : FacingDirection.Left);
+            }
+            // else, the absolute value of Y is larger.
+            else
+            {
+                // If Y is positive, the facing direction is Up. Otherwise it is Down.
+                return (direction.y > 0F ? FacingDirection.Up : FacingDirection.Down);
+            }
         }
 
         private void RecalculateStats()

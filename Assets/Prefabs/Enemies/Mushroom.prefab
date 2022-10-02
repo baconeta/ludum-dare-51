@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 7144231399020754067}
   - component: {fileID: 7144231399020754077}
   - component: {fileID: 7144231399020754066}
-  - component: {fileID: 3319760027416935742}
+  - component: {fileID: 8567124541268216135}
   m_Layer: 3
-  m_Name: Mushroom
+  m_Name: Enemy_Mushroom
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30,8 +30,8 @@ Transform:
   m_GameObject: {fileID: 7144231399020754065}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.014, y: 0.973, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.15, y: 0.15, z: 0.15}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -78,7 +78,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e3deb8479dfc55418fd73be4064d3ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lootOnDeath: {fileID: 357654020248760077, guid: c6f478cfb1f1105488de5b669dd966ab, type: 3}
+  lootOnDeath: {fileID: 357654020248760077, guid: 8a95e7913e576564f9b683e766cdc2a1, type: 3}
   enemyName: Mushroom
   moveSpeed: 1
   maxHealth: 1
@@ -172,7 +172,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
---- !u!95 &3319760027416935742
+--- !u!95 &8567124541268216135
 Animator:
   serializedVersion: 4
   m_ObjectHideFlags: 0
@@ -182,7 +182,7 @@ Animator:
   m_GameObject: {fileID: 7144231399020754065}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 97c91ae19dee39045841333ba84106d4, type: 2}
+  m_Controller: {fileID: 9100000, guid: d183ef640539e654ea1180b158dcf2e2, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
