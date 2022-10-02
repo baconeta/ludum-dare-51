@@ -127,35 +127,35 @@ namespace Player
             }
         }
 
-        private Vector2 GetCurrentDirection()
-        {
-            if (_playerCombat is null)
-            {
-                Debug.LogError("PlayerCombat ref was null");
-            }
-
-            Vector2 dir;
-
-            switch (_playerCombat.GetFacingDirection())
-            {
-                case PlayerCombat.FacingDirection.Up:
-                    dir = transform.up;
-                    break;
-                case PlayerCombat.FacingDirection.Down:
-                    dir = -transform.up;
-                    break;
-                case PlayerCombat.FacingDirection.Left:
-                    dir = -transform.right;
-                    break;
-                case PlayerCombat.FacingDirection.Right:
-                    dir = transform.right;
-                    break;
-                default:
-                    dir = new Vector2();
-                    break;
-            }
-
-            return dir;
-        }
+        // private Vector2 GetCurrentDirection()
+        // {
+        //     if (_playerCombat is null)
+        //     {
+        //         Debug.LogError("PlayerCombat ref was null");
+        //     }
+        //
+        //     Vector2 dir;
+        //
+        //     switch (_playerCombat.GetFacingDirection())
+        //     {
+        //         case PlayerFacing.FacingDirection.Up:
+        //             dir = transform.up;
+        //             break;
+        //         case PlayerFacing.FacingDirection.Down:
+        //             dir = -transform.up;
+        //             break;
+        //         case PlayerFacing.FacingDirection.Left:
+        //             dir = -transform.right;
+        //             break;
+        //         case PlayerFacing.FacingDirection.Right:
+        //             dir = transform.right;
+        //             break;
+        //         default:
+        //             dir = new Vector2();
+        //             break;
+        //     }
+        //
+        //     return dir;
+        // }
     }
 }

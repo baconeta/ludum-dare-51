@@ -16,7 +16,6 @@ namespace Player
 
         public PlayerInput playerInput;
         public Rigidbody2D rb;
-        public Animator animator;
 
         private Vector2 _movement;
 
@@ -42,7 +41,6 @@ namespace Player
 
             //If missing components
             if (!rb) rb = GetComponent<Rigidbody2D>();
-            if (!animator) animator = GetComponent<Animator>();
             if (!playerInput) playerInput = GetComponent<PlayerInput>();
         }
 
@@ -54,15 +52,6 @@ namespace Player
             Vector2 playerMovement = playerInput.actions["Move"].ReadValue<Vector2>();
             _movement.x = playerMovement.x;
             _movement.y = playerMovement.y;
-
-            //TODO temp fix for checking if attack is in progress.
-            //If an attack is not in progress
-            if (!playerInput.actions["Attack"].IsPressed())
-            {
-                animator.SetFloat("Horizontal", _movement.x);
-                animator.SetFloat("Vertical", _movement.y);
-            }
-            animator.SetFloat("Velocity", _movement.sqrMagnitude);
         }
 
         private void FixedUpdate()

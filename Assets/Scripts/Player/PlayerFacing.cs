@@ -128,7 +128,7 @@ public class PlayerFacing : MonoBehaviour
         }
     }
 
-    private bool IsPlayerAttacking()
+    public bool IsPlayerAttacking()
     {
         // Touch.
         if (Controllers.InputController.isMobile)
@@ -146,7 +146,7 @@ public class PlayerFacing : MonoBehaviour
         }
     }
 
-    private bool IsPlayerWalking()
+    public bool IsPlayerWalking()
     {
         // Get Input for player motion analog.
         Vector2 motionDirection = Vector2.zero;
