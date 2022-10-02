@@ -104,6 +104,7 @@ namespace Entities
                 {
                     _timeOfLastAttack = Time.time;
                     Attack();
+                    animator.SetTrigger("Attacked");
                 }
             }
             else //(Out of range)
