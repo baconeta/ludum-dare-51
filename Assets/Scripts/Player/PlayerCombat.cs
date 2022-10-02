@@ -92,6 +92,22 @@ namespace Player
 
         private bool _playing = true;
 
+        /*
+         * Upgrade Costs.
+         */
+        [Header("Upgrade Costs")]
+        [SerializeField][Tooltip("How much currency it costs to upgrade from level 0 to level 1")]
+        public int firstUpgradeCost = 3;
+        [SerializeField][Tooltip("How much currency it costs to upgrade from level 1 to level 2")]
+        public int secondUpgradeCost = 7;
+        [SerializeField][Tooltip("How much currency it costs to upgrade from level 2 to level 3")]
+        public int thirdUpgradeCost = 12;
+        [SerializeField][Tooltip("How much currency it costs to upgrade from level 3 to level 4")]
+        public int fourthUpgradeCost = 18;
+        [SerializeField][Tooltip("How much currency it costs to upgrade from level 4 to level 5")]
+        public int fifthUpgradeCost = 25;
+
+
         // True if the player is trying to attack.
         protected bool attacking = false;
 
