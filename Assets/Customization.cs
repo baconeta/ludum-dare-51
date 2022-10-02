@@ -11,14 +11,16 @@ using Random = UnityEngine.Random;
 
 public class Customization : MonoBehaviour
 {
-    [Header("Placeholder Lists")] 
+    [Header("Placeholder Lists")]
     public TextAsset namePlaceholders;
     public TextAsset animalPlaceholders;
-    
+
     [Header("Player Inputs")]
+    public bool generatePlaceholdersImmediately = false;
     public string playerName;
     public string favouriteAnimal;
-
+    
+    [Header("UI Input Fields")]
     public TMP_InputField playerNameInput;
     public TMP_InputField favouriteAnimalInput;
 
@@ -26,9 +28,13 @@ public class Customization : MonoBehaviour
     private void Start()
     {
         DontDestroyOnLoad(gameObject);
-        RandomAnimalPlaceholder();
-        RandomPlayerNamePlaceholder();
+        if (generatePlaceholdersImmediately)
+        {
+            RandomAnimalPlaceholder();
+            RandomPlayerNamePlaceholder();
+        }
     }
+
     
     public void RandomAnimalPlaceholder()
     {
@@ -81,11 +87,18 @@ public class Customization : MonoBehaviour
 
     public void ConfirmChoices()
     {
+        //First text field
         //If custom text box is empty
         if (string.IsNullOrWhiteSpace(playerNameInput.text))
         {
             //Get placeholder name
             string placeholderName = playerNameInput.placeholder.GetComponent<TextMeshProUGUI>().text;
+            //If no placeholder - Get random placeholder
+            if (placeholderName == "Name")
+            {
+                RandomPlayerNamePlaceholder();
+                placeholderName = playerNameInput.placeholder.GetComponent<TextMeshProUGUI>().text;
+            }
             playerName = placeholderName;
         }
         else //Use player choice
@@ -93,11 +106,20 @@ public class Customization : MonoBehaviour
             playerName = playerNameInput.text;
         }
         
+        //Second text field
         //If custom text box is empty
         if (string.IsNullOrWhiteSpace(favouriteAnimalInput.text))
         {
+            
             //Get placeholder name
             string placeholderAnimal = favouriteAnimalInput.placeholder.GetComponent<TextMeshProUGUI>().text;
+            //If no placeholder - Get random placeholder
+            if (placeholderAnimal == "Favourite Animal")
+            {
+                RandomAnimalPlaceholder();
+                placeholderAnimal = favouriteAnimalInput.placeholder.GetComponent<TextMeshProUGUI>().text;
+
+            }
             favouriteAnimal = placeholderAnimal;
         }
         else //Use player choice
