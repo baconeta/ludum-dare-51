@@ -16,7 +16,7 @@ namespace Player
 
         private float _weaponIsDamagingDurationActual;
 
-        [SerializeField] float HitAngle = 60f;
+        [SerializeField] float hitAngle = 60f;
 
 
         // True if collisions with the weapon will damage enemies.
@@ -72,25 +72,36 @@ namespace Player
                 Debug.LogError("CircleCollider ref was null");
                 return;
             }
+            //Get range
+            float range = _playerCombat.GetAttackRange();
 
             ContactFilter2D filter = new ContactFilter2D().NoFilter();
             List<Collider2D> results = new List<Collider2D>();
             CircleCollider.OverlapCollider(filter, results);
 
+            //For each object the weapon overlaps
             foreach (Collider2D result in results)
             {
-                Vector2 dir = result.gameObject.transform.position - gameObject.transform.position;
-                float angle = Vector2.Angle(dir, GetCurrentDirection());
-                float distance = Vector2.Distance(gameObject.transform.position, result.gameObject.transform.position);
+                if (!weaponIsDamaging) return;
 
-                if (weaponIsDamaging && result.CompareTag("Enemy"))
+                //Enemies only
+                if (!result.CompareTag("Enemy")) return;
+                
+                //Direction player to Enemy
+                Vector2 dir = result.gameObject.transform.position - gameObject.transform.position;
+                
+                //Angle to Enemy
+                float angle = Vector2.Angle(dir, GetCurrentDirection());
+                
+                //Distance of objects
+                float distance = Vector2.Distance(gameObject.transform.position, result.gameObject.transform.position);
+                
+                if (angle <= hitAngle
+                    || angle <= 90)
                 {
-                    if (angle <= HitAngle
-                        || angle <= 90 && distance <= 0.2)
-                    {
-                        result.GetComponent<Enemy>().TakeDamage(_playerCombat.GetAttackDamage());
-                    }
+                    result.GetComponent<Enemy>().TakeDamage(_playerCombat.GetAttackDamage());
                 }
+                
             }
         }
 
