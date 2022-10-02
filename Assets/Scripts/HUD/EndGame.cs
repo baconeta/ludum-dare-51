@@ -10,11 +10,6 @@ namespace HUD
 
         private GameController _gameController;
 
-        private void Awake()
-        {
-            DontDestroyOnLoad(gameObject);
-        }
-
         public void Start()
         {
             _gameController = FindObjectOfType<GameController>();
