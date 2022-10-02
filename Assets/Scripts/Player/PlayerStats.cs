@@ -4,54 +4,60 @@ namespace Player
 {
     public class PlayerStats : MonoBehaviour
     {
-        public string playerName;
+        private string _playerName;
+        private int _currency = 0;
+        private int _score = 0;
 
-        public string favouriteAnimal;
+        public string GetName()
+        {
+            return _playerName;
+        }
+
+        public void SetName(string newName)
+        {
+            Debug.Log(newName);
+            _playerName = newName;
+        }
         
-        public int currency = 0;
-
-        public int score = 0;
+        public int GetCurrency()
+        {
+            return _currency;
+        }
 
         public void AddCurrency(int value)
         {
-            currency += value;
+            _currency += value;
             Debug.Log(value + " added to player wallet!");
         }
 
         public bool SpendCurrency(int value)
         {
             //Check has enough currency
-            if (currency - value < 0) return false;
+            if (_currency - value < 0) return false;
 
             //Spend currency
-            currency -= value;
+            _currency -= value;
             return true;
         }
 
-        public string GetName()
+        public void ResetCurrency()
         {
-            return playerName;
-        }
-        
-        public int GetCurrency()
-        {
-            return currency;
+            _currency = 0;
         }
 
         public int GetScore()
         {
-            return score;
+            return _score;
         }
 
         public void AddScore(int scoreToAdd)
         {
-            score += scoreToAdd;
+            _score += scoreToAdd;
         }
 
-        public void SetPlayerInfo(string newName, string animal)
+        public void ResetScore()
         {
-            playerName = newName;
-            favouriteAnimal = animal;
+            _score = 0;
         }
     }
 }
