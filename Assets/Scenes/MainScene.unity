@@ -1211,6 +1211,7 @@ GameObject:
   - component: {fileID: 1142364622}
   - component: {fileID: 1142364620}
   - component: {fileID: 1142364621}
+  - component: {fileID: 1142364623}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -1262,6 +1263,31 @@ Transform:
   m_Father: {fileID: 723910201}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1142364623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1142364619}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f6ce956784b6c04699c4399f466d2ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnPhaseChange:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTimerStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTimerStop:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTimerResume:
+    m_PersistentCalls:
+      m_Calls: []
+  pc: {fileID: 736482728}
 --- !u!1001 &1173181155
 PrefabInstance:
   m_ObjectHideFlags: 0
