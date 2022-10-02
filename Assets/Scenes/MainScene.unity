@@ -1523,7 +1523,7 @@ PrefabInstance:
       objectReference: {fileID: 1173181159}
     - target: {fileID: 375893899820495540, guid: adb2cd2b963d29c4f8ebec31626cee0e, type: 3}
       propertyPath: attackRangeInitial
-      value: 3
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 375893899820495541, guid: adb2cd2b963d29c4f8ebec31626cee0e, type: 3}
       propertyPath: rb
@@ -1541,6 +1541,10 @@ PrefabInstance:
       propertyPath: playerInput
       value: 
       objectReference: {fileID: 1173181159}
+    - target: {fileID: 6565891818112425706, guid: adb2cd2b963d29c4f8ebec31626cee0e, type: 3}
+      propertyPath: m_Radius
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: adb2cd2b963d29c4f8ebec31626cee0e, type: 3}
 --- !u!114 &1173181156 stripped

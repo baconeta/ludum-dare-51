@@ -42,10 +42,9 @@ namespace Player
             _weaponIsDamagingDurationActual =
                 (1 / _playerCombat.GetAttackSpeed()) * (weaponIsDamagingDurationPercentage / 100F);
             CircleCollider.radius = _playerCombat.GetAttackRange();
-
         }
 
-        public void DoAttack()
+        public void DoAttack(Vector2 attackDirection)
         {
             weaponIsDamaging = true;
 
@@ -54,8 +53,8 @@ namespace Player
 
             // TODO Trigger animation/visibility here.
             StartCoroutine(DisableMeleeDamage());
-
-            SweepCollider();
+            
+            SweepCollider(attackDirection);
         }
 
         // This function disables the weapon after the swing has finished.
@@ -68,7 +67,7 @@ namespace Player
                 CircleCollider.enabled = false;
         }
 
-        private void SweepCollider()
+        private void SweepCollider(Vector2 attackDirection)
         {
             if (CircleCollider is null)
             {
@@ -80,7 +79,7 @@ namespace Player
             List<Collider2D> results = new List<Collider2D>();
             CircleCollider.OverlapCollider(filter, results);
 
-            //For each object the weapon overlaps
+            //For each object the weapon collider overlaps
             foreach (Collider2D result in results)
             {
                 if (!weaponIsDamaging) return;
@@ -89,20 +88,18 @@ namespace Player
                 if (!result.CompareTag("Enemy")) return;
                 
                 //Direction player to Enemy
-                Vector2 dir = result.gameObject.transform.position - gameObject.transform.position;
+                Vector2 dir = (result.transform.position - transform.position).normalized;
                 
-                //Angle to Enemy
-                float angle = Vector2.Angle(dir, GetCurrentDirection());
-                
-                //Distance of objects
-                float distance = Vector2.Distance(gameObject.transform.position, result.gameObject.transform.position);
-                
-                if (angle <= hitAngle
-                    || angle <= 90)
+                //Enemy is within a "Pie Slice" of the player.
+                //0 is 90 degrees to the click angle.
+                //1 is facing directly towards the enemy.
+                //-1 is directly the opposite direction.
+                if (Vector2.Dot(dir, attackDirection) > 0.5f)
                 {
+                    //Damage enemy
                     result.GetComponent<Enemy>().TakeDamage(_playerCombat.GetAttackDamage());
                 }
-                
+
             }
         }
 
