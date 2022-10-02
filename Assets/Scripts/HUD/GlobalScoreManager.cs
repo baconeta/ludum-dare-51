@@ -7,13 +7,15 @@ using UnityEngine.Networking;
 
 public class GlobalScoreManager : MonoBehaviour
 {
-    [Header("Text Fields")]
-    [Tooltip("Highscore name column")] [SerializeField]
+    [Header("Text Fields")] [Tooltip("Highscore name column")] [SerializeField]
     private Text nameColumn;
+
     [Tooltip("Highscore score column")] [SerializeField]
     private Text scoreColumn;
-    
-    private const string SubmitScoreUri = "https://ludum-dare-51-score-server.herokuapp.com/api/scores?user={0}&score={1}";
+
+    private const string SubmitScoreUri =
+        "https://ludum-dare-51-score-server.herokuapp.com/api/scores?user={0}&score={1}";
+
     private const string RetrieveScoresUri = "https://ludum-dare-51-score-server.herokuapp.com/api/scores";
 
     private string _defaultText =
@@ -26,12 +28,15 @@ public class GlobalScoreManager : MonoBehaviour
 
     void Start()
     {
-        // Set the text of the columns to display "Loading..." on each line.
-        nameColumn.text = _defaultText;
-        scoreColumn.text = _defaultText;
-        // Request global score information from the server, and provide a callback for when we get that information.
-        Callback callback = new Callback(UpdateTextFields);
-        StartCoroutine(GetGlobalScoresRequest(callback));
+        if (nameColumn != default)
+        {
+            // Set the text of the columns to display "Loading..." on each line.
+            nameColumn.text = _defaultText;
+            scoreColumn.text = _defaultText;
+            // Request global score information from the server, and provide a callback for when we get that information.
+            Callback callback = new Callback(UpdateTextFields);
+            StartCoroutine(GetGlobalScoresRequest(callback));
+        }
     }
 
     // Update the text fields with the information that we received from the score server.
@@ -49,8 +54,8 @@ public class GlobalScoreManager : MonoBehaviour
         nameColumn.text = nameBuilder.ToString();
         scoreColumn.text = scoreBuilder.ToString();
     }
-    
-    
+
+
     // Get a list of scores from the server.
     private static IEnumerator GetGlobalScoresRequest(Callback callback)
     {
@@ -86,12 +91,13 @@ public class GlobalScoreManager : MonoBehaviour
         }
     }
 
-    
+
     // Post a user's score to the server.
     public void SubmitScore(string user, int score)
     {
         StartCoroutine(SubmitScoreCoroutine(user, score));
     }
+
     private static IEnumerator SubmitScoreCoroutine(string user, int score)
     {
         using UnityWebRequest ping = UnityWebRequest.Post(String.Format(SubmitScoreUri, user, score), "");
