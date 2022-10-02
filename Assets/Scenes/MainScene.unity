@@ -934,12 +934,12 @@ MonoBehaviour:
   gameController: {fileID: 1142364620}
   enemyController: {fileID: 667146669}
   waves:
-  - numberOfPuffballs: 1
-    numberOfSeeds: 1
-    numberOfMushrooms: 1
-  - numberOfPuffballs: 1
-    numberOfSeeds: 1
-    numberOfMushrooms: 1
+  - numberOfPuffballs: 5
+    numberOfSeeds: 5
+    numberOfMushrooms: 5
+  - numberOfPuffballs: 10
+    numberOfSeeds: 10
+    numberOfMushrooms: 5
   isBossRound: 0
 --- !u!1 &644319211
 GameObject:
@@ -2043,7 +2043,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7369678367256390203, guid: 1f794f3f39fee51499b78d5c49b8607e, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -15.000015
+      value: -14.9999695
       objectReference: {fileID: 0}
     - target: {fileID: 7369678367256390203, guid: 1f794f3f39fee51499b78d5c49b8607e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

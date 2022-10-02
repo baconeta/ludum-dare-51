@@ -144,8 +144,8 @@ MonoBehaviour:
   movementSpeedInitial: 2
   movementSpeedActual: 0
   playerInput: {fileID: 0}
-  rb: {fileID: 0}
-  animator: {fileID: 0}
+  rb: {fileID: 375893899820495529}
+  animator: {fileID: 375893899820495543}
   mContactOffset: 0.05
   mMaxIterations: 2
   mMovementFilter:
