@@ -6,11 +6,17 @@ namespace Player
 {
     public class PlayerCombat : MonoBehaviour
     {
-        [Header("Unity References")] public Animator animator;
-
-        public PlayerInput playerInput;
+        [Header("Unity References")]
+        
+        [SerializeField][Tooltip("The animator object for the player sprite.")]
+        private Animator _animator;
+        [SerializeField][Tooltip("The analog control for player input.")]
+        private PlayerInput _playerInput;
+        [SerializeField][Tooltip("The weapon object that the player uses to perform attacks with.")]
         private PlayerWeapon _weapon;
-        public AudioClip attackSound;
+        [SerializeField][Tooltip("The sound to be played when the player attacks.")]
+        private AudioClip _attackSound;
+
 
         /*
          * Player health.
@@ -88,7 +94,6 @@ namespace Player
         // Use me for calculations.
         protected float attackRangeActual;
 
-        private bool _playing = true;
 
         /*
          * Upgrade Costs.
@@ -106,6 +111,10 @@ namespace Player
         public int fifthUpgradeCost = 25;
 
 
+        /*
+         * Other variables.
+         */
+        private bool _playing = true;
         // True if the player is trying to attack.
         protected bool attacking = false;
         // True if the player can't attack because they have recently attacked.
@@ -131,9 +140,9 @@ namespace Player
         // Start is called before the first frame update
         private void Start()
         {
-            if (!animator) GetComponent<Animator>();
+            if (!_animator) GetComponent<Animator>();
             _weapon = gameObject.GetComponentInChildren<PlayerWeapon>();
-            if (!playerInput) playerInput = GetComponent<PlayerInput>();
+            if (!_playerInput) _playerInput = GetComponent<PlayerInput>();
 
             RecalculateStats();
         }
@@ -149,15 +158,15 @@ namespace Player
                 if (Controllers.InputController.isMobile) //Mobile Controls
                 {
                     //Get Input for playerAttack joystick
-                    playerAttackDirection = playerInput.actions["Attack"].ReadValue<Vector2>();
+                    playerAttackDirection = _playerInput.actions["Attack"].ReadValue<Vector2>();
 
                     //Only if stick is in use
                     //Player is attacking
                     if (playerAttackDirection != Vector2.zero)
                     {
                         //Face direction and Attack!
-                        animator.SetFloat("Horizontal", playerAttackDirection.x);
-                        animator.SetFloat("Vertical", playerAttackDirection.y);
+                        _animator.SetFloat("Horizontal", playerAttackDirection.x);
+                        _animator.SetFloat("Vertical", playerAttackDirection.y);
 
                         //Horizontal
                         if (playerAttackDirection.x < 0) facingDirection = FacingDirection.Left;
@@ -175,7 +184,7 @@ namespace Player
                 else
                 {
                     // Attack is pressed
-                    if (playerInput.actions["Attack"].IsPressed())
+                    if (_playerInput.actions["Attack"].IsPressed())
                     {
                         // Attack in direction of the mouse
                         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -187,11 +196,11 @@ namespace Player
                 }
 
                 // Update the animator.
-                animator.SetBool("Attacking", attacking);
+                _animator.SetBool("Attacking", attacking);
                 if (attacking)
                 {
-                    animator.SetFloat("Horizontal", playerAttackDirection.x);
-                    animator.SetFloat("Vertical", playerAttackDirection.y);
+                    _animator.SetFloat("Horizontal", playerAttackDirection.x);
+                    _animator.SetFloat("Vertical", playerAttackDirection.y);
                 }
             }
         }
@@ -242,12 +251,12 @@ namespace Player
 
         private void RecalculateStats()
         {
-            healthMax = healthInitial + (healthLevel * healthGrowthPerLevel);
+            healthMax = healthInitial + (_healthLevel * healthGrowthPerLevel);
             healthActual = healthMax;
-            attackDamageActual = attackDamageInitial + (attackDamageLevel * attackDamageGrowthPerLevel);
-            attackSpeedActual = attackSpeedInitial + (attackSpeedLevel * attackSpeedGrowthPerLevel);
-            attackRangeActual = attackRangeInitial + (attackRangeLevel * attackRangeGrowthPerLevel);
-            animator.ResetTrigger("Dead");
+            attackDamageActual = attackDamageInitial + (_attackDamageLevel * attackDamageGrowthPerLevel);
+            attackSpeedActual = attackSpeedInitial + (_attackSpeedLevel * attackSpeedGrowthPerLevel);
+            attackRangeActual = attackRangeInitial + (_attackRangeLevel * attackRangeGrowthPerLevel);
+            _animator.ResetTrigger("Dead");
             _weapon.RecalculateStats();
         }
 
@@ -285,7 +294,7 @@ namespace Player
             // Stop the game. TODO Hook into the controllers later.
             _playing = false;
             // Trigger the death animation for the player.
-            animator.SetTrigger("Dead");
+            _animator.SetTrigger("Dead");
         }
 
         public float GetAttackDamage()
@@ -305,49 +314,49 @@ namespace Player
 
         public int GetHealthLevel()
         {
-            return healthLevel;
+            return _healthLevel;
         }
 
         public void IncreaseHealthLevel()
         {
-            if (healthLevel < healthMaxLevel)
-                healthLevel++;
+            if (_healthLevel < healthMaxLevel)
+                _healthLevel++;
             RecalculateStats();
         }
 
         public int GetAttackDamageLevel()
         {
-            return attackDamageLevel;
+            return _attackDamageLevel;
         }
 
         public void IncreaseAttackDamageLevel()
         {
-            if (attackDamageLevel < attackDamageMaxLevel)
-                attackDamageLevel++;
+            if (_attackDamageLevel < attackDamageMaxLevel)
+                _attackDamageLevel++;
             RecalculateStats();
         }
 
         public int GetAttackSpeedLevel()
         {
-            return attackSpeedLevel;
+            return _attackSpeedLevel;
         }
 
         public void IncreaseAttackSpeedLevel()
         {
-            if (attackSpeedLevel < attackSpeedMaxLevel)
-                attackSpeedLevel++;
+            if (_attackSpeedLevel < attackSpeedMaxLevel)
+                _attackSpeedLevel++;
             RecalculateStats();
         }
 
         public int GetAttackRangeLevel()
         {
-            return attackRangeLevel;
+            return _attackRangeLevel;
         }
 
         public void IncreaseAttackRange()
         {
-            if (attackRangeLevel < attackRangeMaxLevel)
-                attackRangeLevel++;
+            if (_attackRangeLevel < attackRangeMaxLevel)
+                _attackRangeLevel++;
             RecalculateStats();
         }
 
