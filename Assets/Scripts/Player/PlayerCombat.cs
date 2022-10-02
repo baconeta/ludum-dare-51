@@ -6,98 +6,121 @@ namespace Player
 {
     public class PlayerCombat : MonoBehaviour
     {
-        [Header("Unity References")] public Animator animator;
-
-        public PlayerInput playerInput;
+        /*
+         * Unity References
+         */
+        [Header("Unity References")]
+        [SerializeField][Tooltip("The animator object for the player sprite.")]
+        private Animator _animator;
+        [SerializeField][Tooltip("The analog control for player input.")]
+        private PlayerInput _playerInput;
+        [SerializeField][Tooltip("The weapon object that the player uses to perform attacks with.")]
         private PlayerWeapon _weapon;
-        public AudioClip attackSound;
+        [SerializeField][Tooltip("The sound to be played when the player attacks.")]
+        private AudioClip _attackSound;
+
 
         /*
-     * Player health.
-     */
-        [Header("Health")] [Tooltip("Starting player health.")] [SerializeField]
+         * Player health.
+         */
+        [Header("Player Health")]
+        [SerializeField][Tooltip("Starting player health.")]
         protected int healthInitial = 5;
 
-        [Tooltip("How much player health increases per upgrade level.")] [SerializeField]
+        [SerializeField][Tooltip("How much player health increases per upgrade level.")]
         protected int healthGrowthPerLevel = 1;
 
-        [Tooltip("How many times the player can upgrade health.")] [SerializeField]
+        [SerializeField][Tooltip("How many times the player can upgrade health.")]
         protected int healthMaxLevel = 5;
 
-        protected int healthLevel = 0;
-
-        // Use me for calculations.
-        protected int healthMax;
-        protected int healthActual;
 
         /*
-     * Player attack damage.
-     */
+         * Player attack damage.
+         */
         [Header("Attack Damage")]
-        [Tooltip("How much damage the player deals to enemies per swing attack.")]
-        [SerializeField]
+        [SerializeField][Tooltip("How much damage the player deals to enemies per swing attack.")]
         protected float attackDamageInitial = 1.0F;
 
-        [Tooltip("By how much the player's attack damage increases per level.")] [SerializeField]
+        [SerializeField][Tooltip("By how much the player's attack damage increases per level.")]
         protected float attackDamageGrowthPerLevel = 0.2F;
 
-        [Tooltip("How many times the player can upgrade attack damage.")] [SerializeField]
+        [SerializeField][Tooltip("How many times the player can upgrade attack damage.")]
         protected int attackDamageMaxLevel = 5;
 
-        protected int attackDamageLevel = 0;
-
-        // Use me for calculations.
-        protected float attackDamageActual;
 
         /*
-     * Player attack speed.
-     */
+         * Player attack speed.
+         */
         [Header("Attack Speed")]
-        [Tooltip("How many times per second that the player can attack with their weapon.")]
-        [SerializeField]
+        [SerializeField][Tooltip("How many times per second that the player can attack with their weapon.")]
         protected float attackSpeedInitial = 2.0F;
 
-        [Tooltip("By how much the player's attack speed increases per level.")] [SerializeField]
+        [SerializeField][Tooltip("By how much the player's attack speed increases per level.")]
         protected float attackSpeedGrowthPerLevel = 0.667F;
 
-        [Tooltip("How many times the player can upgrade attack speed.")] [SerializeField]
+        [SerializeField][Tooltip("How many times the player can upgrade attack speed.")]
         protected int attackSpeedMaxLevel = 5;
 
-        protected int attackSpeedLevel = 0;
-
-        // Use me for calculations.
-        protected float attackSpeedActual;
-
-        // Used to calculate how long it has been since the last attack.
-        protected float timeOfLastAttack = 0.0F;
 
         /*
-     * Player attack range.
-     */
+         * Player attack range.
+         */
         [Header("Attack Range")]
-        [Tooltip("How far in game units that the player can reach enemies with their weapon.")]
-        [SerializeField]
+        [SerializeField][Tooltip("How far in game units that the player can reach enemies with their weapon.")]
         protected float attackRangeInitial = 100.0F;
 
-        [Tooltip("By how much the player's attack range increases per level.")] [SerializeField]
+        [SerializeField][Tooltip("By how much the player's attack range increases per level.")]
         protected float attackRangeGrowthPerLevel = 12.0F;
 
-        [Tooltip("How many times the player can upgrade attack range.")] [SerializeField]
+        [SerializeField][Tooltip("How many times the player can upgrade attack range.")]
         protected int attackRangeMaxLevel = 5;
 
-        protected int attackRangeLevel = 0;
 
-        // Use me for calculations.
-        protected float attackRangeActual;
 
+
+        /*
+         * Upgrade Costs.
+         */
+        [Header("Upgrade Costs")]
+        [SerializeField][Tooltip("How much currency it costs to upgrade from level 0 to level 1")]
+        public int firstUpgradeCost = 3;
+        [SerializeField][Tooltip("How much currency it costs to upgrade from level 1 to level 2")]
+        public int secondUpgradeCost = 7;
+        [SerializeField][Tooltip("How much currency it costs to upgrade from level 2 to level 3")]
+        public int thirdUpgradeCost = 12;
+        [SerializeField][Tooltip("How much currency it costs to upgrade from level 3 to level 4")]
+        public int fourthUpgradeCost = 18;
+        [SerializeField][Tooltip("How much currency it costs to upgrade from level 4 to level 5")]
+        public int fifthUpgradeCost = 25;
+
+
+        /*
+         * Player stat levels.
+         */
+        private int _healthLevel = 0;
+        private int _attackDamageLevel = 0;
+        private int _attackSpeedLevel = 0;
+        private int _attackRangeLevel = 0;
+
+
+        /*
+         * Player stat values.
+         * Use us for calculations!
+         */
+        public int healthMax;
+        public int healthActual;
+        public float attackDamageActual;
+        public float attackSpeedActual;
+        public float attackRangeActual;
+        
+        /*
+         * Other variables.
+         */
         private bool _playing = true;
-
         // True if the player is trying to attack.
         protected bool attacking = false;
-
         // True if the player can't attack because they have recently attacked.
         protected bool attackOnCooldown = false;
-
         //Direction of the attack
         protected Vector2 playerAttackDirection = Vector2.zero;
 
@@ -119,9 +142,9 @@ namespace Player
         // Start is called before the first frame update
         private void Start()
         {
-            if (!animator) GetComponent<Animator>();
+            if (!_animator) GetComponent<Animator>();
             _weapon = gameObject.GetComponentInChildren<PlayerWeapon>();
-            if (!playerInput) playerInput = GetComponent<PlayerInput>();
+            if (!_playerInput) _playerInput = GetComponent<PlayerInput>();
 
             RecalculateStats();
         }
@@ -137,15 +160,15 @@ namespace Player
                 if (Controllers.InputController.isMobile) //Mobile Controls
                 {
                     //Get Input for playerAttack joystick
-                    playerAttackDirection = playerInput.actions["Attack"].ReadValue<Vector2>();
+                    playerAttackDirection = _playerInput.actions["Attack"].ReadValue<Vector2>();
 
                     //Only if stick is in use
                     //Player is attacking
                     if (playerAttackDirection != Vector2.zero)
                     {
                         //Face direction and Attack!
-                        animator.SetFloat("Horizontal", playerAttackDirection.x);
-                        animator.SetFloat("Vertical", playerAttackDirection.y);
+                        _animator.SetFloat("Horizontal", playerAttackDirection.x);
+                        _animator.SetFloat("Vertical", playerAttackDirection.y);
 
                         //Horizontal
                         if (playerAttackDirection.x < 0) facingDirection = FacingDirection.Left;
@@ -163,7 +186,7 @@ namespace Player
                 else
                 {
                     // Attack is pressed
-                    if (playerInput.actions["Attack"].IsPressed())
+                    if (_playerInput.actions["Attack"].IsPressed())
                     {
                         // Attack in direction of the mouse
                         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -175,11 +198,11 @@ namespace Player
                 }
 
                 // Update the animator.
-                animator.SetBool("Attacking", attacking);
+                _animator.SetBool("Attacking", attacking);
                 if (attacking)
                 {
-                    animator.SetFloat("Horizontal", playerAttackDirection.x);
-                    animator.SetFloat("Vertical", playerAttackDirection.y);
+                    _animator.SetFloat("Horizontal", playerAttackDirection.x);
+                    _animator.SetFloat("Vertical", playerAttackDirection.y);
                 }
             }
         }
@@ -230,12 +253,12 @@ namespace Player
 
         private void RecalculateStats()
         {
-            healthMax = healthInitial + (healthLevel * healthGrowthPerLevel);
+            healthMax = healthInitial + (_healthLevel * healthGrowthPerLevel);
             healthActual = healthMax;
-            attackDamageActual = attackDamageInitial + (attackDamageLevel * attackDamageGrowthPerLevel);
-            attackSpeedActual = attackSpeedInitial + (attackSpeedLevel * attackSpeedGrowthPerLevel);
-            attackRangeActual = attackRangeInitial + (attackRangeLevel * attackRangeGrowthPerLevel);
-            animator.ResetTrigger("Dead");
+            attackDamageActual = attackDamageInitial + (_attackDamageLevel * attackDamageGrowthPerLevel);
+            attackSpeedActual = attackSpeedInitial + (_attackSpeedLevel * attackSpeedGrowthPerLevel);
+            attackRangeActual = attackRangeInitial + (_attackRangeLevel * attackRangeGrowthPerLevel);
+            _animator.ResetTrigger("Dead");
             _weapon.RecalculateStats();
         }
 
@@ -273,7 +296,7 @@ namespace Player
             // Stop the game. TODO Hook into the controllers later.
             _playing = false;
             // Trigger the death animation for the player.
-            animator.SetTrigger("Dead");
+            _animator.SetTrigger("Dead");
         }
 
         public float GetAttackDamage()
@@ -293,49 +316,49 @@ namespace Player
 
         public int GetHealthLevel()
         {
-            return healthLevel;
+            return _healthLevel;
         }
 
         public void IncreaseHealthLevel()
         {
-            if (healthLevel < healthMaxLevel)
-                healthLevel++;
+            if (_healthLevel < healthMaxLevel)
+                _healthLevel++;
             RecalculateStats();
         }
 
         public int GetAttackDamageLevel()
         {
-            return attackDamageLevel;
+            return _attackDamageLevel;
         }
 
         public void IncreaseAttackDamageLevel()
         {
-            if (attackDamageLevel < attackDamageMaxLevel)
-                attackDamageLevel++;
+            if (_attackDamageLevel < attackDamageMaxLevel)
+                _attackDamageLevel++;
             RecalculateStats();
         }
 
         public int GetAttackSpeedLevel()
         {
-            return attackSpeedLevel;
+            return _attackSpeedLevel;
         }
 
         public void IncreaseAttackSpeedLevel()
         {
-            if (attackSpeedLevel < attackSpeedMaxLevel)
-                attackSpeedLevel++;
+            if (_attackSpeedLevel < attackSpeedMaxLevel)
+                _attackSpeedLevel++;
             RecalculateStats();
         }
 
         public int GetAttackRangeLevel()
         {
-            return attackRangeLevel;
+            return _attackRangeLevel;
         }
 
         public void IncreaseAttackRange()
         {
-            if (attackRangeLevel < attackRangeMaxLevel)
-                attackRangeLevel++;
+            if (_attackRangeLevel < attackRangeMaxLevel)
+                _attackRangeLevel++;
             RecalculateStats();
         }
 
