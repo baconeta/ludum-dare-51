@@ -128,17 +128,19 @@ namespace Player
         {
             if (Controllers.GameController.IsPlayerInputEnabled)
             {
-                // If user is left-clicking.
-                // TODO Replace this check for analog 2.
                 if (Controllers.InputController.isMobile) //Mobile Controls
                 {
+                    //Get Input for playerAttack joystick
                     Vector2 playerAttack = playerInput.actions["Attack"].ReadValue<Vector2>();
 
                     //Only if stick is in use
+                    //Player is attacking
                     if (playerAttack != Vector2.zero)
                     {
                         //Face direction and Attack!
                         //playerAttack <-- Use this Vector2 for player-to-enemy direction
+                        animator.SetFloat("Horizontal", playerAttack.x);
+                        animator.SetFloat("Vertical", playerAttack.y);
                         attacking = true;
                     }
                 }
@@ -149,12 +151,15 @@ namespace Player
                     {
                         //Attack in direction of the mouse
                         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                        Vector2 attackDirection = mousePosition - (Vector2) transform.position;
+                        Vector2 attackDirection = (mousePosition - (Vector2) transform.position).normalized;
+                        
                         //Final attack direction to face player to mouse
-                        attackDirection = transform.position + (Vector3) attackDirection;
+                        //attackDirection = transform.position + (Vector3) attackDirection;
 
                         //Attack!
                         attacking = true;
+                        animator.SetFloat("Horizontal", attackDirection.x);
+                        animator.SetFloat("Vertical", attackDirection.y);
                     }
                 }
 
@@ -225,13 +230,18 @@ namespace Player
             // TODO Update HUD?
             if (healthActual <= 0)
             {
-                // Make sure that health doesn't go negative.
-                healthActual = 0;
-                // Stop the game. TODO Hook into the controllers later.
-                _playing = false;
-                // Trigger the death animation for the player.
-                animator.SetTrigger("Dead");
+                Die();
             }
+        }
+
+        private void Die()
+        {
+            // Make sure that health doesn't go negative.
+            healthActual = 0;
+            // Stop the game. TODO Hook into the controllers later.
+            _playing = false;
+            // Trigger the death animation for the player.
+            animator.SetTrigger("Dead");
         }
 
         public float GetAttackDamage()
