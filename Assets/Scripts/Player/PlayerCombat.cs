@@ -98,6 +98,9 @@ namespace Player
         // True if the player can't attack because they have recently attacked.
         protected bool attackOnCooldown = false;
 
+        //Direction of the attack
+        protected Vector2 playerAttackDirection = Vector2.zero;
+
         public enum FacingDirection
         {
             Up,
@@ -129,21 +132,31 @@ namespace Player
             // Check if the player can be moved.
             if (Controllers.GameController.IsPlayerInputEnabled)
             {
+                playerAttackDirection = Vector2.zero;
+
                 if (Controllers.InputController.isMobile) //Mobile Controls
                 {
                     //Get Input for playerAttack joystick
-                    Vector2 playerAttack = playerInput.actions["Attack"].ReadValue<Vector2>();
+                    playerAttackDirection = playerInput.actions["Attack"].ReadValue<Vector2>();
 
                     //Only if stick is in use
                     //Player is attacking
-                    if (playerAttack != Vector2.zero)
+                    if (playerAttackDirection != Vector2.zero)
                     {
                         //Face direction and Attack!
-                        //playerAttack <-- Use this Vector2 for player-to-enemy direction
-                        animator.SetFloat("Horizontal", playerAttack.x);
-                        animator.SetFloat("Vertical", playerAttack.y);
+                        animator.SetFloat("Horizontal", playerAttackDirection.x);
+                        animator.SetFloat("Vertical", playerAttackDirection.y);
+
+                        //Horizontal
+                        if (playerAttackDirection.x < 0) facingDirection = FacingDirection.Left;
+                        else facingDirection = FacingDirection.Right;
+
+                        //Vertical
+                        if (playerAttackDirection.y < 0) facingDirection = FacingDirection.Down;
+                        else facingDirection = FacingDirection.Up;
+
                         attacking = true;
-                        facingDirection = CalculateFacingDirection(playerAttack);
+                        // facingDirection = CalculateFacingDirection(playerAttackDirection);
                     }
                 }
                 // Keyboard controls
@@ -154,34 +167,19 @@ namespace Player
                     {
                         // Attack in direction of the mouse
                         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                        Vector2 attackDirection = (mousePosition - (Vector2) transform.position).normalized;
+                        playerAttackDirection = (mousePosition - (Vector2) transform.position).normalized;
 
-                        //Final attack direction to face player to mouse
-                        //attackDirection = transform.position + (Vector3) attackDirection;
-
-                        // Attack!
+                        //Attack!
                         attacking = true;
-                        animator.SetFloat("Horizontal", attackDirection.x);
-                        animator.SetFloat("Vertical", attackDirection.y);
                     }
                 }
 
                 // Update the animator.
                 animator.SetBool("Attacking", attacking);
-                switch (facingDirection)
+                if (attacking)
                 {
-                    case FacingDirection.Up:
-                        animator.SetFloat("FacingDirection", 0F);
-                        break;
-                    case FacingDirection.Down:
-                        animator.SetFloat("FacingDirection", 1F);
-                        break;
-                    case FacingDirection.Left:
-                        animator.SetFloat("FacingDirection", 2F);
-                        break;
-                    case FacingDirection.Right:
-                        animator.SetFloat("FacingDirection", 3F);
-                        break;
+                    animator.SetFloat("Horizontal", playerAttackDirection.x);
+                    animator.SetFloat("Vertical", playerAttackDirection.y);
                 }
             }
         }
@@ -203,7 +201,7 @@ namespace Player
         {
             attacking = false;
             attackOnCooldown = true;
-            _weapon.DoAttack();
+            _weapon.DoAttack(playerAttackDirection);
             StartCoroutine(ResetAttackCooldown());
         }
 

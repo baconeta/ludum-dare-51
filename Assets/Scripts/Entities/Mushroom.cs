@@ -35,7 +35,6 @@ namespace Entities
         protected override void Attack()
         {
             //Player take damage
-            Debug.Log(enemyName + " Attack Player!");
         }
         
         private IEnumerator Jump()

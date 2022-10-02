@@ -119,7 +119,6 @@ namespace Entities
         {
             if (WorldPhase == EWorldPhase.DARK)
             {
-
                 _currentHealth -= damage;
                 //Die check
                 if (_currentHealth <= 0)
@@ -187,6 +186,7 @@ namespace Entities
 
         private void UpdateAnimator()
         {
+            
             _animator.SetFloat("Horizontal", _lastMovement.x);
             _animator.SetFloat("Vertical", _lastMovement.y);
             _animator.SetFloat("Velocity", _lastMovement.magnitude);

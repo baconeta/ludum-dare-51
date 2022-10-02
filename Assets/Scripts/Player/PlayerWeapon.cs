@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Entities;
@@ -16,9 +17,9 @@ namespace Player
 
         private float _weaponIsDamagingDurationActual;
 
-        [SerializeField] float HitAngle = 60f;
+        [SerializeField] float hitAngle = 60f;
 
-
+        
         // True if collisions with the weapon will damage enemies.
         protected bool weaponIsDamaging = false;
 
@@ -40,19 +41,21 @@ namespace Player
             // Attack Period (how long a full attack rotation takes) * "Hot" percentage (how long the weapon is hot for).
             _weaponIsDamagingDurationActual =
                 (1 / _playerCombat.GetAttackSpeed()) * (weaponIsDamagingDurationPercentage / 100F);
+            CircleCollider.radius = _playerCombat.GetAttackRange();
         }
 
-        public void DoAttack()
+        public void DoAttack(Vector2 attackDirection)
         {
+
             weaponIsDamaging = true;
 
-            if (CircleCollider != null)
+            if (CircleCollider is not null)
                 CircleCollider.enabled = true;
 
             // TODO Trigger animation/visibility here.
             StartCoroutine(DisableMeleeDamage());
-
-            SweepCollider();
+            
+            SweepCollider(attackDirection);
         }
 
         // This function disables the weapon after the swing has finished.
@@ -61,13 +64,13 @@ namespace Player
             yield return new WaitForSeconds(_weaponIsDamagingDurationActual);
             weaponIsDamaging = false;
 
-            if (CircleCollider != null)
+            if (CircleCollider is not null)
                 CircleCollider.enabled = false;
         }
 
-        private void SweepCollider()
+        private void SweepCollider(Vector2 attackDirection)
         {
-            if (CircleCollider == null)
+            if (CircleCollider is null)
             {
                 Debug.LogError("CircleCollider ref was null");
                 return;
@@ -77,26 +80,33 @@ namespace Player
             List<Collider2D> results = new List<Collider2D>();
             CircleCollider.OverlapCollider(filter, results);
 
+            //For each object the weapon collider overlaps
             foreach (Collider2D result in results)
             {
-                Vector2 dir = result.gameObject.transform.position - gameObject.transform.position;
-                float angle = Vector2.Angle(dir, GetCurrentDirection());
-                float distance = Vector2.Distance(gameObject.transform.position, result.gameObject.transform.position);
+                if (!weaponIsDamaging) return;
 
-                if (weaponIsDamaging && result.CompareTag("Enemy"))
+                //Enemies only
+                if (!result.CompareTag("Enemy")) return;
+                
+                //Direction player to Enemy
+                Vector2 dir = (result.transform.position - transform.position).normalized;
+                
+                //Enemy is within a "Pie Slice" of the player.
+                //0 is 90 degrees to the click angle.
+                //1 is facing directly towards the enemy.
+                //-1 is directly the opposite direction.
+                if (Vector2.Dot(dir, attackDirection) > 0.5f)
                 {
-                    if (angle <= HitAngle
-                        || angle <= 90 && distance <= 0.2)
-                    {
-                        result.GetComponent<Enemy>().TakeDamage(_playerCombat.GetAttackDamage());
-                    }
+                    //Damage enemy
+                    result.GetComponent<Enemy>().TakeDamage(_playerCombat.GetAttackDamage());
                 }
+
             }
         }
 
         private Vector2 GetCurrentDirection()
         {
-            if (_playerCombat == null)
+            if (_playerCombat is null)
             {
                 Debug.LogError("PlayerCombat ref was null");
             }

@@ -27,7 +27,6 @@ namespace Entities
         protected override void Attack()
         {
             //Player take damage
-            Debug.Log(enemyName + " Attack Player!");
             Projectile newProjectile = Instantiate(projectile);
             newProjectile.ShootTarget(player.transform.position, gameObject, projectileSpeed, attackDamage);
         }
