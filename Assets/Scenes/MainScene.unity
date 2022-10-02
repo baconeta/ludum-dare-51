@@ -289,6 +289,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1968543810}
     m_Modifications:
+    - target: {fileID: 308951370, guid: 360b3c3530aca3b47ae78910ac1ff0b0, type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1862343471, guid: 360b3c3530aca3b47ae78910ac1ff0b0, type: 3}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4246011513244249939, guid: 360b3c3530aca3b47ae78910ac1ff0b0, type: 3}
       propertyPath: m_Pivot.x
       value: 1
@@ -2862,8 +2870,8 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1401540131}
-          m_TargetAssemblyTypeName: GameUI, Assembly-CSharp
+        - m_Target: {fileID: 1401540134}
+          m_TargetAssemblyTypeName: GameUIAudio, Assembly-CSharp
           m_MethodName: PlayClickSound
           m_Mode: 1
           m_Arguments:
@@ -2878,8 +2886,8 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1401540131}
-          m_TargetAssemblyTypeName: GameUI, Assembly-CSharp
+        - m_Target: {fileID: 1401540134}
+          m_TargetAssemblyTypeName: GameUIAudio, Assembly-CSharp
           m_MethodName: PlayHoverSound
           m_Mode: 1
           m_Arguments:
