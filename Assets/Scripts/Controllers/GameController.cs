@@ -18,7 +18,7 @@ namespace Controllers
 
         private void Awake()
         {
-            timer = gameObject.AddComponent<GameTimer>();
+            timer = gameObject.GetComponent<GameTimer>();
         }
 
         // Start is called before the first frame update
@@ -48,10 +48,9 @@ namespace Controllers
             BroadcastMessage("onGameReset");
             GameRunning = true;
         }
-        
+
         public void EndGame(bool victory = false, float delay = 0f)
         {
-            
             Debug.Log("End of Game!");
 
             if (victory)
@@ -64,7 +63,7 @@ namespace Controllers
                 Debug.Log("You Lost! CORN conquered You!");
                 //Show loss/death screen
             }
-            
+
             // Not sure what this does Currently errors
             // if (!isInvincible)
             // {
@@ -81,40 +80,35 @@ namespace Controllers
         public void RoundEnded(int currentRound)
         {
             Debug.Log("Round " + currentRound + " completed successfully.");
-            
+
             StartCoroutine(RoundTransition());
         }
 
         public IEnumerator RoundTransition()
         {
-            
             timer.JumpToLightPhase();
             float phaseTimer = timer.GetTimer();
             //TODO Wait until end of NEXT light mode.
             yield return new WaitForSeconds(phaseTimer);
-            
+
             //End and move to sanctuary
             timer.StopTimer();
             IsPlayerInputEnabled = false;
             sanctuary.ShowSanctuary();
             yield return null;
         }
-        
-        
+
 
         public void Continue()
         {
             IsPlayerInputEnabled = true;
             timer.StartTimer();
             //If before boss wave
-            if(!_rc.isBossRound) _rc.StartNextWave();
+            if (!_rc.isBossRound) _rc.StartNextWave();
             else //if after boss wave
             {
-                
                 EndGame(true);
             }
-            
-            
         }
     }
 }
