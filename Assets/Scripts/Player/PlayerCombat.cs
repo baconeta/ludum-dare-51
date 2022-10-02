@@ -106,7 +106,7 @@ namespace Player
             Right,
         }
 
-        private FacingDirection facingDirection;
+        private FacingDirection facingDirection = FacingDirection.Up;
 
         public FacingDirection GetFacingDirection()
         {
