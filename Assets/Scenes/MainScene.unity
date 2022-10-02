@@ -2572,6 +2572,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 608c9b964c6443fd89a3603101fd24bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameController: {fileID: 1142364620}
   endGameUI: {fileID: 8889989590705831580}
   scoreElement: {fileID: 1016803950}
 --- !u!1 &1919679629
