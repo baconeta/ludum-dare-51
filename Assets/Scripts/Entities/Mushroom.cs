@@ -87,7 +87,7 @@ namespace Entities
             
                 //Update to new position
                 _rigidbody2D.MovePosition(moveValue);
-            
+                NotifyAnimator(moveValue);
             
                 yield return null;
             }
@@ -97,13 +97,13 @@ namespace Entities
         
             //Move enemy to new position
             _rigidbody2D.MovePosition(moveValue);
+            NotifyAnimator(moveValue);
 
 
             _timeOfLastJump = Time.time;
         
             _isJumping = false;
-        
-        
+            NotifyAnimator(Vector3.zero);
         
             yield return null;
         }
