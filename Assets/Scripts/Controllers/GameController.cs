@@ -48,15 +48,29 @@ namespace Controllers
             BroadcastMessage("onGameReset");
             GameRunning = true;
         }
-
-        // Update is called once per frame
-        public void EndGame(float delay = 0f)
+        
+        public void EndGame(bool victory = false, float delay = 0f)
         {
             
-            if (!isInvincible)
+            Debug.Log("End of Game!");
+
+            if (victory)
             {
-                Invoke(nameof(BroadcastGameOver), delay);
+                Debug.Log("You Win! You conquered CORN!");
+                //Show Scoreboard now
             }
+            else
+            {
+                Debug.Log("You Lost! CORN conquered You!");
+                //Show loss/death screen
+            }
+            
+
+            // Not sure what this does Currently errors
+            // if (!isInvincible)
+            // {
+            //     Invoke(nameof(BroadcastGameOver), delay);
+            // }
         }
 
         private void BroadcastGameOver()
@@ -97,8 +111,8 @@ namespace Controllers
             if(!_rc.isBossRound) _rc.StartNextWave();
             else //if after boss wave
             {
-                //Show scoreboard
-                Debug.Log("End of Game!");
+                
+                EndGame(true);
             }
             
             

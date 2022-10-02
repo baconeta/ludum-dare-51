@@ -1,4 +1,5 @@
 using System.Collections;
+using Controllers;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -124,6 +125,8 @@ namespace Player
         //Direction of the attack
         protected Vector2 playerAttackDirection = Vector2.zero;
 
+        private bool isDead = false;
+
         public enum FacingDirection
         {
             Up,
@@ -152,6 +155,12 @@ namespace Player
         // Update is called once per frame
         private void Update()
         {
+            //For testing mostly
+            if (healthActual <= 0)
+            {
+                if(!isDead) Die();
+            }
+            
             // Check if the player can be moved.
             if (Controllers.GameController.IsPlayerInputEnabled)
             {
@@ -285,15 +294,17 @@ namespace Player
             // TODO Update HUD?
             if (healthActual <= 0)
             {
-                Die();
+                if(!isDead) Die();
             }
         }
 
         private void Die()
         {
+            isDead = true;
             // Make sure that health doesn't go negative.
             healthActual = 0;
-            // Stop the game. TODO Hook into the controllers later.
+            // Stop the game.
+            GetComponent<Player>().gameController.EndGame();
             _playing = false;
             // Trigger the death animation for the player.
             _animator.SetTrigger("Dead");

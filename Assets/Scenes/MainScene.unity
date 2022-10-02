@@ -940,6 +940,7 @@ MonoBehaviour:
   - numberOfPuffballs: 1
     numberOfSeeds: 1
     numberOfMushrooms: 1
+  isBossRound: 0
 --- !u!1 &644319211
 GameObject:
   m_ObjectHideFlags: 0
@@ -1671,6 +1672,10 @@ PrefabInstance:
       propertyPath: playerInput
       value: 
       objectReference: {fileID: 1173181159}
+    - target: {fileID: 375893899820495542, guid: adb2cd2b963d29c4f8ebec31626cee0e, type: 3}
+      propertyPath: gameController
+      value: 
+      objectReference: {fileID: 1142364620}
     - target: {fileID: 6565891818112425706, guid: adb2cd2b963d29c4f8ebec31626cee0e, type: 3}
       propertyPath: m_Radius
       value: 7
