@@ -30,7 +30,7 @@ namespace Entities
 
         [Header("Attack Stats")] public float attackRadius = 1;
         public float attackSpeed = 1;
-        public float attackDamage = 1;
+        public int attackDamage = 1;
         private float _timeOfLastAttack;
 
         //Components

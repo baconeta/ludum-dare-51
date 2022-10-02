@@ -26,7 +26,7 @@ namespace Entities
         //Range Attack
         protected override void Attack()
         {
-            //Player take damage
+            //Spawn Projectile (Damage is handled by projectile)
             Projectile newProjectile = Instantiate(projectile);
             newProjectile.ShootTarget(player.transform.position, gameObject, projectileSpeed, attackDamage);
         }

@@ -12,6 +12,7 @@ namespace Player
         public PlayerStats playerStats;
         public PlayerInput playerInput;
         public GameController gameController;
+        public GameUI gameUI;
 
         private void Awake()
         {
@@ -20,6 +21,7 @@ namespace Player
             playerStats = GetComponent<PlayerStats>();
             playerInput = GetComponent<PlayerInput>();
             gameController = FindObjectOfType<GameController>();
+            gameUI = FindObjectOfType<GameUI>();
         }
 
         public PlayerInput GetPlayerInput()
