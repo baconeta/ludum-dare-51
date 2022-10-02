@@ -11,21 +11,18 @@ namespace Player
         private PlayerCombat _playerCombat;
         private CircleCollider2D CircleCollider;
 
-        [Tooltip("Per swing, how long should the weapon be \"hot\" for, as a percentage.")]
-        [SerializeField]
+        [Tooltip("Per swing, how long should the weapon be \"hot\" for, as a percentage.")] [SerializeField]
         private float weaponIsDamagingDurationPercentage = 70.0F;
 
         private float _weaponIsDamagingDurationActual;
 
-        [SerializeField]
-        float HitAngle = 60f;
-
+        [SerializeField] float HitAngle = 60f;
 
 
         // True if collisions with the weapon will damage enemies.
         protected bool weaponIsDamaging = false;
 
-        private void Start()
+        private void Awake()
         {
             _playerCombat = GetComponentInParent<PlayerCombat>();
             CircleCollider = GetComponent<CircleCollider2D>();
@@ -70,7 +67,11 @@ namespace Player
 
         private void SweepCollider()
         {
-            if (CircleCollider == null) { Debug.LogError("CircleCollider ref was null"); return; }
+            if (CircleCollider == null)
+            {
+                Debug.LogError("CircleCollider ref was null");
+                return;
+            }
 
             ContactFilter2D filter = new ContactFilter2D().NoFilter();
             List<Collider2D> results = new List<Collider2D>();
@@ -95,7 +96,10 @@ namespace Player
 
         private Vector2 GetCurrentDirection()
         {
-            if (_playerCombat == null) { Debug.LogError("PlayerCombat ref was null"); }
+            if (_playerCombat == null)
+            {
+                Debug.LogError("PlayerCombat ref was null");
+            }
 
             Vector2 dir;
 
@@ -117,6 +121,7 @@ namespace Player
                     dir = new Vector2();
                     break;
             }
+
             return dir;
         }
     }

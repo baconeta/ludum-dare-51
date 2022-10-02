@@ -143,20 +143,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeedInitial: 2
   movementSpeedActual: 0
+  playerInput: {fileID: 0}
   rb: {fileID: 0}
   animator: {fileID: 0}
   mContactOffset: 0.05
   mMaxIterations: 2
   mMovementFilter:
     useTriggers: 0
-    useLayerMask: 0
+    useLayerMask: 1
     useDepth: 0
     useOutsideDepth: 0
     useNormalAngle: 0
     useOutsideNormalAngle: 0
     layerMask:
       serializedVersion: 2
-      m_Bits: 0
+      m_Bits: 23
     minDepth: 0
     maxDepth: 0
     minNormalAngle: 0
@@ -174,6 +175,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 375893899820495543}
+  playerInput: {fileID: 0}
   attackSound: {fileID: 0}
   healthInitial: 5
   healthGrowthPerLevel: 1
@@ -199,9 +201,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3d53b80407086740951dd7454812053, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCombat: {fileID: 0}
-  playerMovement: {fileID: 0}
-  playerStats: {fileID: 0}
+  playerCombat: {fileID: 375893899820495540}
+  playerMovement: {fileID: 375893899820495541}
+  playerStats: {fileID: 1378147127}
+  playerInput: {fileID: 0}
 --- !u!95 &375893899820495543
 Animator:
   serializedVersion: 4

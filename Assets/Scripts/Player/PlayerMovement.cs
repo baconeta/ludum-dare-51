@@ -54,6 +54,7 @@ namespace Player
             if (Controllers.GameController.IsPlayerInputEnabled)
             {
                 Vector2 playerMovement = playerInput.actions["Move"].ReadValue<Vector2>();
+                // Debug.Log(playerMovement);
                 _movement.x = playerMovement.x;
                 _movement.y = playerMovement.y;
 
@@ -137,6 +138,7 @@ namespace Player
             // NOTE: We can avoid this setting of the Rigidbody2D position by a different choice of query.
             var targetPosition = rb.position;
             rb.position = startPosition;
+            
 
             rb.MovePosition(targetPosition);
         }
