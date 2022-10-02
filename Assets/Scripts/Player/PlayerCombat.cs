@@ -11,11 +11,13 @@ namespace Player
         /*
          * Unity References
          */
-        [Header("Unity References")] [SerializeField] [Tooltip("The animator object for the player sprite.")]
+        [Header("Unity References")]
+        
+        [SerializeField] [Tooltip("The animator object for the player sprite.")]
         private Animator _animator;
 
-        [SerializeField] [Tooltip("The analog control for player input.")]
-        private PlayerInput _playerInput;
+        [SerializeField] [Tooltip("")]
+        private PlayerFacing _playerFacing;
 
         [SerializeField] [Tooltip("The weapon object that the player uses to perform attacks with.")]
         private PlayerWeapon _weapon;
@@ -138,9 +140,6 @@ namespace Player
          */
         private bool _playing = true;
 
-        // True if the player is trying to attack.
-        protected bool attacking = false;
-
         // True if the player can't attack because they have recently attacked.
         protected bool attackOnCooldown = false;
 
@@ -150,27 +149,11 @@ namespace Player
         private bool isDead = false;
         private GameUI _gameUI;
 
-        public enum FacingDirection
-        {
-            Up,
-            Down,
-            Left,
-            Right,
-        }
-
-        private FacingDirection facingDirection = FacingDirection.Up;
-
-        public FacingDirection GetFacingDirection()
-        {
-            return facingDirection;
-        }
-
         // Start is called before the first frame update
         private void Start()
         {
-            if (!_animator) GetComponent<Animator>();
             _weapon = gameObject.GetComponentInChildren<PlayerWeapon>();
-            if (!_playerInput) _playerInput = GetComponent<PlayerInput>();
+            if (!_playerFacing) _playerFacing = GetComponent<PlayerFacing>();
             _gameUI = GetComponent<Player>().gameUI;
 
             RecalculateStats();
@@ -184,71 +167,20 @@ namespace Player
             {
                 if (!isDead) Die();
             }
-
-            // Check if the player can be moved.
-            if (Controllers.GameController.IsPlayerInputEnabled)
-            {
-                playerAttackDirection = Vector2.zero;
-
-                if (Controllers.InputController.isMobile) //Mobile Controls
-                {
-                    //Get Input for playerAttack joystick
-                    playerAttackDirection = _playerInput.actions["Attack"].ReadValue<Vector2>();
-
-                    //Only if stick is in use
-                    //Player is attacking
-                    if (playerAttackDirection != Vector2.zero)
-                    {
-                        //Face direction and Attack!
-                        _animator.SetFloat("Horizontal", playerAttackDirection.x);
-                        _animator.SetFloat("Vertical", playerAttackDirection.y);
-
-                        //Horizontal
-                        if (playerAttackDirection.x < 0) facingDirection = FacingDirection.Left;
-                        else facingDirection = FacingDirection.Right;
-
-                        //Vertical
-                        if (playerAttackDirection.y < 0) facingDirection = FacingDirection.Down;
-                        else facingDirection = FacingDirection.Up;
-
-                        attacking = true;
-                        // facingDirection = CalculateFacingDirection(playerAttackDirection);
-                    }
-                }
-                // Keyboard controls
-                else
-                {
-                    // Attack is pressed
-                    if (_playerInput.actions["Attack"].IsPressed())
-                    {
-                        // Attack in direction of the mouse
-                        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                        playerAttackDirection = (mousePosition - (Vector2) transform.position).normalized;
-
-                        //Attack!
-                        attacking = true;
-                    }
-                }
-
-                // Update the animator.
-                _animator.SetBool("Attacking", attacking);
-                if (attacking)
-                {
-                    _animator.SetFloat("Horizontal", playerAttackDirection.x);
-                    _animator.SetFloat("Vertical", playerAttackDirection.y);
-                }
-
-            }
         }
 
         private void FixedUpdate()
         {
             // Only update if the game is in play.
             if (!_playing) return;
+            
+            // Check if the player can be moved.
+            if (!Controllers.GameController.IsPlayerInputEnabled) return;
 
             // If the player is trying to attack, and the attack isn't on cooldown, initiate an attack.
-            if (attacking && !attackOnCooldown)
+            if (_playerFacing.IsPlayerAttacking() && !attackOnCooldown)
             {
+                Debug.Log("Attack!");
                 Attack();
             }
         }
@@ -256,7 +188,6 @@ namespace Player
         // Declare an attack.
         private void Attack()
         {
-            attacking = false;
             attackOnCooldown = true;
             _weapon.DoAttack(playerAttackDirection);
             StartCoroutine(ResetAttackCooldown());
@@ -267,22 +198,6 @@ namespace Player
         {
             yield return new WaitForSeconds(1 / attackSpeedActual);
             attackOnCooldown = false;
-        }
-
-        private static FacingDirection CalculateFacingDirection(Vector2 direction)
-        {
-            // If the absolute value of X is larger than Y.
-            if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
-            {
-                // If X is positive, the facing direction is Right. Otherwise it is Left.
-                return (direction.x > 0F ? FacingDirection.Right : FacingDirection.Left);
-            }
-            // else, the absolute value of Y is larger.
-            else
-            {
-                // If Y is positive, the facing direction is Up. Otherwise it is Down.
-                return (direction.y > 0F ? FacingDirection.Up : FacingDirection.Down);
-            }
         }
 
         private void RecalculateStats()

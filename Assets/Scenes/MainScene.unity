@@ -1368,6 +1368,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1173181159}
     - target: {fileID: 375893899820495540, guid: adb2cd2b963d29c4f8ebec31626cee0e, type: 3}
+      propertyPath: _playerFacing
+      value: 
+      objectReference: {fileID: 1173181170}
+    - target: {fileID: 375893899820495540, guid: adb2cd2b963d29c4f8ebec31626cee0e, type: 3}
       propertyPath: healthInitial
       value: 50
       objectReference: {fileID: 0}
@@ -1490,6 +1494,21 @@ Rigidbody2D:
   m_CorrespondingSourceObject: {fileID: 375893899820495529, guid: adb2cd2b963d29c4f8ebec31626cee0e, type: 3}
   m_PrefabInstance: {fileID: 1173181155}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1173181170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1173181157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a84de7e17f96b349a8ba536bb54fc9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  camera: {fileID: 736482727}
+  animator: {fileID: 1173181161}
+  playerInput: {fileID: 1173181159}
 --- !u!1 &1232269058
 GameObject:
   m_ObjectHideFlags: 0
@@ -2036,7 +2055,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7369678367256390203, guid: 1f794f3f39fee51499b78d5c49b8607e, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -14.999985
+      value: -15
       objectReference: {fileID: 0}
     - target: {fileID: 7369678367256390203, guid: 1f794f3f39fee51499b78d5c49b8607e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
