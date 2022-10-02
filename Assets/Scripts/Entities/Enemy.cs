@@ -208,6 +208,7 @@ namespace Entities
         private void SetWorldPhase(EWorldPhase newPhase)
         {
             WorldPhase = newPhase;
+            _animator.SetBool("IsDark", WorldPhase == EWorldPhase.DARK);
         }
 
         protected void NotifyAnimator(Vector3 movement)
@@ -217,7 +218,6 @@ namespace Entities
 
         private void UpdateAnimator()
         {
-            
             _animator.SetFloat("Horizontal", _lastMovement.x);
             _animator.SetFloat("Vertical", _lastMovement.y);
             _animator.SetFloat("Velocity", _lastMovement.magnitude);
