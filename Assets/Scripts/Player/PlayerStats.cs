@@ -28,6 +28,11 @@ namespace Player
             return true;
         }
 
+        public string GetName()
+        {
+            return playerName;
+        }
+        
         public int GetCurrency()
         {
             return currency;
