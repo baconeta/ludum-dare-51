@@ -333,7 +333,7 @@ namespace Player
             // Make sure that health doesn't go negative.
             HealthActual = 0;
             // Stop the game.
-            GetComponent<Player>().gameController.EndGame();
+            GetComponent<Player>().gameController.EndGame(false);
             _playing = false;
             // Trigger the death animation for the player.
             _animator.SetTrigger("Dead");
