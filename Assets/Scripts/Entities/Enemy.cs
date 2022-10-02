@@ -11,10 +11,14 @@ namespace Entities
         [Header("Enemy Stats")] public string enemyName;
 
         public float moveSpeed = 1;
+        private Vector3 _lastMovement;
+
         public float maxHealth = 1;
         private float _currentHealth;
+
         public float aggravationRange = 10;
         private bool _isAggravated = false;
+
         private EWorldPhase WorldPhase;
 
         [Header("Attack Stats")] public float attackRadius = 1;
@@ -26,6 +30,7 @@ namespace Entities
         protected Player.Player player;
         protected Rigidbody2D _rigidbody2D;
         private GameController _gameController;
+        private Animator _animator;
 
         public EnemyController EcRef { get; set; }
 
@@ -36,19 +41,16 @@ namespace Entities
         protected virtual void Start()
         {
             if (!_rigidbody2D)
-            {
                 _rigidbody2D = GetComponent<Rigidbody2D>();
-            }
+
+            if (!_animator)
+                _animator = GetComponent<Animator>();
 
             if (!player)
-            {
                 player = FindObjectOfType<Player.Player>();
-            }
 
             if (!_gameController)
-            {
                 _gameController = FindObjectOfType<GameController>();
-            }
 
             SetupEventSubscriptions();
 
@@ -61,11 +63,12 @@ namespace Entities
         // Update is called once per frame
         protected virtual void Update()
         {
+            UpdateAnimator();
         }
-
 
         protected virtual void FixedUpdate()
         {
+            NotifyAnimator(Vector3.zero);
             float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
 
             if (!_isAggravated)
@@ -175,6 +178,18 @@ namespace Entities
         private void SetWorldPhase(EWorldPhase newPhase)
         {
             WorldPhase = newPhase;
+        }
+
+        protected void NotifyAnimator(Vector3 movement)
+        {
+            _lastMovement = movement;
+        }
+
+        private void UpdateAnimator()
+        {
+            _animator.SetFloat("Horizontal", _lastMovement.x);
+            _animator.SetFloat("Vertical", _lastMovement.y);
+            _animator.SetFloat("Velocity", _lastMovement.magnitude);
         }
     }
 }

@@ -18,7 +18,9 @@ namespace Entities
             Vector3 directionToPlayer = (player.transform.position - transform.position).normalized;
 
             //Move to player
-            transform.position += moveSpeed * Time.deltaTime * directionToPlayer;
+            var moveValue = moveSpeed * Time.deltaTime * directionToPlayer;
+            transform.position += moveValue;
+            NotifyAnimator(moveValue);
         }
 
         //Range Attack
