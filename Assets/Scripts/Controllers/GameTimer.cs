@@ -59,5 +59,12 @@ public class GameTimer : MonoBehaviour
             }
         }
     }
+
+    public float GetTimeToNextDark()
+    {
+        if (worldPhase is EWorldPhase.DARK) return timer + phaseTime;
+        
+        else return (timer);
+    }
 }
 

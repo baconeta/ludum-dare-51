@@ -934,12 +934,12 @@ MonoBehaviour:
   gameController: {fileID: 1142364620}
   enemyController: {fileID: 667146669}
   waves:
-  - numberOfPuffballs: 10
-    numberOfSeeds: 10
-    numberOfMushrooms: 4
-  - numberOfPuffballs: 15
-    numberOfSeeds: 15
-    numberOfMushrooms: 8
+  - numberOfPuffballs: 1
+    numberOfSeeds: 1
+    numberOfMushrooms: 1
+  - numberOfPuffballs: 1
+    numberOfSeeds: 1
+    numberOfMushrooms: 1
 --- !u!1 &644319211
 GameObject:
   m_ObjectHideFlags: 0
