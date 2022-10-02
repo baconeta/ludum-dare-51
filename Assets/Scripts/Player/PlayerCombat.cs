@@ -137,9 +137,9 @@ namespace Player
                     // Only if stick is in use
                     if (playerAttack != Vector2.zero)
                     {
-                        //playerAttack <-- Use this Vector2 for player-to-enemy direction
                         // Face direction and Attack!
                         attacking = true;
+                        facingDirection = CalculateFacingDirection(playerAttack);
                     }
                 }
                 // Keyboard controls
@@ -156,6 +156,7 @@ namespace Player
 
                         // Attack!
                         attacking = true;
+                        facingDirection = CalculateFacingDirection(attackDirection);
                     }
                 }
 
@@ -194,10 +195,10 @@ namespace Player
         // Declare an attack.
         private void Attack()
         {
+            attacking = false;
             attackOnCooldown = true;
             _weapon.DoAttack();
             StartCoroutine(ResetAttackCooldown());
-            attacking = false;
         }
 
         // This function resets the attack cooldown after the cooldown period ends.
@@ -205,6 +206,22 @@ namespace Player
         {
             yield return new WaitForSeconds(1 / attackSpeedActual);
             attackOnCooldown = false;
+        }
+
+        private static FacingDirection CalculateFacingDirection(Vector2 direction)
+        {
+            // If the absolute value of X is larger than Y.
+            if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
+            {
+                // If X is positive, the facing direction is Right. Otherwise it is Left.
+                return (direction.x > 0F ? FacingDirection.Right : FacingDirection.Left);
+            }
+            // else, the absolute value of Y is larger.
+            else
+            {
+                // If Y is positive, the facing direction is Up. Otherwise it is Down.
+                return (direction.y > 0F ? FacingDirection.Up : FacingDirection.Down);
+            }
         }
 
         private void RecalculateStats()
