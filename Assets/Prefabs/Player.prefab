@@ -174,9 +174,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66a68c1d637cc54438391a5ed645c248, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 375893899820495543}
-  playerInput: {fileID: 0}
-  attackSound: {fileID: 0}
+  _animator: {fileID: 375893899820495543}
+  _playerInput: {fileID: 0}
+  _weapon: {fileID: 0}
+  _attackSound: {fileID: 0}
   healthInitial: 5
   healthGrowthPerLevel: 1
   healthMaxLevel: 5
@@ -189,6 +190,16 @@ MonoBehaviour:
   attackRangeInitial: 100
   attackRangeGrowthPerLevel: 12
   attackRangeMaxLevel: 5
+  firstUpgradeCost: 3
+  secondUpgradeCost: 7
+  thirdUpgradeCost: 12
+  fourthUpgradeCost: 18
+  fifthUpgradeCost: 25
+  healthMax: 0
+  healthActual: 0
+  attackDamageActual: 0
+  attackSpeedActual: 0
+  attackRangeActual: 0
 --- !u!114 &375893899820495542
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -237,6 +248,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aceb22ac9c06fe84aa0a782734ff2a28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerName: 
+  favouriteAnimal: 
   currency: 0
   score: 0
 --- !u!1 &5022368985573105852
@@ -285,7 +298,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponIsDamagingDurationPercentage: 70
-  HitAngle: 45
+  hitAngle: 60
 --- !u!58 &6565891818112425706
 CircleCollider2D:
   m_ObjectHideFlags: 0
