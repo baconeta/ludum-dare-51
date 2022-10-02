@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace Collectables
 {
     // This could be a parent for the different types of loot that we can pickup, or it could be the end-all class.
@@ -11,7 +13,9 @@ namespace Collectables
                 player = FindObjectOfType<Player.Player>();
             }
 
-            player.GetPlayerStats().AddCurrency((int) value);
+            AudioSource.PlayClipAtPoint(pickupSound, transform.position, 0.15f);
+
+            player.GetPlayerStats().AddCurrency(value);
             Destroy(gameObject);
         }
     }

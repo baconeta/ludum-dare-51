@@ -216,6 +216,8 @@ MonoBehaviour:
   playerMovement: {fileID: 375893899820495541}
   playerStats: {fileID: 1378147127}
   playerInput: {fileID: 0}
+  gameController: {fileID: 0}
+  gameUI: {fileID: 0}
 --- !u!95 &375893899820495543
 Animator:
   serializedVersion: 4
@@ -299,6 +301,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponIsDamagingDurationPercentage: 70
   hitAngle: 60
+  weaponAudioSource: {fileID: 0}
+  hitSounds: []
+  hitSoundPitchShiftMin: 0
+  hitSoundPitchShiftMax: 0
 --- !u!58 &6565891818112425706
 CircleCollider2D:
   m_ObjectHideFlags: 0

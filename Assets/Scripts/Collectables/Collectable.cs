@@ -13,6 +13,7 @@ namespace Collectables
         public float pickupTimer = 0;
 
         protected Player.Player player;
+        [SerializeField] protected AudioClip pickupSound;
 
         protected abstract void OnCollectablePickup();
 
