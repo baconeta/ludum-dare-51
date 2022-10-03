@@ -103,7 +103,6 @@ MonoBehaviour:
   lootOnDeath: {fileID: 357654020248760077, guid: 8a95e7913e576564f9b683e766cdc2a1, type: 3}
   HealthLoot: {fileID: 357654020248760077, guid: 9cc22239e32d0e34fbcca8f645f8535a, type: 3}
   HealthLootChance: 50
-  LootDropOffset: 2
   enemyName: Seed
   moveSpeed: 1
   maxHealth: 35
@@ -111,6 +110,8 @@ MonoBehaviour:
   attackRadius: 6
   attackSpeed: 1
   attackDamage: 2
+  hitSound: {fileID: 8300000, guid: b58f7386fab7ba54396a45fba19acd1e, type: 3}
+  volume: 0.3
   projectile: {fileID: 7244973061248620078, guid: b77f0f27f1e93e2418352bffe572728f, type: 3}
   projectileSpeed: 1
 --- !u!58 &7151240252480087816
