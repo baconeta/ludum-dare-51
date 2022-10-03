@@ -1,11 +1,15 @@
 using Objects;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 using Utils;
 
 namespace Entities
 {
     public class Boss : Enemy
     {
+        private GameObject _healthBar;
+        private Slider _healthBarSlider;
         public Projectile projectile;
         public float projectileSpeed = 3;
         public Vector3 cornSpitOffset;
@@ -43,10 +47,22 @@ namespace Entities
             // We don't need to update the animator every frame like the other enemies
         }
 
+        public override void TakeDamage(float damage)
+        {
+            base.TakeDamage(damage);
+            // Update the boss's health bar value to reflect the new current health.
+            if (!_healthBar) _healthBar = FindObjectOfType<BossHealthBarHoist>().bossHealthBar;
+            if (!_healthBarSlider) _healthBarSlider = _healthBar.GetComponent<Slider>();
+            _healthBarSlider.value = _currentHealth / maxHealth;
+        }
+
         public override void Die(bool isDespawning = false)
         {
             // Boss died so we win the game
             Debug.Log("we killed the boss");
+            // Hide the boss's health bar.
+            if (!_healthBar) _healthBar = FindObjectOfType<BossHealthBarHoist>().bossHealthBar;
+            _healthBar.SetActive(false);
         }
     }
 }

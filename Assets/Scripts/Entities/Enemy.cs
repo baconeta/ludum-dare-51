@@ -17,7 +17,7 @@ namespace Entities
         private Vector3 _lastMovement;
 
         public float maxHealth = 1;
-        private float _currentHealth;
+        protected float _currentHealth;
 
         public float aggravationRange = 10;
         private bool _isAggravated = false;
@@ -121,7 +121,7 @@ namespace Entities
             _isAggravated = true;
         }
 
-        public void TakeDamage(float damage)
+        public virtual void TakeDamage(float damage)
         {
             if (WorldPhase == EWorldPhase.DARK)
             {

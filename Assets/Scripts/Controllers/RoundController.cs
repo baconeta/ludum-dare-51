@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Controllers
 {
@@ -63,6 +64,9 @@ namespace Controllers
             //Last Wave/Boss Fight
             isBossRound = true;
             enemyController.SpawnBoss();
+            // Show the boss's health bar.
+            GameObject bossHealthBar = FindObjectOfType<BossHealthBarHoist>().bossHealthBar;
+            bossHealthBar.SetActive(true);
             return bossWave;
         }
 
