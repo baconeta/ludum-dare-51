@@ -8,7 +8,9 @@ namespace Controllers
     public class GameController : MonoBehaviour
     {
         [SerializeField] private bool isInvincible;
+
         [SerializeField] private Sanctuary sanctuary;
+
         // This is used to submit and receive scores to and from the server.
         [SerializeField] private GlobalScoreManager _globalScoreManager;
         [SerializeField] private EndGame endGame;
@@ -74,7 +76,7 @@ namespace Controllers
             // {
             //     Invoke(nameof(BroadcastGameOver), delay);
             // }
-            
+
             // Submit the score to the score server.
             PlayerStats stats = FindObjectOfType<PlayerStats>();
             var finalScore = stats.GetScore();

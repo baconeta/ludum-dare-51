@@ -36,7 +36,7 @@ namespace Controllers
 
             //Get bounds of spawnable area
             boundX = (spawnableArea.GetComponent<SpriteRenderer>().size.x - spawnBoundaryOffsetX) / 2;
-            boundY = (spawnableArea.GetComponent<SpriteRenderer>().size.y- spawnBoundaryOffsetY) / 2;
+            boundY = (spawnableArea.GetComponent<SpriteRenderer>().size.y - spawnBoundaryOffsetY) / 2;
         }
 
         public void Update()
@@ -63,7 +63,7 @@ namespace Controllers
             Debug.Log("All enemies destroyed by debug command.");
         }
 
-        public void SpawnEnemy(Transform spawnPosition = null, string enemyType = null)
+        public void SpawnEnemy(Vector3 spawnPosition = default, string enemyType = null)
         {
             //Spawn new enemy
             Enemy newEnemy = Instantiate(GetEnemyType(enemyType));
@@ -72,9 +72,9 @@ namespace Controllers
 
             //Move new enemy to spawn position.
             Vector3 newPosition;
-            if (spawnPosition)
+            if (spawnPosition != default)
             {
-                newPosition = spawnPosition.position;
+                newPosition = spawnPosition;
             }
             else
             {
@@ -109,13 +109,18 @@ namespace Controllers
             _active = true;
         }
 
+        public void SpawnBoss()
+        {
+            SpawnEnemy(enemyType: "CornBoss", spawnPosition: new Vector3(-0.165872335f, 7.3083086f, 0f));
+        }
+
         public Enemy GetEnemyType(string enemyType = null)
         {
             Enemy newEnemy = null;
             switch (enemyType)
             {
                 case null:
-                    newEnemy = enemyList[Random.Range(0, enemyList.Count)];
+                    newEnemy = enemyList[Random.Range(0, enemyList.Count - 1)]; // don't include the boss in rand choice
                     break;
                 case "Mushroom":
                     newEnemy = enemyList[0];
@@ -125,6 +130,9 @@ namespace Controllers
                     break;
                 case "Seed":
                     newEnemy = enemyList[2];
+                    break;
+                case "CornBoss":
+                    newEnemy = enemyList[3];
                     break;
             }
 
