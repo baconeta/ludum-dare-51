@@ -1,7 +1,14 @@
+using Objects;
+using UnityEngine;
+
 namespace Entities
 {
     public class Boss : Enemy
     {
+        public Projectile projectile;
+        public float projectileSpeed = 3;
+        public Vector3 cornSpitOffset;
+
         // Start is called before the first frame update
         protected override void EnemyMovement()
         {
@@ -10,15 +17,23 @@ namespace Entities
 
         protected override void Attack()
         {
-            // if we attack then we should cry
+            // Attacking should start the attacking animation, spawn a kernel and fire it at the players location
+            
+            // TODO add curve to projectile motion
+            GameObject o = gameObject; // ref to this for efficiency 
+            Vector3 instantiationLocation = o.transform.position;
+            instantiationLocation += cornSpitOffset;
+
+            Projectile newProjectile = Instantiate(projectile, instantiationLocation, o.transform.rotation);
+            newProjectile.ShootTarget(player.transform.position, gameObject, projectileSpeed, attackDamage);
         }
 
         protected override void UpdateAnimator()
         {
-            // do nothing bro
+            // We don't need to update the animator every frame like the other enemies
         }
 
-        public override void Die(bool isDespawning)
+        public override void Die(bool isDespawning = false)
         {
             // Boss died so we win the game
         }
