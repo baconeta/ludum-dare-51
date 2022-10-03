@@ -54,6 +54,8 @@ namespace Controllers
             //Last Wave/Boss Fight
             isBossRound = true;
             enemyController.SpawnBoss();
+            // Show the boss's health bar.
+            FindObjectOfType<BossHealthBarHoist>().bossHealthBar.enabled = true;
             return bossWave;
         }
 
