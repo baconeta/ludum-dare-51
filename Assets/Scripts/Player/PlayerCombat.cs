@@ -123,6 +123,7 @@ namespace Player
 
         private bool isDead = false;
         private GameUI _gameUI;
+        private PlayerStats _stats;
 
         // Start is called before the first frame update
         private void Start()
@@ -134,6 +135,8 @@ namespace Player
             _playerAudioSource = GetComponent<AudioSource>();
 
             RecalculateStats();
+
+            _stats = FindObjectOfType<PlayerStats>();
         }
 
         // Update is called once per frame
@@ -232,6 +235,8 @@ namespace Player
             {
                 if (!isDead) Die();
             }
+
+            _stats.AddScore(-damage);
 
             _playerAudioSource.PlayOneShot(_hitSound);
         }

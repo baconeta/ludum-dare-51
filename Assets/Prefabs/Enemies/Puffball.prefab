@@ -105,10 +105,11 @@ MonoBehaviour:
   HealthLootChance: 50
   enemyName: Puffball
   moveSpeed: 1.2
-  maxHealth: 20
+  baseScoreMultiplier: 1
+  maxHealth: 16
   aggravationRange: 15
   attackRadius: 0.5
-  attackSpeed: 2
+  attackSpeed: 0.0875
   attackDamage: 1
   hitSound: {fileID: 8300000, guid: b58f7386fab7ba54396a45fba19acd1e, type: 3}
   volume: 0.3

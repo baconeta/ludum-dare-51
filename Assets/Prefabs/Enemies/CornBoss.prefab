@@ -163,15 +163,16 @@ MonoBehaviour:
   HealthLootChance: 0
   enemyName: CornBoss
   moveSpeed: 0
-  maxHealth: 300
+  baseScoreMultiplier: 0
+  maxHealth: 1200
   aggravationRange: 50
   attackRadius: 25
   attackSpeed: 3
-  attackDamage: 10
+  attackDamage: 19
   hitSound: {fileID: 8300000, guid: e001b17ed72cac74cafb8facd1afaa4f, type: 3}
   volume: 0.2
   projectile: {fileID: 7280510772380333881, guid: 4a3e00c719d9e9d46879ec8844ff77be, type: 3}
-  projectileSpeed: 3
+  projectileSpeed: 4
   cornSpitOffset: {x: 1, y: -1, z: 0.1}
   timeAttackTakes: 0.45
   spitSounds:

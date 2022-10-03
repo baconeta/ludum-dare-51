@@ -105,15 +105,16 @@ MonoBehaviour:
   HealthLootChance: 50
   enemyName: Seed
   moveSpeed: 1
-  maxHealth: 35
+  baseScoreMultiplier: 1.25
+  maxHealth: 42
   aggravationRange: 15
   attackRadius: 6
-  attackSpeed: 1
-  attackDamage: 2
+  attackSpeed: 2
+  attackDamage: 7
   hitSound: {fileID: 8300000, guid: b58f7386fab7ba54396a45fba19acd1e, type: 3}
   volume: 0.3
   projectile: {fileID: 7244973061248620078, guid: b77f0f27f1e93e2418352bffe572728f, type: 3}
-  projectileSpeed: 1
+  projectileSpeed: 2
 --- !u!58 &7151240252480087816
 CircleCollider2D:
   m_ObjectHideFlags: 0

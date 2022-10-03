@@ -105,11 +105,12 @@ MonoBehaviour:
   HealthLootChance: 50
   enemyName: Mushroom
   moveSpeed: 0.8
-  maxHealth: 60
+  baseScoreMultiplier: 1.5
+  maxHealth: 105
   aggravationRange: 15
   attackRadius: 0.7
-  attackSpeed: 3
-  attackDamage: 3
+  attackSpeed: 1.5
+  attackDamage: 10
   hitSound: {fileID: 8300000, guid: b58f7386fab7ba54396a45fba19acd1e, type: 3}
   volume: 0.3
   jumpCurve:

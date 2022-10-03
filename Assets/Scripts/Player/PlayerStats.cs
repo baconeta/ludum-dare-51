@@ -14,6 +14,7 @@ namespace Player
         private void Start()
         {
             _gameUI = GetComponent<Player>().gameUI;
+            _score = GetComponent<PlayerCombat>().healthMax; // start with some base score balanced to health value
         }
 
         public string GetName()
@@ -67,6 +68,7 @@ namespace Player
         {
             _score = 0;
         }
+
         public void CalculateScore()
         {
             // puffball, mushroom, seed need counter that increases on kill
@@ -81,7 +83,6 @@ namespace Player
             //var mushroomScore = mushroomsKilled+seedsCollected*15;
             //var bossScore = bossKilled*50;
             //var overallTime = timetoComplete;
-
 
 
             //var overallScore = puffballScore + seedScore + mushroomScore + bossScore - overallTime;
