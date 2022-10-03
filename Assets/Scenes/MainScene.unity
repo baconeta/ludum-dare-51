@@ -1595,6 +1595,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameColumn: {fileID: 0}
   scoreColumn: {fileID: 0}
+  maximumEntries: 12
 --- !u!114 &1142364624
 MonoBehaviour:
   m_ObjectHideFlags: 0
