@@ -183,9 +183,9 @@ namespace Player
         {
             attackOnCooldown = true;
             _weapon.DoAttack(GetAttackDirection());
-            
+
             //Do visual
-            
+
 
             StartCoroutine(ResetAttackCooldown());
         }
