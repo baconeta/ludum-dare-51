@@ -81,14 +81,6 @@ namespace HUD
             UpdateLabels();
         }
 
-        private void UpdateLabels()
-        {
-            //Update score and currency HUD text
-            SetScoreText(_playerStats.GetScore().ToString());
-            SetCurrencyText(_playerStats.GetCurrency().ToString());
-            SetNameText(_playerStats.GetName());
-        }
-
         public void BuyUpgradeMaxHealth()
         {
             if (!CanBuyMaxHealthUpgrade())
@@ -112,17 +104,6 @@ namespace HUD
             return upgradeCost <= _playerStats.GetCurrency();
         }
 
-        private int GetUpgradeCost(int currentLevel) =>
-            currentLevel switch
-            {
-                0 => firstUpgradeCost,
-                1 => secondUpgradeCost,
-                2 => thirdUpgradeCost,
-                3 => fourthUpgradeCost,
-                4 => fifthUpgradeCost,
-                _ => int.MaxValue
-            };
-
         public void BuyUpgradeWeaponDamage()
         {
             Debug.Log("Buy WeaponDamage");
@@ -138,6 +119,24 @@ namespace HUD
             Debug.Log("Buy WeaponSpeed");
         }
 
+        private int GetUpgradeCost(int currentLevel) =>
+            currentLevel switch
+            {
+                0 => firstUpgradeCost,
+                1 => secondUpgradeCost,
+                2 => thirdUpgradeCost,
+                3 => fourthUpgradeCost,
+                4 => fifthUpgradeCost,
+                _ => int.MaxValue
+            };
+
+        private void UpdateLabels()
+        {
+            //Update score and currency HUD text
+            SetScoreText(_playerStats.GetScore().ToString());
+            SetCurrencyText(_playerStats.GetCurrency().ToString());
+            SetNameText(_playerStats.GetName());
+        }
 
         public void SetNameText(string newName)
         {
