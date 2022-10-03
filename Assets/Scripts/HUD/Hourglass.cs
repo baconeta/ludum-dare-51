@@ -1,15 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 using Controllers;
 
 public class Hourglass : MonoBehaviour
 {
     [SerializeField] Image FillTop;
     [SerializeField] Image FillBottom;
-    [SerializeField] TextMeshProUGUI TimeText;
 
     GameController gameController;
 
@@ -31,9 +27,6 @@ public class Hourglass : MonoBehaviour
         {
             FillTop.fillAmount = gameController.timer.GetTime() / 10;
             FillBottom.fillAmount = 1 - FillTop.fillAmount;
-
-            int currentime = (int)gameController.timer.GetTime();
-            TimeText.text = currentime.ToString();
         }
     }
 

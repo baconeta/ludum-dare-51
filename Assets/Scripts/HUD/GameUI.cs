@@ -49,7 +49,7 @@ public class GameUI : MonoBehaviour
 
     public void UpdateCurrency()
     {
-        currencyText.SetText("Currency: " + player.GetPlayerStats().GetCurrency());
+        currencyText.SetText(player.GetPlayerStats().GetCurrency().ToString());
     }
 
     public void UpdateHealth()
