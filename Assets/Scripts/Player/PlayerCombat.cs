@@ -28,7 +28,7 @@ namespace Player
          * Player health.
          */
         [Header("Player Health")] [SerializeField] [Tooltip("Starting player health.")]
-        protected int healthInitial = 5;
+        protected internal int healthInitial = 5;
 
         [SerializeField] [Tooltip("How much player health increases per upgrade level.")]
         protected int healthGrowthPerLevel = 1;
@@ -123,6 +123,7 @@ namespace Player
 
         private bool isDead = false;
         private GameUI _gameUI;
+        private PlayerStats _stats;
 
         // Start is called before the first frame update
         private void Start()
@@ -134,6 +135,8 @@ namespace Player
             _playerAudioSource = GetComponent<AudioSource>();
 
             RecalculateStats();
+
+            _stats = FindObjectOfType<PlayerStats>();
         }
 
         // Update is called once per frame
@@ -232,6 +235,8 @@ namespace Player
             {
                 if (!isDead) Die();
             }
+
+            _stats.AddScore(-damage);
 
             _playerAudioSource.PlayOneShot(_hitSound);
         }

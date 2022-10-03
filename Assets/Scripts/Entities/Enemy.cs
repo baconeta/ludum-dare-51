@@ -1,4 +1,5 @@
 using Controllers;
+using Player;
 using UnityEngine;
 
 namespace Entities
@@ -15,6 +16,7 @@ namespace Entities
 
         public float moveSpeed = 1;
         private Vector3 _lastMovement;
+        [SerializeField] private float baseScoreMultiplier = 1f;
 
         public float maxHealth = 1;
         protected float _currentHealth;
@@ -35,7 +37,7 @@ namespace Entities
         private GameController _gameController;
         protected Animator animator;
         public AudioClip hitSound;
-        [Range(0,1f)] public float volume;
+        [Range(0, 1f)] public float volume;
 
         public EnemyController EcRef { get; set; }
 
@@ -45,7 +47,6 @@ namespace Entities
         // Start is called before the first frame update
         protected virtual void Start()
         {
-            
             if (!_rigidbody2D)
                 _rigidbody2D = GetComponent<Rigidbody2D>();
 
@@ -73,6 +74,8 @@ namespace Entities
 
         protected virtual void FixedUpdate()
         {
+            if (!_gameController.GameRunning) return;
+
             NotifyAnimator(Vector3.zero);
             float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
 
@@ -126,10 +129,10 @@ namespace Entities
             if (WorldPhase == EWorldPhase.DARK)
             {
                 _currentHealth -= damage;
-                
+
                 //Play audio
                 AudioSource.PlayClipAtPoint(hitSound, transform.position, volume);
-                
+
                 //Die check
                 if (_currentHealth <= 0)
                 {
@@ -151,6 +154,8 @@ namespace Entities
             {
                 EcRef = FindObjectOfType<EnemyController>();
             }
+
+            FindObjectOfType<PlayerStats>().AddScore((int) (baseScoreMultiplier * maxHealth));
 
             EcRef.livingEnemies.Remove(this);
             RemoveEventSubscriptions();

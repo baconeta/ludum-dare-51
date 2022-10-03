@@ -1,3 +1,4 @@
+using System;
 using HUD;
 using UnityEngine;
 
@@ -67,25 +68,15 @@ namespace Player
         {
             _score = 0;
         }
+
+        // Only call this once per game play-through
         public void CalculateScore()
         {
-            // puffball, mushroom, seed need counter that increases on kill
-            // puffball score 10
-            // seed score 12
-            // mushroom score 15
-            // boss score 50
-            // minus overall time to complete game
+            _score += GetComponent<PlayerCombat>().healthInitial;
 
-            //var puffballScore = puffballsKilled+puffsCollected*10;
-            //var seedScore = seedsKilled+seedsCollected*12;
-            //var mushroomScore = mushroomsKilled+seedsCollected*15;
-            //var bossScore = bossKilled*50;
-            //var overallTime = timetoComplete;
+            _score += 3 * (int) FindObjectOfType<GameTimer>().GetPlayedTimeScore();
 
-
-
-            //var overallScore = puffballScore + seedScore + mushroomScore + bossScore - overallTime;
-            // AddScore(overallScore);
+            _score *= 13; // This makes the score much higher and not seem boring as fuck
         }
     }
 }
