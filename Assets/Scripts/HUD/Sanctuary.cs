@@ -44,18 +44,14 @@ namespace HUD
         [Header("Upgrade Button References")]
         public Button upgradeMaxHealthButton;
         public Button upgradeWeaponDamageButton;
-        public Button upgradeWeaponSpeedButton;
         public Button upgradeWeaponRangeButton;
+        public Button upgradeWeaponSpeedButton;
 
         [Header("Upgrade Cost References")]
         public TextMeshProUGUI upgradeMaxHealthCost;
         public TextMeshProUGUI upgradeWeaponDamageCost;
-        public TextMeshProUGUI upgradeWeaponSpeedCost;
         public TextMeshProUGUI upgradeWeaponRangeCost;
-
-        [Header("Story references")]
-        public Image narrativeUI;
-        public List<Sprite> storylets;
+        public TextMeshProUGUI upgradeWeaponSpeedCost;
 
         private void Start()
         {
@@ -80,9 +76,6 @@ namespace HUD
 
         private void UpdateSanctuary(int currentRound)
         {
-            //Update narrative image to current round
-            narrativeUI.sprite = storylets[currentRound - 1];
-
             UpdateUpgradesUI();
         }
 
@@ -204,10 +197,10 @@ namespace HUD
 
         private void UpdateUpgradeCostsText()
         {
-            upgradeMaxHealthCost.text = "Cost: " + GetUpgradeCost(_playerCombat.GetHealthLevel());
-            upgradeWeaponDamageCost.text = "Cost: " + GetUpgradeCost(_playerCombat.GetAttackDamageLevel());
-            upgradeWeaponRangeCost.text = "Cost: " + GetUpgradeCost(_playerCombat.GetAttackRangeLevel());
-            upgradeWeaponSpeedCost.text = "Cost: " + GetUpgradeCost(_playerCombat.GetAttackSpeedLevel());
+            upgradeMaxHealthCost.text = "Cost: " + GetUpgradeCost(_playerCombat.GetHealthLevel()).ToString();
+            upgradeWeaponDamageCost.text = "Cost: " + GetUpgradeCost(_playerCombat.GetAttackDamageLevel()).ToString();
+            upgradeWeaponRangeCost.text = "Cost: " + GetUpgradeCost(_playerCombat.GetAttackRangeLevel()).ToString();
+            upgradeWeaponSpeedCost.text = "Cost: " + GetUpgradeCost(_playerCombat.GetAttackSpeedLevel()).ToString();
         }
 
         private void UpdateUpgradeButtons()
