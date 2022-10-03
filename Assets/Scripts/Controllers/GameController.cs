@@ -20,7 +20,7 @@ namespace Controllers
         public RoundController _rc;
         public bool GameRunning { get; set; }
 
-        public static bool IsPlayerInputEnabled = true;
+        public static bool IsPlayerInputEnabled = false;
 
         [HideInInspector] public GameTimer timer;
 
@@ -53,12 +53,15 @@ namespace Controllers
 
             if (gameUI != null)
                 gameUI.ShowRoundClearedText(false);
+
+            IsPlayerInputEnabled = true;
         }
 
         public void ResetGame()
         {
             BroadcastMessage("onGameReset");
             GameRunning = true;
+            IsPlayerInputEnabled = true;
         }
 
         public void EndGame(bool victory = false, float delay = 0f)
