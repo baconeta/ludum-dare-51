@@ -270,10 +270,14 @@ namespace Player
 
         public void IncreaseHealthLevel()
         {
-            if (_healthLevel < healthMaxLevel)
-                _healthLevel++;
+            if (!CanIncreaseHealthLevel())
+                return;
+
+            _healthLevel++;
             RecalculateStats();
         }
+
+        public bool CanIncreaseHealthLevel() => _healthLevel < healthMaxLevel;
 
         public int GetAttackDamageLevel()
         {

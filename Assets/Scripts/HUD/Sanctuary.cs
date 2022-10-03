@@ -38,6 +38,8 @@ namespace HUD
         public TextMeshProUGUI currencyText;
         public TextMeshProUGUI nameText;
         public Player.Player player;
+        private PlayerCombat _playerCombat;
+        private PlayerStats _playerStats;
 
 
         [Header("Upgrade Button References")]
@@ -52,7 +54,11 @@ namespace HUD
         
         private void Start()
         {
-            if (!player) player = FindObjectOfType<Player.Player>();
+            if (!player)
+                player = FindObjectOfType<Player.Player>();
+
+            _playerCombat = player.playerCombat;
+            _playerStats = player.playerStats;
         }
 
         public void ShowSanctuary(int currentRound)
@@ -83,10 +89,35 @@ namespace HUD
 
         public void BuyUpgradeMaxHealth()
         {
-            //max health cost
-            //player.GetPlayerCombat().UpgradeCost blah blah
-            Debug.Log("Buy Max Health");
+            if (!CanBuyMaxHealthUpgrade())
+                return;
+
+            var upgradeCost = GetUpgradeCost(_playerCombat.GetHealthLevel());
+            _playerStats.SpendCurrency(upgradeCost);
+            _playerCombat.IncreaseHealthLevel();
+
+            Debug.Log("Bought max health upgrade! New Level: " + _playerCombat.GetHealthLevel());
         }
+
+        private bool CanBuyMaxHealthUpgrade()
+        {
+            if (!_playerCombat.CanIncreaseHealthLevel())
+                return true;
+
+            var upgradeCost = GetUpgradeCost(_playerCombat.GetHealthLevel());
+            return upgradeCost <= player.playerStats.GetCurrency();
+        }
+
+        private int GetUpgradeCost(int currentLevel) =>
+            currentLevel switch
+            {
+                0 => firstUpgradeCost,
+                1 => secondUpgradeCost,
+                2 => thirdUpgradeCost,
+                3 => fourthUpgradeCost,
+                4 => fifthUpgradeCost,
+                _ => int.MaxValue
+            };
 
         public void BuyUpgradeWeaponDamage()
         {
