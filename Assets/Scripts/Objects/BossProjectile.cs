@@ -1,10 +1,17 @@
+using System;
 using Player;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 namespace Objects
 {
     public class BossProjectile : Projectile
     {
+        [SerializeField] private Animator animator;
+        public float distanceToStartPopping = 2f;
+        private bool keepMoving;
+        private bool popping;
+
         public override void ShootTarget(Vector3 newTargetPosition, GameObject newSource, float newSpeed,
             float newDamage)
         {
@@ -16,16 +23,47 @@ namespace Objects
             _source = newSource;
             _damage = newDamage;
 
-            //Get direction to shoot
-            Vector3 shootDirection = (newTargetPosition - transform.position).normalized;
-            //Get speed/direction of bullet
-            Vector3 fireVelocity = shootDirection * _speed;
-            //Set velocity
-            _rigidbody2D.velocity = fireVelocity;
 
-            //Rotate so that it faces the correct direction // TODO make it spin or something??
-            Quaternion angle = Quaternion.LookRotation(Vector3.forward, shootDirection);
-            transform.rotation = angle;
+            keepMoving = true;
+            popping = false;
+
+            // move towards the target - once the target is less than X distance away, play the one shot animation and active the collider
+            // Leave on the ground for 30 seconds at least
+
+            // //Get direction to shoot
+            // .normalized;
+            // //Get speed/direction of bullet
+            // Vector3 fireVelocity = shootDirection * _speed;
+            // //Set velocity
+            // _rigidbody2D.velocity = fireVelocity;
+            //
+            // //Rotate so that it faces the correct direction
+            // Quaternion angle = Quaternion.LookRotation(Vector3.forward, shootDirection);
+            // transform.rotation = angle;
+        }
+
+        private void FixedUpdate()
+        {
+            if (!keepMoving) return;
+
+            Vector3 shootVector = _target - transform.position;
+            if (!popping && shootVector.magnitude <= distanceToStartPopping)
+            {
+                animator.SetTrigger("Pop");
+                popping = true;
+            }
+
+            if (shootVector.magnitude <= 0.5f)
+            {
+                keepMoving = false;
+            }
+            else
+            {
+                _rigidbody2D.MovePosition(
+                    Vector3.MoveTowards(transform.position, _target, _speed * Time.fixedDeltaTime));
+            }
+
+            
         }
 
         private void OnTriggerEnter2D(Collider2D other)
