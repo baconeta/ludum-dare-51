@@ -1,5 +1,6 @@
 using System.Collections;
 using HUD;
+using Objects;
 using Player;
 using UnityEngine;
 
@@ -62,11 +63,17 @@ namespace Controllers
 
         public void EndGame(bool victory = false, float delay = 0f)
         {
-            Debug.Log("End of Game!");
-
             GameRunning = false;
             timer.StopTimer();
             IsPlayerInputEnabled = false;
+
+            var allProjectiles = FindObjectsOfType<Projectile>();
+
+            foreach (Projectile projectile in allProjectiles)
+            {
+                projectile.enabled = false;
+                projectile.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+            }
 
             if (victory)
             {
@@ -78,12 +85,6 @@ namespace Controllers
                 Debug.Log("You Lost! CORN conquered You!");
                 //Show loss/death screen
             }
-
-            // Not sure what this does Currently errors
-            // if (!isInvincible)
-            // {
-            //     Invoke(nameof(BroadcastGameOver), delay);
-            // }
 
             // Submit the score to the score server.
             PlayerStats stats = FindObjectOfType<PlayerStats>();

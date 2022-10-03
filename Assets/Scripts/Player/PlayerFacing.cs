@@ -1,3 +1,4 @@
+using Controllers;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -6,6 +7,7 @@ namespace Player
     public class PlayerFacing : MonoBehaviour
     {
         [SerializeField] [Tooltip("")] private Camera gameCamera;
+        [SerializeField] [Tooltip("")] private GameController gameController;
 
         [SerializeField] [Tooltip("The animator object for the player sprite.")]
         private Animator animator;
@@ -25,6 +27,7 @@ namespace Player
         private static readonly int Direction = Animator.StringToHash(("FacingDirection"));
         private static readonly int Attacking = Animator.StringToHash("Attacking");
         private static readonly int Walking = Animator.StringToHash("Walking");
+        private static readonly int Dead = Animator.StringToHash("Dead");
 
         public FacingDirection GetFacingDirection()
         {
@@ -44,11 +47,17 @@ namespace Player
             if (!gameCamera) gameCamera = FindObjectOfType<Camera>();
             if (!animator) animator = GetComponent<Animator>();
             if (!playerInput) playerInput = GetComponent<PlayerInput>();
+            if (!gameController) gameController = FindObjectOfType<GameController>();
         }
 
         // Update is called once per frame
         private void Update()
         {
+            if (!gameController.GameRunning)
+            {
+                animator.SetTrigger(Dead);
+            }
+
             // Check if input is enabled.
             if (!Controllers.GameController.IsPlayerInputEnabled) return;
 

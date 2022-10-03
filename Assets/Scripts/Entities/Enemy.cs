@@ -74,6 +74,8 @@ namespace Entities
 
         protected virtual void FixedUpdate()
         {
+            if (!_gameController.GameRunning) return;
+
             NotifyAnimator(Vector3.zero);
             float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
 
