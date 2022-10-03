@@ -5,13 +5,12 @@ public class GameUI : MonoBehaviour
 {
     public GameObject gameUI;
     public TextMeshProUGUI currencyText;
-    public TextMeshProUGUI healthText;
+
+    [SerializeField] [Tooltip("The current health element for the health bar.")]
+    public UnityEngine.UI.Slider healthBar;
+
     public Player.Player player;
     public GameObject mobileUI;
-
-    
-
-    
 
     public void Start()
     {
@@ -20,8 +19,6 @@ public class GameUI : MonoBehaviour
         if (Controllers.InputController.isMobile) ShowMobileUI();
         else HideMobileUI();
     }
-
-    
 
     public void ShowMobileUI()
     {
@@ -46,18 +43,17 @@ public class GameUI : MonoBehaviour
 
     public void UpdateUI()
     {
-        currencyText.SetText("Currency: " + player.GetPlayerStats().GetCurrency());
-        healthText.SetText("Health: " + player.GetPlayerCombat().GetPlayerHealth());
+        UpdateCurrency();
+        UpdateHealth();
     }
 
     public void UpdateCurrency()
     {
-        currencyText.SetText("Currency: " + player.GetPlayerStats().GetCurrency());
+        currencyText.SetText(player.GetPlayerStats().GetCurrency().ToString());
     }
 
     public void UpdateHealth()
     {
-        healthText.SetText("Health: " + player.GetPlayerCombat().GetPlayerHealth());
-
+        healthBar.value = player.GetPlayerCombat().GetPlayerHealth() / (float) player.GetPlayerCombat().healthMax;
     }
 }

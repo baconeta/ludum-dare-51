@@ -8,6 +8,13 @@ namespace Player
         private int _currency = 0;
         private int _score = 0;
 
+        private GameUI _gameUI;
+
+        private void Start()
+        {
+            _gameUI = GetComponent<Player>().gameUI;
+        }
+
         public string GetName()
         {
             return _playerName;
@@ -27,7 +34,7 @@ namespace Player
         public void AddCurrency(int value)
         {
             _currency += value;
-            Debug.Log(value + " added to player wallet!");
+            _gameUI.UpdateCurrency();
         }
 
         public bool SpendCurrency(int value)
