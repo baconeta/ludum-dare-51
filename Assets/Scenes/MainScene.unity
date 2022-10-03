@@ -3016,10 +3016,10 @@ MonoBehaviour:
   attackRadius: 25
   attackSpeed: 3
   attackDamage: 10
-  projectile: {fileID: 7244973061248620078, guid: b77f0f27f1e93e2418352bffe572728f, type: 3}
+  projectile: {fileID: 7012458799316868461, guid: 4a3e00c719d9e9d46879ec8844ff77be, type: 3}
   projectileSpeed: 3
-  cornSpitOffset: {x: 0, y: -0.5, z: 0}
-  timeAttackTakes: 0.5
+  cornSpitOffset: {x: 1, y: -1, z: 0.1}
+  timeAttackTakes: 0.45
 --- !u!1001 &8889989590705831574
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -31,7 +31,7 @@ namespace Entities
             Vector3 instantiationLocation = o.transform.position;
             instantiationLocation += cornSpitOffset;
             Projectile newProjectile = Instantiate(projectile, instantiationLocation, o.transform.rotation);
-            newProjectile.ShootTarget(player.transform.position, gameObject, projectileSpeed, attackDamage);
+            newProjectile.ShootTarget(player.transform.position, gameObject, projectileSpeed, attackDamage, false);
         }
 
         protected override void UpdateAnimator()

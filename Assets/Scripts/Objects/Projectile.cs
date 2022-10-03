@@ -39,7 +39,8 @@ namespace Objects
             }
         }
 
-        public void ShootTarget(Vector3 newTargetPosition, GameObject newSource, float newSpeed, float newDamage)
+        public void ShootTarget(Vector3 newTargetPosition, GameObject newSource, float newSpeed, float newDamage,
+            bool moveAfterSpawn = true)
         {
             //Save variables
             _target = newTargetPosition;
@@ -47,8 +48,11 @@ namespace Objects
             _speed = newSpeed;
             _damage = newDamage;
 
-            //Move to spawn
-            transform.position = newSource.transform.position;
+            if (moveAfterSpawn)
+            {
+                //Move to spawn
+                transform.position = newSource.transform.position;
+            }
 
             //Get direction to shoot
             Vector3 shootDirection = (newTargetPosition - _source.transform.position).normalized;
@@ -56,7 +60,7 @@ namespace Objects
             Vector3 fireVelocity = shootDirection * _speed;
             //Set velocity
             _rigidbody2D.velocity = fireVelocity;
-            
+
             //Rotate so that it faces the correct direction
             Quaternion angle = Quaternion.LookRotation(Vector3.forward, shootDirection);
             transform.rotation = angle;
