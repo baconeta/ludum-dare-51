@@ -8,7 +8,8 @@ namespace Entities
 {
     public class Boss : Enemy
     {
-        private Slider _healthBar;
+        private GameObject _healthBar;
+        private Slider _healthBarSlider;
         public Projectile projectile;
         public float projectileSpeed = 3;
         public Vector3 cornSpitOffset;
@@ -51,7 +52,8 @@ namespace Entities
             base.TakeDamage(damage);
             // Update the boss's health bar value to reflect the new current health.
             if (!_healthBar) _healthBar = FindObjectOfType<BossHealthBarHoist>().bossHealthBar;
-            _healthBar.value = base._currentHealth / base.maxHealth;
+            if (!_healthBarSlider) _healthBarSlider = _healthBar.GetComponent<Slider>();
+            _healthBarSlider.value = _currentHealth / maxHealth;
         }
 
         public override void Die(bool isDespawning = false)
@@ -60,7 +62,7 @@ namespace Entities
             Debug.Log("we killed the boss");
             // Hide the boss's health bar.
             if (!_healthBar) _healthBar = FindObjectOfType<BossHealthBarHoist>().bossHealthBar;
-            _healthBar.enabled = false;
+            _healthBar.SetActive(false);
         }
     }
 }
