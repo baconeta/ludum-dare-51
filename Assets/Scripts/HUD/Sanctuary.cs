@@ -43,10 +43,10 @@ namespace HUD
 
 
         [Header("Upgrade Button References")]
-        public GameObject upgradeMaxHealthButton;
-        public GameObject upgradeWeaponDamageButton;
-        public GameObject upgradeWeaponSpeedButton;
-        public GameObject upgradeWeaponRangeButton;
+        public Button upgradeMaxHealthButton;
+        public Button upgradeWeaponDamageButton;
+        public Button upgradeWeaponSpeedButton;
+        public Button upgradeWeaponRangeButton;
 
         [Header("Story references")]
         public Image narrativeUI;
@@ -78,7 +78,7 @@ namespace HUD
             //Update narrative image to current round
             narrativeUI.sprite = storylets[currentRound - 1];
 
-            UpdateLabels();
+            UpdateUpgradesUI();
         }
 
         public void BuyUpgradeMaxHealth()
@@ -90,7 +90,7 @@ namespace HUD
             _playerStats.SpendCurrency(upgradeCost);
             _playerCombat.IncreaseHealthLevel();
 
-            UpdateLabels();
+            UpdateUpgradesUI();
 
             Debug.Log("Bought max health upgrade! New Level: " + _playerCombat.GetHealthLevel());
         }
@@ -113,7 +113,7 @@ namespace HUD
             _playerStats.SpendCurrency(upgradeCost);
             _playerCombat.IncreaseAttackDamageLevel();
 
-            UpdateLabels();
+            UpdateUpgradesUI();
 
             Debug.Log("Bought weapon damage upgrade! New Level: " + _playerCombat.GetAttackDamageLevel());
         }
@@ -136,7 +136,7 @@ namespace HUD
             _playerStats.SpendCurrency(upgradeCost);
             _playerCombat.IncreaseAttackRangeLevel();
 
-            UpdateLabels();
+            UpdateUpgradesUI();
 
             Debug.Log("Bought weapon range upgrade! New Level: " + _playerCombat.GetAttackRangeLevel());
         }
@@ -159,7 +159,7 @@ namespace HUD
             _playerStats.SpendCurrency(upgradeCost);
             _playerCombat.IncreaseAttackSpeedLevel();
 
-            UpdateLabels();
+            UpdateUpgradesUI();
 
             Debug.Log("Bought weapon speed upgrade! New Level: " + _playerCombat.GetAttackSpeedLevel());
         }
@@ -186,12 +186,22 @@ namespace HUD
 
         private bool CanAfford(int cost) => cost <= _playerStats.GetCurrency();
 
-        private void UpdateLabels()
+        private void UpdateUpgradesUI()
         {
             //Update score and currency HUD text
             SetScoreText(_playerStats.GetScore().ToString());
             SetCurrencyText(_playerStats.GetCurrency().ToString());
             SetNameText(_playerStats.GetName());
+
+            UpdateUpgradeButtons();
+        }
+
+        private void UpdateUpgradeButtons()
+        {
+            upgradeMaxHealthButton.interactable = CanBuyMaxHealthUpgrade();
+            upgradeWeaponRangeButton.interactable = CanBuyWeaponRangeUpgrade();
+            upgradeWeaponDamageButton.interactable = CanBuyWeaponDamageUpgrade();
+            upgradeWeaponSpeedButton.interactable = CanBuyWeaponSpeedUpgrade();
         }
 
         private void SetNameText(string newName)

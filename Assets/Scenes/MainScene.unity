@@ -915,6 +915,17 @@ MonoBehaviour:
     numberOfSeeds: 15
     numberOfMushrooms: 15
   isBossRound: 0
+--- !u!114 &611226638 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7369678366373520696, guid: 1f794f3f39fee51499b78d5c49b8607e, type: 3}
+  m_PrefabInstance: {fileID: 1453009128}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &618056399 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4492260138954867499, guid: 360b3c3530aca3b47ae78910ac1ff0b0, type: 3}
@@ -1403,10 +1414,10 @@ MonoBehaviour:
   currencyText: {fileID: 1453009130}
   nameText: {fileID: 1290071700}
   player: {fileID: 1173181156}
-  upgradeMaxHealthButton: {fileID: 1453009135}
-  upgradeWeaponDamageButton: {fileID: 1453009134}
-  upgradeWeaponSpeedButton: {fileID: 1453009133}
-  upgradeWeaponRangeButton: {fileID: 1453009132}
+  upgradeMaxHealthButton: {fileID: 1453009145}
+  upgradeWeaponDamageButton: {fileID: 2047059183}
+  upgradeWeaponSpeedButton: {fileID: 1453009141}
+  upgradeWeaponRangeButton: {fileID: 611226638}
   narrativeUI: {fileID: 979480115}
   storylets:
   - {fileID: 21300000, guid: 79302615d6e756d42a447f129e04d791, type: 3}
@@ -2505,24 +2516,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1453009132 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7369678366373520702, guid: 1f794f3f39fee51499b78d5c49b8607e, type: 3}
-  m_PrefabInstance: {fileID: 1453009128}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1453009133 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7369678367450044427, guid: 1f794f3f39fee51499b78d5c49b8607e, type: 3}
-  m_PrefabInstance: {fileID: 1453009128}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1453009134 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7369678368236518887, guid: 1f794f3f39fee51499b78d5c49b8607e, type: 3}
-  m_PrefabInstance: {fileID: 1453009128}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1453009135 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7369678366315388517, guid: 1f794f3f39fee51499b78d5c49b8607e, type: 3}
   m_PrefabInstance: {fileID: 1453009128}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1453009136 stripped
@@ -2530,6 +2526,28 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7369678367256390200, guid: 1f794f3f39fee51499b78d5c49b8607e, type: 3}
   m_PrefabInstance: {fileID: 1453009128}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1453009141 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7369678367450044469, guid: 1f794f3f39fee51499b78d5c49b8607e, type: 3}
+  m_PrefabInstance: {fileID: 1453009128}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1453009145 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7369678366315388519, guid: 1f794f3f39fee51499b78d5c49b8607e, type: 3}
+  m_PrefabInstance: {fileID: 1453009128}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1697018318
 GameObject:
   m_ObjectHideFlags: 0
@@ -2864,6 +2882,17 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &2047059183 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7369678368236518881, guid: 1f794f3f39fee51499b78d5c49b8607e, type: 3}
+  m_PrefabInstance: {fileID: 1453009128}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1453009134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2047059186
 MonoBehaviour:
   m_ObjectHideFlags: 0
