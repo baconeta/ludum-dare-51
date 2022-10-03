@@ -1,17 +1,20 @@
 using System;
 using System.Collections;
 using System.Text;
+using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.Networking;
 
 public class GlobalScoreManager : MonoBehaviour
 {
     [Header("Text Fields")] [Tooltip("Highscore name column")] [SerializeField]
-    private Text nameColumn;
+    private TextMeshProUGUI nameColumn;
 
     [Tooltip("Highscore score column")] [SerializeField]
-    private Text scoreColumn;
+    private TextMeshProUGUI scoreColumn;
+    
+    [Tooltip("How many entries to show at once")] [SerializeField]
+    private int maximumEntries = 12;
 
     private const string SubmitScoreUri =
         "https://ludum-dare-51-score-server.herokuapp.com/api/scores?user={0}&score={1}";
@@ -45,10 +48,10 @@ public class GlobalScoreManager : MonoBehaviour
         StringBuilder nameBuilder = new StringBuilder();
         StringBuilder scoreBuilder = new StringBuilder();
 
-        foreach (ScoreEntry entry in entryList.entries)
+        for (int i = 0; i < maximumEntries && i < entryList.entries.Length; ++i)
         {
-            nameBuilder.AppendLine(entry.user);
-            scoreBuilder.AppendLine(entry.score.ToString());
+            nameBuilder.AppendLine(entryList.entries[i].user);
+            scoreBuilder.AppendLine(entryList.entries[i].score.ToString());
         }
 
         nameColumn.text = nameBuilder.ToString();
