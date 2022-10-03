@@ -22,7 +22,7 @@ namespace Utils
             }
         }
 
-        private void Stop()
+        public void Stop()
         {
             foreach (AudioSource aSource in _sources)
             {
