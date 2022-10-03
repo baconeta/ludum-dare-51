@@ -230,10 +230,8 @@ namespace Player
             {
                 if (!isDead) Die();
             }
-            
-            _playerAudioSource.PlayOneShot(_hitSound);
-            
 
+            _playerAudioSource.PlayOneShot(_hitSound);
         }
 
         private void Die()
@@ -263,10 +261,9 @@ namespace Player
             return attackRangeActual;
         }
 
-        public int GetHealthLevel()
-        {
-            return _healthLevel;
-        }
+        public int GetHealthLevel() => _healthLevel;
+
+        public bool CanIncreaseHealthLevel() => _healthLevel < healthMaxLevel;
 
         public void IncreaseHealthLevel()
         {
@@ -277,41 +274,42 @@ namespace Player
             RecalculateStats();
         }
 
-        public bool CanIncreaseHealthLevel() => _healthLevel < healthMaxLevel;
+        public int GetAttackDamageLevel() => _attackDamageLevel;
 
-        public int GetAttackDamageLevel()
-        {
-            return _attackDamageLevel;
-        }
+        public bool CanIncreaseAttackDamageLevel() => _attackDamageLevel < attackDamageMaxLevel;
 
         public void IncreaseAttackDamageLevel()
         {
-            if (_attackDamageLevel < attackDamageMaxLevel)
-                _attackDamageLevel++;
+            if (!CanIncreaseAttackDamageLevel())
+                return;
+
+            _attackDamageLevel++;
             RecalculateStats();
         }
 
-        public int GetAttackSpeedLevel()
-        {
-            return _attackSpeedLevel;
-        }
+        public int GetAttackSpeedLevel() => _attackSpeedLevel;
+
+        public bool CanIncreaseAttackSpeedLevel() => _attackSpeedLevel < attackSpeedMaxLevel;
 
         public void IncreaseAttackSpeedLevel()
         {
-            if (_attackSpeedLevel < attackSpeedMaxLevel)
-                _attackSpeedLevel++;
+            if (!CanIncreaseAttackSpeedLevel())
+                return;
+
+            _attackSpeedLevel++;
             RecalculateStats();
         }
 
-        public int GetAttackRangeLevel()
-        {
-            return _attackRangeLevel;
-        }
+        public int GetAttackRangeLevel() => _attackRangeLevel;
 
-        public void IncreaseAttackRange()
+        public bool CanIncreaseAttackRangeLevel() => _attackRangeLevel < attackRangeMaxLevel;
+
+        public void IncreaseAttackRangeLevel()
         {
-            if (_attackRangeLevel < attackRangeMaxLevel)
-                _attackRangeLevel++;
+            if (!CanIncreaseAttackRangeLevel())
+                return;
+
+            _attackRangeLevel++;
             RecalculateStats();
         }
 

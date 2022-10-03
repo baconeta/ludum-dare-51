@@ -98,25 +98,79 @@ namespace HUD
         private bool CanBuyMaxHealthUpgrade()
         {
             if (!_playerCombat.CanIncreaseHealthLevel())
-                return true;
+                return false;
 
             var upgradeCost = GetUpgradeCost(_playerCombat.GetHealthLevel());
-            return upgradeCost <= _playerStats.GetCurrency();
+            return CanAfford(upgradeCost);
         }
 
         public void BuyUpgradeWeaponDamage()
         {
-            Debug.Log("Buy WeaponDamage");
+            if (!CanBuyWeaponDamageUpgrade())
+                return;
+
+            var upgradeCost = GetUpgradeCost(_playerCombat.GetAttackDamageLevel());
+            _playerStats.SpendCurrency(upgradeCost);
+            _playerCombat.IncreaseAttackDamageLevel();
+
+            UpdateLabels();
+
+            Debug.Log("Bought weapon damage upgrade! New Level: " + _playerCombat.GetAttackDamageLevel());
+        }
+
+        private bool CanBuyWeaponDamageUpgrade()
+        {
+            if (!_playerCombat.CanIncreaseAttackDamageLevel())
+                return false;
+
+            var upgradeCost = GetUpgradeCost(_playerCombat.GetAttackDamageLevel());
+            return CanAfford(upgradeCost);
         }
 
         public void BuyUpgradeWeaponRange()
         {
-            Debug.Log("Buy WeaponRange");
+            if (!CanBuyWeaponRangeUpgrade())
+                return;
+
+            var upgradeCost = GetUpgradeCost(_playerCombat.GetAttackRangeLevel());
+            _playerStats.SpendCurrency(upgradeCost);
+            _playerCombat.IncreaseAttackRangeLevel();
+
+            UpdateLabels();
+
+            Debug.Log("Bought weapon range upgrade! New Level: " + _playerCombat.GetAttackRangeLevel());
+        }
+
+        private bool CanBuyWeaponRangeUpgrade()
+        {
+            if (!_playerCombat.CanIncreaseAttackRangeLevel())
+                return false;
+
+            var upgradeCost = GetUpgradeCost(_playerCombat.GetAttackRangeLevel());
+            return CanAfford(upgradeCost);
         }
 
         public void BuyUpgradeWeaponSpeed()
         {
-            Debug.Log("Buy WeaponSpeed");
+            if (!CanBuyWeaponSpeedUpgrade())
+                return;
+
+            var upgradeCost = GetUpgradeCost(_playerCombat.GetAttackSpeedLevel());
+            _playerStats.SpendCurrency(upgradeCost);
+            _playerCombat.IncreaseAttackSpeedLevel();
+
+            UpdateLabels();
+
+            Debug.Log("Bought weapon speed upgrade! New Level: " + _playerCombat.GetAttackSpeedLevel());
+        }
+
+        private bool CanBuyWeaponSpeedUpgrade()
+        {
+            if (!_playerCombat.CanIncreaseAttackSpeedLevel())
+                return false;
+
+            var upgradeCost = GetUpgradeCost(_playerCombat.GetAttackSpeedLevel());
+            return CanAfford(upgradeCost);
         }
 
         private int GetUpgradeCost(int currentLevel) =>
@@ -130,6 +184,8 @@ namespace HUD
                 _ => int.MaxValue
             };
 
+        private bool CanAfford(int cost) => cost <= _playerStats.GetCurrency();
+
         private void UpdateLabels()
         {
             //Update score and currency HUD text
@@ -138,16 +194,17 @@ namespace HUD
             SetNameText(_playerStats.GetName());
         }
 
-        public void SetNameText(string newName)
+        private void SetNameText(string newName)
         {
             nameText.SetText(newName);
         }
-        public void SetScoreText(string text)
+
+        private void SetScoreText(string text)
         {
             scoreText.SetText("Score: " + text);
         }
 
-        public void SetCurrencyText(string text)
+        private void SetCurrencyText(string text)
         {
             currencyText.SetText("Loot: " + text);
         }
