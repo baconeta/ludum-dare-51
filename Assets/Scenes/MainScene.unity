@@ -254,6 +254,14 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
       value: Controllers.InputController, Assembly-CSharp
       objectReference: {fileID: 0}
+    - target: {fileID: 1966644343905779697, guid: 360b3c3530aca3b47ae78910ac1ff0b0, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1966644343905779697, guid: 360b3c3530aca3b47ae78910ac1ff0b0, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3984878993417597454, guid: 360b3c3530aca3b47ae78910ac1ff0b0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
       value: 6
@@ -362,19 +370,21 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value:
       objectReference: {fileID: 770312883}
-    m_RemovedComponents: []
+    - target: {fileID: 4246011513559368774, guid: 360b3c3530aca3b47ae78910ac1ff0b0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_IntArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6014591988788842245, guid: 360b3c3530aca3b47ae78910ac1ff0b0, type: 3}
+      propertyPath: healthBar
+      value:
+      objectReference: {fileID: 1689911835}
+    - target: {fileID: 6014591988788842245, guid: 360b3c3530aca3b47ae78910ac1ff0b0, type: 3}
+      propertyPath: _playerCombat
+      value:
+      objectReference: {fileID: 1173181172}
+    m_RemovedComponents:
+    - {fileID: 6014591988788842245, guid: 360b3c3530aca3b47ae78910ac1ff0b0, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 360b3c3530aca3b47ae78910ac1ff0b0, type: 3}
---- !u!114 &109111628 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4246011514318473352, guid: 360b3c3530aca3b47ae78910ac1ff0b0, type: 3}
-  m_PrefabInstance: {fileID: 109111627}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
 --- !u!114 &109111629 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4246011513403405694, guid: 360b3c3530aca3b47ae78910ac1ff0b0, type: 3}
@@ -1758,6 +1768,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a84de7e17f96b349a8ba536bb54fc9f, type: 3}
   m_Name:
   m_EditorClassIdentifier:
+--- !u!114 &1173181172 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 375893899820495540, guid: adb2cd2b963d29c4f8ebec31626cee0e, type: 3}
+  m_PrefabInstance: {fileID: 1173181155}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1173181157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66a68c1d637cc54438391a5ed645c248, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
 --- !u!114 &1290071700 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1468215693, guid: 1f794f3f39fee51499b78d5c49b8607e, type: 3}
@@ -1908,7 +1929,7 @@ MonoBehaviour:
   m_EditorClassIdentifier:
   gameUI: {fileID: 109111630}
   currencyText: {fileID: 109111629}
-  healthText: {fileID: 109111628}
+  healthBar: {fileID: 1689911835}
   player: {fileID: 1173181156}
   mobileUI: {fileID: 333839148}
 --- !u!4 &1401540132
@@ -2402,6 +2423,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7369678367256390200, guid: 1f794f3f39fee51499b78d5c49b8607e, type: 3}
   m_PrefabInstance: {fileID: 1453009128}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1689911835 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4492260138954867499, guid: 360b3c3530aca3b47ae78910ac1ff0b0, type: 3}
+  m_PrefabInstance: {fileID: 109111627}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
 --- !u!1 &1697018318
 GameObject:
   m_ObjectHideFlags: 0
