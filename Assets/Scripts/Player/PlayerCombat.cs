@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using Controllers;
+using HUD;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -93,7 +94,8 @@ namespace Player
          * Player stat values.
          * Use us for calculations!
          */
-        public int healthMax;
+        public int healthMax = 1;
+
         // Do not directly get/set this. Use HealthActual instead.
         private int _healthActualInternal;
 
