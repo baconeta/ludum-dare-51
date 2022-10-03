@@ -35,5 +35,11 @@ namespace Utils
                 yield return null;
             }
         }
+
+        public void StopAllTracks()
+        {
+            _loopableAudioSource.Stop();
+            StopAllCoroutines();
+        }
     }
 }
