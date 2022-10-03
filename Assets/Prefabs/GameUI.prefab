@@ -314,7 +314,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FillTop: {fileID: 1868828590}
   FillBottom: {fileID: 1523171683}
-  TimeText: {fileID: 0}
 --- !u!223 &1237183128581776894
 Canvas:
   m_ObjectHideFlags: 0
@@ -1335,7 +1334,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4246011513559368773
 RectTransform:
   m_ObjectHideFlags: 0
