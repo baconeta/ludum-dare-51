@@ -1,3 +1,4 @@
+using System;
 using Player;
 using UnityEngine;
 
@@ -9,14 +10,14 @@ namespace Objects
         public Sprite projectileSprite;
 
         //Given by initializer
-        private Vector3 _target;
-        private GameObject _source;
-        private float _speed;
-        private float _damage;
+        protected Vector3 _target;
+        protected GameObject _source;
+        protected float _speed;
+        protected float _damage;
         private float _timeOfSpawn;
 
 
-        private Rigidbody2D _rigidbody2D;
+        protected Rigidbody2D _rigidbody2D;
         private SpriteRenderer _sr;
 
         private void Awake()
@@ -39,8 +40,8 @@ namespace Objects
             }
         }
 
-        public void ShootTarget(Vector3 newTargetPosition, GameObject newSource, float newSpeed, float newDamage,
-            bool moveAfterSpawn = true)
+        public virtual void ShootTarget(Vector3 newTargetPosition, GameObject newSource, float newSpeed,
+            float newDamage)
         {
             //Save variables
             _target = newTargetPosition;
@@ -48,11 +49,9 @@ namespace Objects
             _speed = newSpeed;
             _damage = newDamage;
 
-            if (moveAfterSpawn)
-            {
-                //Move to spawn
-                transform.position = newSource.transform.position;
-            }
+
+            //Move to spawn
+            transform.position = newSource.transform.position;
 
             //Get direction to shoot
             Vector3 shootDirection = (newTargetPosition - _source.transform.position).normalized;
@@ -69,6 +68,7 @@ namespace Objects
         private void OnTriggerEnter2D(Collider2D other)
         {
             //It hits player!
+
             if (other.CompareTag("Player"))
             {
                 //Get enemy damage
@@ -82,7 +82,7 @@ namespace Objects
             }
         }
 
-        private void DestroyProjectile()
+        protected void DestroyProjectile()
         {
             Destroy(gameObject);
         }

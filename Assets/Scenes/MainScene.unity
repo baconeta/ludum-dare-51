@@ -3016,7 +3016,7 @@ MonoBehaviour:
   attackRadius: 25
   attackSpeed: 3
   attackDamage: 10
-  projectile: {fileID: 7012458799316868461, guid: 4a3e00c719d9e9d46879ec8844ff77be, type: 3}
+  projectile: {fileID: 7280510772380333881, guid: 4a3e00c719d9e9d46879ec8844ff77be, type: 3}
   projectileSpeed: 3
   cornSpitOffset: {x: 1, y: -1, z: 0.1}
   timeAttackTakes: 0.45
