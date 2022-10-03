@@ -1365,6 +1365,8 @@ MonoBehaviour:
   - {fileID: 1400654487774292807, guid: 46ce9b4196fd5ee438376a0583cacea7, type: 3}
   - {fileID: 7151240252480087818, guid: cb35bd557bd91944aa9e3f16a783cdd4, type: 3}
   spawnableArea: {fileID: 2110533664}
+  spawnBoundaryOffsetX: 3
+  spawnBoundaryOffsetY: 3
   livingEnemies: []
   roundController: {fileID: 607544412}
 --- !u!4 &667146670
