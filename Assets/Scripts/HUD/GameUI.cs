@@ -1,59 +1,62 @@
 using TMPro;
 using UnityEngine;
 
-public class GameUI : MonoBehaviour
+namespace HUD
 {
-    public GameObject gameUI;
-    public TextMeshProUGUI currencyText;
-
-    [SerializeField] [Tooltip("The current health element for the health bar.")]
-    public UnityEngine.UI.Slider healthBar;
-
-    public Player.Player player;
-    public GameObject mobileUI;
-
-    public void Start()
+    public class GameUI : MonoBehaviour
     {
-        player = FindObjectOfType<Player.Player>();
-        ShowUI();
-        if (Controllers.InputController.isMobile) ShowMobileUI();
-        else HideMobileUI();
-    }
+        public GameObject gameUI;
+        public TextMeshProUGUI currencyText;
 
-    public void ShowMobileUI()
-    {
-        mobileUI.SetActive(true);
-    }
+        [SerializeField] [Tooltip("The current health element for the health bar.")]
+        public UnityEngine.UI.Slider healthBar;
 
-    public void HideMobileUI()
-    {
-        mobileUI.SetActive(false);
-    }
+        public Player.Player player;
+        public GameObject mobileUI;
 
-    public void ShowUI()
-    {
-        gameUI.SetActive(true);
-        UpdateUI();
-    }
+        public void Start()
+        {
+            player = FindObjectOfType<Player.Player>();
+            ShowUI();
+            if (Controllers.InputController.isMobile) ShowMobileUI();
+            else HideMobileUI();
+        }
 
-    public void HideUI()
-    {
-        gameUI.SetActive(false);
-    }
+        public void ShowMobileUI()
+        {
+            mobileUI.SetActive(true);
+        }
 
-    public void UpdateUI()
-    {
-        UpdateCurrency();
-        UpdateHealth();
-    }
+        public void HideMobileUI()
+        {
+            mobileUI.SetActive(false);
+        }
 
-    public void UpdateCurrency()
-    {
-        currencyText.SetText(player.GetPlayerStats().GetCurrency().ToString());
-    }
+        public void ShowUI()
+        {
+            gameUI.SetActive(true);
+            UpdateUI();
+        }
 
-    public void UpdateHealth()
-    {
-        healthBar.value = player.GetPlayerCombat().GetPlayerHealth() / (float) player.GetPlayerCombat().healthMax;
+        public void HideUI()
+        {
+            gameUI.SetActive(false);
+        }
+
+        public void UpdateUI()
+        {
+            UpdateCurrency();
+            UpdateHealth();
+        }
+
+        public void UpdateCurrency()
+        {
+            currencyText.SetText(player.GetPlayerStats().GetCurrency().ToString());
+        }
+
+        public void UpdateHealth()
+        {
+            healthBar.value = player.GetPlayerCombat().GetPlayerHealth() / (float) player.GetPlayerCombat().healthMax;
+        }
     }
 }

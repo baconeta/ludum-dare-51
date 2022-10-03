@@ -177,7 +177,7 @@ MonoBehaviour:
   _animator: {fileID: 375893899820495543}
   _playerFacing: {fileID: 0}
   _weapon: {fileID: 3870772335738054938}
-  _attackSound: {fileID: 0}
+  _hitSound: {fileID: 0}
   healthInitial: 50
   healthGrowthPerLevel: 1
   healthMaxLevel: 5
@@ -195,8 +195,7 @@ MonoBehaviour:
   thirdUpgradeCost: 12
   fourthUpgradeCost: 18
   fifthUpgradeCost: 25
-  healthMax: 0
-  healthActual: 0
+  healthMax: 1
   attackDamageActual: 0
   attackSpeedActual: 0
   attackRangeActual: 0
@@ -325,7 +324,7 @@ MonoBehaviour:
     minNormalAngle: 0
     maxNormalAngle: 0
   weaponIsDamagingDurationPercentage: 70
-  hitAngle: 60
+  weaponGraphic: {fileID: 0}
   weaponAudioSource: {fileID: 0}
   hitSounds:
   - {fileID: 8300000, guid: ec94a90c11db0ab44a870d574d673bcb, type: 3}
