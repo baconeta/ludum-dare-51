@@ -21,6 +21,8 @@ public class TimerStopEvent : UnityEvent<float>
 public class GameTimer : MonoBehaviour
 {
     public PhaseChangeEvent OnPhaseChange;
+    public PhaseChangeEvent OnPhaseChangeToDark;
+    public PhaseChangeEvent OnPhaseChangeToLight;
     public PhaseChangeEvent OnTimerStart;
     public TimerStopEvent OnTimerStop;
     public UnityEvent OnTimerResume;
@@ -29,7 +31,6 @@ public class GameTimer : MonoBehaviour
     private float phaseTime = 10f;
     private EWorldPhase worldPhase;
     private bool isTimerRunning = false;
-    [SerializeField] private PlayerCamera pc;
 
     private void Awake()
     {
@@ -91,11 +92,6 @@ public class GameTimer : MonoBehaviour
         if (worldPhase >= EWorldPhase.DEFAULT_LAST)
         {
             worldPhase = 0;
-        }
-
-        if (pc != default)
-        {
-            pc.Flash();
         }
 
         OnPhaseChange.Invoke(worldPhase);
