@@ -939,9 +939,6 @@ MonoBehaviour:
   - numberOfPuffballs: 1
     numberOfSeeds: 1
     numberOfMushrooms: 1
-  - numberOfPuffballs: 1
-    numberOfSeeds: 1
-    numberOfMushrooms: 1
   isBossRound: 0
 --- !u!1 &665355260
 GameObject:
@@ -1387,7 +1384,6 @@ MonoBehaviour:
   storylets:
   - {fileID: 21300000, guid: 79302615d6e756d42a447f129e04d791, type: 3}
   - {fileID: 21300000, guid: 4ce3e89d9b2fed245a43b9ef1fc6968a, type: 3}
-  - {fileID: 21300000, guid: fe3b5eea5e041354d939c187bdb919fc, type: 3}
   - {fileID: 21300000, guid: 04fdf2395d86c5047bc7ed4a95934c73, type: 3}
 --- !u!1 &808134631
 GameObject:
@@ -1637,6 +1633,30 @@ PrefabInstance:
       propertyPath: _playerFacing
       value: 
       objectReference: {fileID: 1173181170}
+    - target: {fileID: 375893899820495540, guid: adb2cd2b963d29c4f8ebec31626cee0e, type: 3}
+      propertyPath: healthInitial
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 375893899820495540, guid: adb2cd2b963d29c4f8ebec31626cee0e, type: 3}
+      propertyPath: attackRangeInitial
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 375893899820495540, guid: adb2cd2b963d29c4f8ebec31626cee0e, type: 3}
+      propertyPath: attackDamageInitial
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 375893899820495540, guid: adb2cd2b963d29c4f8ebec31626cee0e, type: 3}
+      propertyPath: healthGrowthPerLevel
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 375893899820495540, guid: adb2cd2b963d29c4f8ebec31626cee0e, type: 3}
+      propertyPath: attackRangeGrowthPerLevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 375893899820495540, guid: adb2cd2b963d29c4f8ebec31626cee0e, type: 3}
+      propertyPath: attackDamageGrowthPerLevel
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 375893899820495541, guid: adb2cd2b963d29c4f8ebec31626cee0e, type: 3}
       propertyPath: animator
       value: 
@@ -1645,6 +1665,10 @@ PrefabInstance:
       propertyPath: playerInput
       value: 
       objectReference: {fileID: 1173181159}
+    - target: {fileID: 375893899820495541, guid: adb2cd2b963d29c4f8ebec31626cee0e, type: 3}
+      propertyPath: movementSpeedInitial
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 375893899820495542, guid: adb2cd2b963d29c4f8ebec31626cee0e, type: 3}
       propertyPath: playerInput
       value: 

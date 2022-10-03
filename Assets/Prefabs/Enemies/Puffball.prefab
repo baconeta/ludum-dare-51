@@ -105,9 +105,9 @@ MonoBehaviour:
   HealthLootChance: 50
   LootDropOffset: 2
   enemyName: Puffball
-  moveSpeed: 1
-  maxHealth: 1
-  aggravationRange: 10
+  moveSpeed: 1.2
+  maxHealth: 20
+  aggravationRange: 15
   attackRadius: 0.5
   attackSpeed: 2
   attackDamage: 1
