@@ -160,10 +160,9 @@ MonoBehaviour:
   lootOnDeath: {fileID: 7244973061248620074, guid: b77f0f27f1e93e2418352bffe572728f, type: 3}
   HealthLoot: {fileID: 7244973061248620074, guid: b77f0f27f1e93e2418352bffe572728f, type: 3}
   HealthLootChance: 0
-  LootDropOffset: 0
   enemyName: CornBoss
   moveSpeed: 0
-  maxHealth: 1
+  maxHealth: 150
   aggravationRange: 50
   attackRadius: 25
   attackSpeed: 3
