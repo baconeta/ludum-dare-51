@@ -23,6 +23,8 @@ namespace Controllers
 
         [HideInInspector] public GameTimer timer;
 
+       
+
         private void Awake()
         {
             timer = gameObject.GetComponent<GameTimer>();
@@ -48,6 +50,10 @@ namespace Controllers
 
             if (timer)
                 timer.StartTimer();
+
+            if (gameUI != null)
+                gameUI.ShowRoundClearedText(false);
+          
         }
 
         public void ResetGame()
@@ -96,6 +102,9 @@ namespace Controllers
         {
             Debug.Log("Round " + currentRound + " completed successfully.");
 
+            if (gameUI != null)
+                gameUI.ShowRoundClearedText(true);
+
             StartCoroutine(RoundTransition(currentRound));
         }
 
@@ -105,6 +114,9 @@ namespace Controllers
             float phaseTimer = timer.GetTimer();
             //TODO Wait until end of NEXT light mode.
             yield return new WaitForSeconds(phaseTimer);
+
+            if (gameUI != null)
+                gameUI.ShowRoundClearedText(false);
 
             //End and move to sanctuary
             timer.StopTimer();
