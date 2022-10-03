@@ -1,18 +1,26 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class Boss : MonoBehaviour
+namespace Entities
 {
-    // Start is called before the first frame update
-    void Start()
+    public class Boss : Enemy
     {
-        
-    }
+        // Start is called before the first frame update
+        protected override void EnemyMovement()
+        {
+            // We do not move
+        }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        protected override void Attack()
+        {
+            // if we attack then we should cry
+        }
+
+        protected override void UpdateAnimator()
+        {
+            // do nothing bro
+        }
+
+        public override void Die(bool isDespawning)
+        {
+            // Boss died so we win the game
+        }
     }
 }
