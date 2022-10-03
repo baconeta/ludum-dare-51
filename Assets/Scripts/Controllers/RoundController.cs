@@ -52,6 +52,8 @@ namespace Controllers
 
             // Tells the game controller which round just finished and to handle that
             gameController.RoundEnded(CurrentRound);
+
+            gameController.timer.ExpectedRounds(CurrentRound * 5f * 20f * 0.67f);
         }
 
         public WaveData GetNextWave()

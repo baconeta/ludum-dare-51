@@ -28,7 +28,7 @@ namespace Player
          * Player health.
          */
         [Header("Player Health")] [SerializeField] [Tooltip("Starting player health.")]
-        protected int healthInitial = 5;
+        protected internal int healthInitial = 5;
 
         [SerializeField] [Tooltip("How much player health increases per upgrade level.")]
         protected int healthGrowthPerLevel = 1;

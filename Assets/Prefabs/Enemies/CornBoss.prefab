@@ -163,7 +163,7 @@ MonoBehaviour:
   HealthLootChance: 0
   enemyName: CornBoss
   moveSpeed: 0
-  baseScoreMultiplier: 0
+  baseScoreMultiplier: 3
   maxHealth: 1200
   aggravationRange: 50
   attackRadius: 25
