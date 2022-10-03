@@ -4558,7 +4558,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &917741056
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7708,8 +7708,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.13120662, y: 0.07497516}
-  m_SizeDelta: {x: 300, y: 200}
+  m_AnchoredPosition: {x: 0, y: 79.99999}
+  m_SizeDelta: {x: 500, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1732578810
 MonoBehaviour:
@@ -7731,7 +7731,14 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Help Page Three
+  m_text: 'If you play on a computer with a mouse and keyboard:
+
+
+    Move the character
+    with WASD or the Arrow Keys
+
+    Attack towards the direction of your mouse cursor
+    by Left-clicking or pressing the Space Bar.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e0f6f8d0f86eadc4f886f9c8dec92daf, type: 2}
   m_sharedMaterial: {fileID: 525360558915587755, guid: e0f6f8d0f86eadc4f886f9c8dec92daf, type: 2}
@@ -7758,8 +7765,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 14
-  m_fontSizeBase: 14
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -9344,7 +9351,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1970187016
 RectTransform:
   m_ObjectHideFlags: 0
