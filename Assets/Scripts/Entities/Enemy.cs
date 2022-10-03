@@ -139,7 +139,7 @@ namespace Entities
         }
 
         //Despawning variable for if no rewards should be given
-        public void Die(bool isDespawning = false)
+        public virtual void Die(bool isDespawning = false)
         {
             if (!isDespawning)
             {
@@ -216,7 +216,7 @@ namespace Entities
             _lastMovement = movement;
         }
 
-        private void UpdateAnimator()
+        protected virtual void UpdateAnimator()
         {
             animator.SetFloat("Horizontal", _lastMovement.x);
             animator.SetFloat("Vertical", _lastMovement.y);

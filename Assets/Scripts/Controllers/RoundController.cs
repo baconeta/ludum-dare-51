@@ -16,10 +16,11 @@ namespace Controllers
         [SerializeField] private GameController gameController;
         [SerializeField] private EnemyController enemyController;
         [SerializeField] public WaveData[] waves;
+        [SerializeField] public WaveData bossWave;
 
         public bool isBossRound;
 
-        private int CurrentRound { get; set; }
+        public int CurrentRound { get; set; }
 
         // Start is called before the first frame update
         private void Start()
@@ -38,10 +39,9 @@ namespace Controllers
         public void LastEnemyDestroyed() // could this be an event listener?
         {
             CurrentRound += 1; // round data is indexed by 0 and display round numbers indexes by 1 so this is safe
-            
+
             // Tells the game controller which round just finished and to handle that
             gameController.RoundEnded(CurrentRound);
-            
         }
 
         public WaveData GetNextWave()
@@ -50,11 +50,11 @@ namespace Controllers
             {
                 return waves[CurrentRound];
             }
-            
+
             //Last Wave/Boss Fight
-            Debug.Log("Boss Fight!");
             isBossRound = true;
-            return new WaveData(); // TODO this should return and handle the boss fight somehow?
+            enemyController.SpawnBoss();
+            return bossWave;
         }
 
         public void StartNextWave()

@@ -19,7 +19,7 @@ namespace Player
         private float _weaponIsDamagingDurationActual;
 
         public GameObject weaponGraphic;
-        
+
         [Header("Audio")] public AudioSource weaponAudioSource;
         public List<AudioClip> hitSounds;
         [Range(-1f, 0f)] public float hitSoundPitchShiftMin = 0f;
@@ -47,7 +47,7 @@ namespace Player
             // Attack Period (how long a full attack rotation takes) * "Hot" percentage (how long the weapon is hot for).
             _weaponIsDamagingDurationActual =
                 (1 / _playerCombat.GetAttackSpeed()) * (weaponIsDamagingDurationPercentage / 100F);
-            
+
             //Set range
             _circleCollider.radius = _playerCombat.GetAttackRange();
         }
@@ -75,7 +75,7 @@ namespace Player
 
             // TODO Trigger animation/visibility here.
             StartCoroutine(ShowWeaponGraphic(attackDirection));
-            
+
             StartCoroutine(DisableMeleeDamage());
 
             SweepCollider(attackDirection);
@@ -92,15 +92,15 @@ namespace Player
 
             // Make graphic match attack radius
             weaponGraphic.transform.localScale = Vector3.one * _circleCollider.radius / 5;
-            
+
             //Wait until attack is finished
             yield return new WaitForSeconds(_weaponIsDamagingDurationActual);
-            
+
             //Hide graphic
             weaponGraphic.SetActive(false);
             yield return null;
         }
-        
+
 
         // This function disables the weapon after the swing has finished.
         IEnumerator DisableMeleeDamage()
