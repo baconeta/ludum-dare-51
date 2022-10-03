@@ -254,6 +254,14 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
       value: Controllers.InputController, Assembly-CSharp
       objectReference: {fileID: 0}
+    - target: {fileID: 1966644343905779697, guid: 360b3c3530aca3b47ae78910ac1ff0b0, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1966644343905779697, guid: 360b3c3530aca3b47ae78910ac1ff0b0, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3984878993417597454, guid: 360b3c3530aca3b47ae78910ac1ff0b0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
       value: 6
@@ -360,17 +368,6 @@ PrefabInstance:
       objectReference: {fileID: 770312883}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 360b3c3530aca3b47ae78910ac1ff0b0, type: 3}
---- !u!114 &109111628 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4246011514318473352, guid: 360b3c3530aca3b47ae78910ac1ff0b0, type: 3}
-  m_PrefabInstance: {fileID: 109111627}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &109111629 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4246011513403405694, guid: 360b3c3530aca3b47ae78910ac1ff0b0, type: 3}
@@ -1243,6 +1240,17 @@ MonoBehaviour:
     numberOfSeeds: 1
     numberOfMushrooms: 1
   isBossRound: 0
+--- !u!114 &618056399 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4492260138954867499, guid: 360b3c3530aca3b47ae78910ac1ff0b0, type: 3}
+  m_PrefabInstance: {fileID: 109111627}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &665355260
 GameObject:
   m_ObjectHideFlags: 0
@@ -2338,7 +2346,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameUI: {fileID: 109111630}
   currencyText: {fileID: 109111629}
-  healthText: {fileID: 109111628}
+  healthBar: {fileID: 618056399}
   player: {fileID: 1173181156}
   mobileUI: {fileID: 333839148}
 --- !u!4 &1401540132
@@ -3271,7 +3279,7 @@ MonoBehaviour:
   m_IsGlobal: 1
   priority: 0
   blendDistance: 0
-  weight: 1
+  weight: 0
   sharedProfile: {fileID: 11400000, guid: ecf219f2bbd6434479168f778f3db32a, type: 2}
 --- !u!114 &2065715153
 MonoBehaviour:
