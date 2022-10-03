@@ -23,7 +23,6 @@ namespace Controllers
 
         [HideInInspector] public GameTimer timer;
 
-       
 
         private void Awake()
         {
@@ -53,7 +52,6 @@ namespace Controllers
 
             if (gameUI != null)
                 gameUI.ShowRoundClearedText(false);
-          
         }
 
         public void ResetGame()
@@ -85,6 +83,7 @@ namespace Controllers
 
             // Submit the score to the score server.
             PlayerStats stats = FindObjectOfType<PlayerStats>();
+            stats.CalculateScore();
             var finalScore = stats.GetScore();
             _globalScoreManager.SubmitScore(stats.GetName(), finalScore);
 
