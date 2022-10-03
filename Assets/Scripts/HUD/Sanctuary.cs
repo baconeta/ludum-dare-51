@@ -1,33 +1,44 @@
+using System.Collections.Generic;
 using Controllers;
 using Player;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace HUD
 {
     public class Sanctuary : MonoBehaviour
     {
+        [Header("Game references")]
         public GameObject sanctuaryUI;
         public GameController gameController;
+        
+        [Header("Stats References")]
         public TextMeshProUGUI scoreText;
         public TextMeshProUGUI currencyText;
         public TextMeshProUGUI nameText;
         public Player.Player player;
 
+
+        [Header("Upgrade Button References")]
         public GameObject upgradeMaxHealthButton;
         public GameObject upgradeWeaponDamageButton;
         public GameObject upgradeWeaponSpeedButton;
         public GameObject upgradeWeaponRangeButton;
 
+        [Header("Story references")]
+        public Image narrativeUI;
+        public List<Sprite> storylets;
+        
         private void Start()
         {
             if (!player) player = FindObjectOfType<Player.Player>();
         }
 
-        public void ShowSanctuary()
+        public void ShowSanctuary(int currentRound)
         {
             sanctuaryUI.SetActive(true);
-            UpdateSanctuary();
+            UpdateSanctuary(currentRound);
         }
 
         public void CloseSanctuary()
@@ -36,7 +47,7 @@ namespace HUD
             sanctuaryUI.SetActive(false);
         }
 
-        private void UpdateSanctuary()
+        private void UpdateSanctuary(int currentRound)
         {
             //Get player stats
             PlayerStats stats = player.GetPlayerStats();
@@ -45,6 +56,9 @@ namespace HUD
             SetScoreText(stats.GetScore().ToString());
             SetCurrencyText(stats.GetCurrency().ToString());
             SetNameText(stats.GetName());
+            
+            //Update narrative image to current round
+            narrativeUI.sprite = storylets[currentRound - 1];
         }
 
         public void BuyUpgradeMaxHealth()
