@@ -19,8 +19,8 @@ namespace Player
         [SerializeField] [Tooltip("The weapon object that the player uses to perform attacks with.")]
         private PlayerWeapon _weapon;
 
-        [SerializeField] [Tooltip("The sound to be played when the player attacks.")]
-        private AudioClip _attackSound;
+        public AudioClip _hitSound;
+        private AudioSource _playerAudioSource;
 
 
         /*
@@ -151,6 +151,8 @@ namespace Player
             if (!_playerFacing) _playerFacing = GetComponent<PlayerFacing>();
             _gameUI = GetComponent<Player>().gameUI;
 
+            _playerAudioSource = GetComponent<AudioSource>();
+
             RecalculateStats();
         }
 
@@ -250,6 +252,10 @@ namespace Player
             {
                 if (!isDead) Die();
             }
+            
+            _playerAudioSource.PlayOneShot(_hitSound);
+            
+
         }
 
         private void Die()

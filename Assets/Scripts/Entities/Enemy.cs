@@ -34,6 +34,8 @@ namespace Entities
         protected Rigidbody2D _rigidbody2D;
         private GameController _gameController;
         protected Animator animator;
+        public AudioClip hitSound;
+        [Range(0,1f)] public float volume;
 
         public EnemyController EcRef { get; set; }
 
@@ -43,6 +45,7 @@ namespace Entities
         // Start is called before the first frame update
         protected virtual void Start()
         {
+            
             if (!_rigidbody2D)
                 _rigidbody2D = GetComponent<Rigidbody2D>();
 
@@ -123,6 +126,10 @@ namespace Entities
             if (WorldPhase == EWorldPhase.DARK)
             {
                 _currentHealth -= damage;
+                
+                //Play audio
+                AudioSource.PlayClipAtPoint(hitSound, transform.position, volume);
+                
                 //Die check
                 if (_currentHealth <= 0)
                 {
