@@ -88,7 +88,6 @@ namespace Player
 
             //Rotate so that it faces the correct direction
             Quaternion angle = Quaternion.LookRotation(Vector3.forward, -direction);
-            Debug.Log(angle);
             weaponGraphic.transform.rotation = angle;
 
             // Make graphic match attack radius
