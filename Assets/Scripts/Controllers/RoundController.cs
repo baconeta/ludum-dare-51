@@ -30,7 +30,16 @@ namespace Controllers
                 Debug.Log("Have you attached the enemy controller ref to the round controller?");
             }
 
-            CurrentRound = 0;
+            BossHotwire hotwire = FindObjectOfType<BossHotwire>();
+            if (hotwire && hotwire.DoJumpToBoss())
+            {
+                // Bypass round counter to spawn boss immediately.
+                CurrentRound = 999;
+            }
+            else
+            {
+                CurrentRound = 0;
+            }
 
             // Start the first wave
             enemyController.SpawnRound();
