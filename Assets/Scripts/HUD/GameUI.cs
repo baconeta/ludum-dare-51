@@ -5,8 +5,10 @@ public class GameUI : MonoBehaviour
 {
     public GameObject gameUI;
     public TextMeshProUGUI currencyText;
+
     [SerializeField] [Tooltip("The current health element for the health bar.")]
     public UnityEngine.UI.Slider healthBar;
+
     public Player.Player player;
     public GameObject mobileUI;
 
@@ -52,8 +54,6 @@ public class GameUI : MonoBehaviour
 
     public void UpdateHealth()
     {
-        Debug.Log("UpdateHealth");
         healthBar.value = player.GetPlayerCombat().GetPlayerHealth() / (float) player.GetPlayerCombat().healthMax;
-        Debug.Log(healthBar.value);
     }
 }
