@@ -56,12 +56,11 @@ namespace Entities
             if (!_gameController)
                 _gameController = FindObjectOfType<GameController>();
 
-            SetupEventSubscriptions();
-
             //Set health to max
             _currentHealth = maxHealth;
 
-            WorldPhase = _gameController.timer.GetWorldPhase();
+            SetWorldPhase(_gameController.timer.GetWorldPhase());
+            SetupEventSubscriptions();
         }
 
         // Update is called once per frame
