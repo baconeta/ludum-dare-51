@@ -1,6 +1,8 @@
+using System;
 using Controllers;
 using Player;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Entities
 {
@@ -168,8 +170,10 @@ namespace Entities
             {
                 //Spawn loot
                 GameObject newLoot = Instantiate(lootOnDeath);
+                float variance = 0.4f;
+                Vector3 randomOffset = new Vector3(Random.Range(-variance, variance), Random.Range(-variance, variance), 0f);
                 //Move loot to die position
-                newLoot.transform.position = transform.position;
+                newLoot.transform.position = transform.position + randomOffset;
             }
             else
             {
