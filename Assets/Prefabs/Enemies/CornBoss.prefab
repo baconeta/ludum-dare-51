@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8284990446832668659}
   - component: {fileID: 7438767978179949094}
   - component: {fileID: 8284990446832664579}
+  - component: {fileID: 1864669356202350574}
   m_Layer: 3
   m_Name: CornBoss
   m_TagString: Enemy
@@ -162,14 +163,114 @@ MonoBehaviour:
   HealthLootChance: 0
   enemyName: CornBoss
   moveSpeed: 0
-  maxHealth: 150
+  maxHealth: 300
   aggravationRange: 50
   attackRadius: 25
   attackSpeed: 3
   attackDamage: 10
   hitSound: {fileID: 8300000, guid: e001b17ed72cac74cafb8facd1afaa4f, type: 3}
-  volume: 0
+  volume: 0.2
   projectile: {fileID: 7280510772380333881, guid: 4a3e00c719d9e9d46879ec8844ff77be, type: 3}
   projectileSpeed: 3
   cornSpitOffset: {x: 1, y: -1, z: 0.1}
   timeAttackTakes: 0.45
+  spitSounds:
+  - {fileID: 8300000, guid: ec603abbfc378414ca21d5402093d616, type: 3}
+  - {fileID: 8300000, guid: 620628f55fc1cde4bb780da57169fc5d, type: 3}
+  audioSource: {fileID: 1864669356202350574}
+--- !u!82 &1864669356202350574
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8284990446832668656}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 0.2
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
