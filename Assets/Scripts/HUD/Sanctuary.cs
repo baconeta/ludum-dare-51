@@ -28,11 +28,11 @@ namespace HUD
 
         [SerializeField] [Tooltip("How much currency it costs to upgrade from level 4 to level 5")]
         public int fifthUpgradeCost = 25;
-        
+
         [Header("Game references")]
         public GameObject sanctuaryUI;
         public GameController gameController;
-        
+
         [Header("Stats References")]
         public TextMeshProUGUI scoreText;
         public TextMeshProUGUI currencyText;
@@ -51,7 +51,7 @@ namespace HUD
         [Header("Story references")]
         public Image narrativeUI;
         public List<Sprite> storylets;
-        
+
         private void Start()
         {
             if (!player)
