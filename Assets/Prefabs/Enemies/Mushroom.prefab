@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 7144231399020754064}
   - component: {fileID: 7144231399020754079}
   - component: {fileID: 7144231399020754067}
-  - component: {fileID: 7144231399020754077}
   - component: {fileID: 7144231399020754066}
   - component: {fileID: 8567124541268216135}
+  - component: {fileID: 8975006743395170591}
   m_Layer: 3
   m_Name: Mushroom
   m_TagString: Enemy
@@ -138,22 +138,6 @@ MonoBehaviour:
   jumpDistance: 2
   jumpSpeed: 1
   jumpCooldown: 0.5
---- !u!58 &7144231399020754077
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7144231399020754065}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 3
 --- !u!50 &7144231399020754066
 Rigidbody2D:
   serializedVersion: 4
@@ -195,3 +179,29 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!61 &8975006743395170591
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7144231399020754065}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 4.56, y: 5.74}
+    newSize: {x: 4.56, y: 5.74}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 3.48, y: 4.48}
+  m_EdgeRadius: 0
