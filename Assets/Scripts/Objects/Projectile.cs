@@ -56,6 +56,10 @@ namespace Objects
             Vector3 fireVelocity = shootDirection * _speed;
             //Set velocity
             _rigidbody2D.velocity = fireVelocity;
+            
+            //Rotate so that it faces the correct direction
+            Quaternion angle = Quaternion.LookRotation(Vector3.forward, shootDirection);
+            transform.rotation = angle;
         }
 
         private void OnTriggerEnter2D(Collider2D other)
