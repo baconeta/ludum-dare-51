@@ -64,6 +64,10 @@ namespace Controllers
         {
             Debug.Log("End of Game!");
 
+            GameRunning = false;
+            timer.StopTimer();
+            IsPlayerInputEnabled = false;
+
             if (victory)
             {
                 Debug.Log("You Win! You conquered CORN!");
@@ -111,7 +115,6 @@ namespace Controllers
         {
             timer.JumpToLightPhase();
             float phaseTimer = timer.GetTimer();
-            //TODO Wait until end of NEXT light mode.
             yield return new WaitForSeconds(phaseTimer);
 
             if (gameUI != null)
