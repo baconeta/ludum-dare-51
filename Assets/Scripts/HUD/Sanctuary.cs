@@ -95,7 +95,7 @@ namespace HUD
 
         public void SetCurrencyText(string text)
         {
-            currencyText.SetText("Currency: " + text);
+            currencyText.SetText("Loot: " + text);
         }
     }
 }
