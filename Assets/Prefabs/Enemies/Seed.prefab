@@ -106,8 +106,8 @@ MonoBehaviour:
   LootDropOffset: 2
   enemyName: Seed
   moveSpeed: 1
-  maxHealth: 1
-  aggravationRange: 10
+  maxHealth: 35
+  aggravationRange: 15
   attackRadius: 6
   attackSpeed: 1
   attackDamage: 2

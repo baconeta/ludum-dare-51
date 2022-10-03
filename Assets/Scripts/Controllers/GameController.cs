@@ -14,7 +14,7 @@ namespace Controllers
         [SerializeField] private EndGame endGame;
         [SerializeField] GameUI gameUI;
 
-        private RoundController _rc;
+        public RoundController _rc;
         public bool GameRunning { get; set; }
 
         public static bool IsPlayerInputEnabled = true;
@@ -94,10 +94,10 @@ namespace Controllers
         {
             Debug.Log("Round " + currentRound + " completed successfully.");
 
-            StartCoroutine(RoundTransition());
+            StartCoroutine(RoundTransition(currentRound));
         }
 
-        public IEnumerator RoundTransition()
+        public IEnumerator RoundTransition(int currentRound)
         {
             timer.JumpToLightPhase();
             float phaseTimer = timer.GetTimer();
@@ -107,7 +107,7 @@ namespace Controllers
             //End and move to sanctuary
             timer.StopTimer();
             IsPlayerInputEnabled = false;
-            sanctuary.ShowSanctuary();
+            sanctuary.ShowSanctuary(currentRound);
             yield return null;
         }
 
