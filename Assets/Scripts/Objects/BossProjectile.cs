@@ -22,24 +22,8 @@ namespace Objects
             _speed = newSpeed;
             _source = newSource;
             _damage = newDamage;
-
-
             keepMoving = true;
             popping = false;
-
-            // move towards the target - once the target is less than X distance away, play the one shot animation and active the collider
-            // Leave on the ground for 30 seconds at least
-
-            // //Get direction to shoot
-            // .normalized;
-            // //Get speed/direction of bullet
-            // Vector3 fireVelocity = shootDirection * _speed;
-            // //Set velocity
-            // _rigidbody2D.velocity = fireVelocity;
-            //
-            // //Rotate so that it faces the correct direction
-            // Quaternion angle = Quaternion.LookRotation(Vector3.forward, shootDirection);
-            // transform.rotation = angle;
         }
 
         private void FixedUpdate()
@@ -62,8 +46,6 @@ namespace Objects
                 _rigidbody2D.MovePosition(
                     Vector3.MoveTowards(transform.position, _target, _speed * Time.fixedDeltaTime));
             }
-
-            
         }
 
         private void OnTriggerEnter2D(Collider2D other)
