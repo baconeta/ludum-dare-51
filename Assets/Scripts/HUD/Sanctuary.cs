@@ -75,16 +75,18 @@ namespace HUD
 
         private void UpdateSanctuary(int currentRound)
         {
-            //Get player stats
-            PlayerStats stats = player.GetPlayerStats();
-
-            //Update score and currency HUD text
-            SetScoreText(stats.GetScore().ToString());
-            SetCurrencyText(stats.GetCurrency().ToString());
-            SetNameText(stats.GetName());
-            
             //Update narrative image to current round
             narrativeUI.sprite = storylets[currentRound - 1];
+
+            UpdateLabels();
+        }
+
+        private void UpdateLabels()
+        {
+            //Update score and currency HUD text
+            SetScoreText(_playerStats.GetScore().ToString());
+            SetCurrencyText(_playerStats.GetCurrency().ToString());
+            SetNameText(_playerStats.GetName());
         }
 
         public void BuyUpgradeMaxHealth()
@@ -96,6 +98,8 @@ namespace HUD
             _playerStats.SpendCurrency(upgradeCost);
             _playerCombat.IncreaseHealthLevel();
 
+            UpdateLabels();
+
             Debug.Log("Bought max health upgrade! New Level: " + _playerCombat.GetHealthLevel());
         }
 
@@ -105,7 +109,7 @@ namespace HUD
                 return true;
 
             var upgradeCost = GetUpgradeCost(_playerCombat.GetHealthLevel());
-            return upgradeCost <= player.playerStats.GetCurrency();
+            return upgradeCost <= _playerStats.GetCurrency();
         }
 
         private int GetUpgradeCost(int currentLevel) =>
