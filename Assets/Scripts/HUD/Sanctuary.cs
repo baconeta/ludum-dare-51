@@ -179,7 +179,7 @@ namespace HUD
                 2 => thirdUpgradeCost,
                 3 => fourthUpgradeCost,
                 4 => fifthUpgradeCost,
-                _ => int.MaxValue
+                _ => 999
             };
 
         private bool CanAfford(int cost) => cost <= _playerStats.GetCurrency();
