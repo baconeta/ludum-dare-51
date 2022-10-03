@@ -102,7 +102,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lootOnDeath: {fileID: 357654020248760077, guid: 3b4b3f1bca533794a95bb67902cb9148, type: 3}
   HealthLoot: {fileID: 357654020248760077, guid: 9cc22239e32d0e34fbcca8f645f8535a, type: 3}
-  HealthLootChance: 50
+  HealthLootChance: 10
   enemyName: Puffball
   moveSpeed: 1.2
   baseScoreMultiplier: 1

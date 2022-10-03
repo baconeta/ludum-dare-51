@@ -547,7 +547,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.25
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -872,11 +872,17 @@ MonoBehaviour:
     numberOfSeeds: 0
     numberOfMushrooms: 0
   - numberOfPuffballs: 8
-    numberOfSeeds: 6
+    numberOfSeeds: 5
     numberOfMushrooms: 0
-  - numberOfPuffballs: 10
-    numberOfSeeds: 4
-    numberOfMushrooms: 5
+  - numberOfPuffballs: 4
+    numberOfSeeds: 10
+    numberOfMushrooms: 3
+  - numberOfPuffballs: 12
+    numberOfSeeds: 6
+    numberOfMushrooms: 4
+  - numberOfPuffballs: 4
+    numberOfSeeds: 8
+    numberOfMushrooms: 15
   bossWave:
     numberOfPuffballs: 15
     numberOfSeeds: 15
@@ -1683,7 +1689,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 375893899820495540, guid: adb2cd2b963d29c4f8ebec31626cee0e, type: 3}
       propertyPath: healthGrowthPerLevel
-      value: 2
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 375893899820495540, guid: adb2cd2b963d29c4f8ebec31626cee0e, type: 3}
       propertyPath: attackRangeGrowthPerLevel
