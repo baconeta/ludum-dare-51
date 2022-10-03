@@ -47,7 +47,7 @@ namespace Player
         }
 
         // Update is called once per frame
-        void Update()
+        private void Update()
         {
             // Check if input is enabled.
             if (!Controllers.GameController.IsPlayerInputEnabled) return;
@@ -64,7 +64,8 @@ namespace Player
                 {
                     // Vector between mouse position and player position in-world.
                     attackDirection =
-                        (Vector2) (gameCamera.ScreenToWorldPoint(Input.mousePosition) - transform.position);
+                        gameCamera.ScreenToWorldPoint(playerInput.actions["MousePos"].ReadValue<Vector2>()) -
+                        transform.position;
                 }
 
                 // Check which axis has greater magnitude, then check if that axis is positive or negative.
