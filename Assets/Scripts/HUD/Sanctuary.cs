@@ -40,13 +40,18 @@ namespace HUD
         public Player.Player player;
         private PlayerCombat _playerCombat;
         private PlayerStats _playerStats;
-
-
+        
         [Header("Upgrade Button References")]
         public Button upgradeMaxHealthButton;
         public Button upgradeWeaponDamageButton;
         public Button upgradeWeaponSpeedButton;
         public Button upgradeWeaponRangeButton;
+
+        [Header("Upgrade Cost References")]
+        public TextMeshProUGUI upgradeMaxHealthCost;
+        public TextMeshProUGUI upgradeWeaponDamageCost;
+        public TextMeshProUGUI upgradeWeaponSpeedCost;
+        public TextMeshProUGUI upgradeWeaponRangeCost;
 
         [Header("Story references")]
         public Image narrativeUI;
@@ -193,7 +198,16 @@ namespace HUD
             SetCurrencyText(_playerStats.GetCurrency().ToString());
             SetNameText(_playerStats.GetName());
 
+            UpdateUpgradeCostsText();
             UpdateUpgradeButtons();
+        }
+
+        private void UpdateUpgradeCostsText()
+        {
+            upgradeMaxHealthCost.text = "Cost: " + GetUpgradeCost(_playerCombat.GetHealthLevel());
+            upgradeWeaponDamageCost.text = "Cost: " + GetUpgradeCost(_playerCombat.GetAttackDamageLevel());
+            upgradeWeaponRangeCost.text = "Cost: " + GetUpgradeCost(_playerCombat.GetAttackRangeLevel());
+            upgradeWeaponSpeedCost.text = "Cost: " + GetUpgradeCost(_playerCombat.GetAttackSpeedLevel());
         }
 
         private void UpdateUpgradeButtons()
