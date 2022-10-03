@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using Entities;
-using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -10,6 +9,8 @@ namespace Controllers
     {
         public List<Enemy> enemyList;
         public GameObject spawnableArea;
+        public float spawnBoundaryOffsetX;
+        public float spawnBoundaryOffsetY;
         public List<Enemy> livingEnemies;
 
         private bool _active;
@@ -34,8 +35,8 @@ namespace Controllers
             }
 
             //Get bounds of spawnable area
-            boundX = spawnableArea.GetComponent<SpriteRenderer>().size.x / 2;
-            boundY = spawnableArea.GetComponent<SpriteRenderer>().size.y / 2;
+            boundX = (spawnableArea.GetComponent<SpriteRenderer>().size.x - spawnBoundaryOffsetX) / 2;
+            boundY = (spawnableArea.GetComponent<SpriteRenderer>().size.y- spawnBoundaryOffsetY) / 2;
         }
 
         public void Update()
