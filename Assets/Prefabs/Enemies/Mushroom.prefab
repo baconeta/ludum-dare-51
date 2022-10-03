@@ -140,6 +140,7 @@ MonoBehaviour:
   jumpDistance: 2
   jumpSpeed: 1
   jumpCooldown: 0.5
+  jumpCooldownRandomness: 0.5
 --- !u!50 &7144231399020754066
 Rigidbody2D:
   serializedVersion: 4
