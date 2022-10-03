@@ -175,26 +175,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 375893899820495543}
-  _playerFacing: {fileID: 0}
+  _playerFacing: {fileID: 8510581180561397376}
   _weapon: {fileID: 3870772335738054938}
-  _hitSound: {fileID: 0}
-  healthInitial: 50
-  healthGrowthPerLevel: 1
+  _hitSound: {fileID: 8300000, guid: 62db879a116e5174496370d3cdd3523b, type: 3}
+  healthInitial: 80
+  healthGrowthPerLevel: 20
   healthMaxLevel: 5
-  attackDamageInitial: 1
-  attackDamageGrowthPerLevel: 0.2
+  attackDamageInitial: 10
+  attackDamageGrowthPerLevel: 5
   attackDamageMaxLevel: 5
-  attackSpeedInitial: 2
-  attackSpeedGrowthPerLevel: 0.667
+  attackSpeedInitial: 0.75
+  attackSpeedGrowthPerLevel: 0.5
   attackSpeedMaxLevel: 5
-  attackRangeInitial: 7
-  attackRangeGrowthPerLevel: 3
+  attackRangeInitial: 5
+  attackRangeGrowthPerLevel: 1
   attackRangeMaxLevel: 5
-  firstUpgradeCost: 3
-  secondUpgradeCost: 7
-  thirdUpgradeCost: 12
-  fourthUpgradeCost: 18
-  fifthUpgradeCost: 25
   healthMax: 1
   attackDamageActual: 0
   attackSpeedActual: 0

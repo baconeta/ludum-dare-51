@@ -31,6 +31,9 @@ public class GameTimer : MonoBehaviour
     private float phaseTime = 10f;
     private EWorldPhase worldPhase;
     private bool isTimerRunning = false;
+    private float currentRoundGameTime;
+    private float totalGameTime;
+    private float totalExpectedTime;
 
     private void Awake()
     {
@@ -77,6 +80,7 @@ public class GameTimer : MonoBehaviour
     {
         if (isTimerRunning)
         {
+            currentRoundGameTime += Time.deltaTime;
             timer -= Time.deltaTime;
 
             if (timer <= 0f)
@@ -112,5 +116,15 @@ public class GameTimer : MonoBehaviour
 
         //Its dark, change phase
         ChangePhase();
+    }
+
+    public float GetPlayedTimeScore()
+    {
+        return Mathf.Clamp(totalExpectedTime - totalGameTime, 0, totalExpectedTime);
+    }
+
+    public void ExpectedRounds(float slowRoundTime)
+    {
+        totalExpectedTime += slowRoundTime;
     }
 }

@@ -137,7 +137,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a839f3dafcdeb54d9ba470e880b00c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  value: 1
+  value: 10
   pickupTimer: 1
   pickupSound: {fileID: 8300000, guid: 30f448f270ad2f245a4371196547eb88, type: 3}
   darkHeartSound: {fileID: 0}

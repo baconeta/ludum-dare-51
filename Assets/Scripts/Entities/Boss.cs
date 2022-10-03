@@ -1,3 +1,4 @@
+using Controllers;
 using Objects;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -58,11 +59,12 @@ namespace Entities
 
         public override void Die(bool isDespawning = false)
         {
-            // Boss died so we win the game
-            Debug.Log("we killed the boss");
             // Hide the boss's health bar.
             if (!_healthBar) _healthBar = FindObjectOfType<BossHealthBarHoist>().bossHealthBar;
             _healthBar.SetActive(false);
+
+            // Boss died so we win the game
+            FindObjectOfType<GameController>().EndGame(true);
         }
     }
 }
