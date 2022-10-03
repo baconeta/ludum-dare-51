@@ -8,6 +8,7 @@ namespace Entities
         public Projectile projectile;
         public float projectileSpeed = 3;
         public Vector3 cornSpitOffset;
+        public float timeAttackTakes;
 
         // Start is called before the first frame update
         protected override void EnemyMovement()
@@ -18,12 +19,17 @@ namespace Entities
         protected override void Attack()
         {
             // Attacking should start the attacking animation, spawn a kernel and fire it at the players location
-            
+
             // TODO add curve to projectile motion
-            GameObject o = gameObject; // ref to this for efficiency 
+
+            Invoke(nameof(SpawnProjectile), timeAttackTakes);
+        }
+
+        private void SpawnProjectile()
+        {
+            GameObject o = gameObject;
             Vector3 instantiationLocation = o.transform.position;
             instantiationLocation += cornSpitOffset;
-
             Projectile newProjectile = Instantiate(projectile, instantiationLocation, o.transform.rotation);
             newProjectile.ShootTarget(player.transform.position, gameObject, projectileSpeed, attackDamage);
         }
