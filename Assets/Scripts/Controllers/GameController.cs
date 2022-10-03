@@ -115,6 +115,7 @@ namespace Controllers
         public void Continue()
         {
             IsPlayerInputEnabled = true;
+            timer.JumpToLightPhase();
             timer.StartTimer();
             //If before boss wave
             if (!_rc.isBossRound) _rc.StartNextWave();
