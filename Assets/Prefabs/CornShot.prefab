@@ -155,9 +155,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 1.33, y: -1.46}
+  m_Offset: {x: -0.79, y: 1.84}
   serializedVersion: 2
-  m_Radius: 2
+  m_Radius: 2.6
 --- !u!82 &5657043906098370443
 AudioSource:
   m_ObjectHideFlags: 0
@@ -170,7 +170,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -270,6 +270,12 @@ MonoBehaviour:
   projectileSprite: {fileID: 21300000, guid: 40709c12b808d464ab59bcb51b373013, type: 3}
   animator: {fileID: 2940114840128326338}
   distanceToStartPopping: 2
+  popSounds:
+  - {fileID: 8300000, guid: c3ab4dff989552245a677fd4626f7a5d, type: 3}
+  - {fileID: 8300000, guid: c3ab4dff989552245a677fd4626f7a5d, type: 3}
+  - {fileID: 8300000, guid: d1c79670e319d064fa118acf75664c06, type: 3}
+  - {fileID: 8300000, guid: d1c79670e319d064fa118acf75664c06, type: 3}
+  audioSource: {fileID: 5657043906098370443}
 --- !u!95 &2940114840128326338
 Animator:
   serializedVersion: 4
