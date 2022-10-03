@@ -9,30 +9,56 @@ namespace HUD
 {
     public class Sanctuary : MonoBehaviour
     {
+        /*
+         * Upgrade Costs.
+         */
+        [Header("Upgrade Costs")]
+        [SerializeField]
+        [Tooltip("How much currency it costs to upgrade from level 0 to level 1")]
+        public int firstUpgradeCost = 3;
+
+        [SerializeField] [Tooltip("How much currency it costs to upgrade from level 1 to level 2")]
+        public int secondUpgradeCost = 7;
+
+        [SerializeField] [Tooltip("How much currency it costs to upgrade from level 2 to level 3")]
+        public int thirdUpgradeCost = 12;
+
+        [SerializeField] [Tooltip("How much currency it costs to upgrade from level 3 to level 4")]
+        public int fourthUpgradeCost = 18;
+
+        [SerializeField] [Tooltip("How much currency it costs to upgrade from level 4 to level 5")]
+        public int fifthUpgradeCost = 25;
+
         [Header("Game references")]
         public GameObject sanctuaryUI;
         public GameController gameController;
-        
+
         [Header("Stats References")]
         public TextMeshProUGUI scoreText;
         public TextMeshProUGUI currencyText;
         public TextMeshProUGUI nameText;
         public Player.Player player;
+        private PlayerCombat _playerCombat;
+        private PlayerStats _playerStats;
 
 
         [Header("Upgrade Button References")]
-        public GameObject upgradeMaxHealthButton;
-        public GameObject upgradeWeaponDamageButton;
-        public GameObject upgradeWeaponSpeedButton;
-        public GameObject upgradeWeaponRangeButton;
+        public Button upgradeMaxHealthButton;
+        public Button upgradeWeaponDamageButton;
+        public Button upgradeWeaponSpeedButton;
+        public Button upgradeWeaponRangeButton;
 
         [Header("Story references")]
         public Image narrativeUI;
         public List<Sprite> storylets;
-        
+
         private void Start()
         {
-            if (!player) player = FindObjectOfType<Player.Player>();
+            if (!player)
+                player = FindObjectOfType<Player.Player>();
+
+            _playerCombat = player.playerCombat;
+            _playerStats = player.playerStats;
         }
 
         public void ShowSanctuary(int currentRound)
@@ -49,51 +75,146 @@ namespace HUD
 
         private void UpdateSanctuary(int currentRound)
         {
-            //Get player stats
-            PlayerStats stats = player.GetPlayerStats();
-
-            //Update score and currency HUD text
-            SetScoreText(stats.GetScore().ToString());
-            SetCurrencyText(stats.GetCurrency().ToString());
-            SetNameText(stats.GetName());
-            
             //Update narrative image to current round
             narrativeUI.sprite = storylets[currentRound - 1];
+
+            UpdateUpgradesUI();
         }
 
         public void BuyUpgradeMaxHealth()
         {
-            //max health cost
-            //player.GetPlayerCombat().UpgradeCost blah blah
-            Debug.Log("Buy Max Health");
+            if (!CanBuyMaxHealthUpgrade())
+                return;
+
+            var upgradeCost = GetUpgradeCost(_playerCombat.GetHealthLevel());
+            _playerStats.SpendCurrency(upgradeCost);
+            _playerCombat.IncreaseHealthLevel();
+
+            UpdateUpgradesUI();
+
+            Debug.Log("Bought max health upgrade! New Level: " + _playerCombat.GetHealthLevel());
+        }
+
+        private bool CanBuyMaxHealthUpgrade()
+        {
+            if (!_playerCombat.CanIncreaseHealthLevel())
+                return false;
+
+            var upgradeCost = GetUpgradeCost(_playerCombat.GetHealthLevel());
+            return CanAfford(upgradeCost);
         }
 
         public void BuyUpgradeWeaponDamage()
         {
-            Debug.Log("Buy WeaponDamage");
+            if (!CanBuyWeaponDamageUpgrade())
+                return;
+
+            var upgradeCost = GetUpgradeCost(_playerCombat.GetAttackDamageLevel());
+            _playerStats.SpendCurrency(upgradeCost);
+            _playerCombat.IncreaseAttackDamageLevel();
+
+            UpdateUpgradesUI();
+
+            Debug.Log("Bought weapon damage upgrade! New Level: " + _playerCombat.GetAttackDamageLevel());
+        }
+
+        private bool CanBuyWeaponDamageUpgrade()
+        {
+            if (!_playerCombat.CanIncreaseAttackDamageLevel())
+                return false;
+
+            var upgradeCost = GetUpgradeCost(_playerCombat.GetAttackDamageLevel());
+            return CanAfford(upgradeCost);
         }
 
         public void BuyUpgradeWeaponRange()
         {
-            Debug.Log("Buy WeaponRange");
+            if (!CanBuyWeaponRangeUpgrade())
+                return;
+
+            var upgradeCost = GetUpgradeCost(_playerCombat.GetAttackRangeLevel());
+            _playerStats.SpendCurrency(upgradeCost);
+            _playerCombat.IncreaseAttackRangeLevel();
+
+            UpdateUpgradesUI();
+
+            Debug.Log("Bought weapon range upgrade! New Level: " + _playerCombat.GetAttackRangeLevel());
+        }
+
+        private bool CanBuyWeaponRangeUpgrade()
+        {
+            if (!_playerCombat.CanIncreaseAttackRangeLevel())
+                return false;
+
+            var upgradeCost = GetUpgradeCost(_playerCombat.GetAttackRangeLevel());
+            return CanAfford(upgradeCost);
         }
 
         public void BuyUpgradeWeaponSpeed()
         {
-            Debug.Log("Buy WeaponSpeed");
+            if (!CanBuyWeaponSpeedUpgrade())
+                return;
+
+            var upgradeCost = GetUpgradeCost(_playerCombat.GetAttackSpeedLevel());
+            _playerStats.SpendCurrency(upgradeCost);
+            _playerCombat.IncreaseAttackSpeedLevel();
+
+            UpdateUpgradesUI();
+
+            Debug.Log("Bought weapon speed upgrade! New Level: " + _playerCombat.GetAttackSpeedLevel());
         }
 
+        private bool CanBuyWeaponSpeedUpgrade()
+        {
+            if (!_playerCombat.CanIncreaseAttackSpeedLevel())
+                return false;
 
-        public void SetNameText(string newName)
+            var upgradeCost = GetUpgradeCost(_playerCombat.GetAttackSpeedLevel());
+            return CanAfford(upgradeCost);
+        }
+
+        private int GetUpgradeCost(int currentLevel) =>
+            currentLevel switch
+            {
+                0 => firstUpgradeCost,
+                1 => secondUpgradeCost,
+                2 => thirdUpgradeCost,
+                3 => fourthUpgradeCost,
+                4 => fifthUpgradeCost,
+                _ => int.MaxValue
+            };
+
+        private bool CanAfford(int cost) => cost <= _playerStats.GetCurrency();
+
+        private void UpdateUpgradesUI()
+        {
+            //Update score and currency HUD text
+            SetScoreText(_playerStats.GetScore().ToString());
+            SetCurrencyText(_playerStats.GetCurrency().ToString());
+            SetNameText(_playerStats.GetName());
+
+            UpdateUpgradeButtons();
+        }
+
+        private void UpdateUpgradeButtons()
+        {
+            upgradeMaxHealthButton.interactable = CanBuyMaxHealthUpgrade();
+            upgradeWeaponRangeButton.interactable = CanBuyWeaponRangeUpgrade();
+            upgradeWeaponDamageButton.interactable = CanBuyWeaponDamageUpgrade();
+            upgradeWeaponSpeedButton.interactable = CanBuyWeaponSpeedUpgrade();
+        }
+
+        private void SetNameText(string newName)
         {
             nameText.SetText(newName);
         }
-        public void SetScoreText(string text)
+
+        private void SetScoreText(string text)
         {
             scoreText.SetText("Score: " + text);
         }
 
-        public void SetCurrencyText(string text)
+        private void SetCurrencyText(string text)
         {
             currencyText.SetText("Loot: " + text);
         }

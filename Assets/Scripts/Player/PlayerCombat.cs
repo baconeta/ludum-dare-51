@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using Controllers;
+using HUD;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -80,28 +81,6 @@ namespace Player
         [SerializeField] [Tooltip("How many times the player can upgrade attack range.")]
         protected int attackRangeMaxLevel = 5;
 
-
-        /*
-         * Upgrade Costs.
-         */
-        [Header("Upgrade Costs")]
-        [SerializeField]
-        [Tooltip("How much currency it costs to upgrade from level 0 to level 1")]
-        public int firstUpgradeCost = 3;
-
-        [SerializeField] [Tooltip("How much currency it costs to upgrade from level 1 to level 2")]
-        public int secondUpgradeCost = 7;
-
-        [SerializeField] [Tooltip("How much currency it costs to upgrade from level 2 to level 3")]
-        public int thirdUpgradeCost = 12;
-
-        [SerializeField] [Tooltip("How much currency it costs to upgrade from level 3 to level 4")]
-        public int fourthUpgradeCost = 18;
-
-        [SerializeField] [Tooltip("How much currency it costs to upgrade from level 4 to level 5")]
-        public int fifthUpgradeCost = 25;
-
-
         /*
          * Player stat levels.
          */
@@ -115,7 +94,8 @@ namespace Player
          * Player stat values.
          * Use us for calculations!
          */
-        public int healthMax;
+        public int healthMax = 1;
+
         // Do not directly get/set this. Use HealthActual instead.
         private int _healthActualInternal;
 
@@ -252,10 +232,8 @@ namespace Player
             {
                 if (!isDead) Die();
             }
-            
-            _playerAudioSource.PlayOneShot(_hitSound);
-            
 
+            _playerAudioSource.PlayOneShot(_hitSound);
         }
 
         private void Die()
@@ -285,51 +263,55 @@ namespace Player
             return attackRangeActual;
         }
 
-        public int GetHealthLevel()
-        {
-            return _healthLevel;
-        }
+        public int GetHealthLevel() => _healthLevel;
+
+        public bool CanIncreaseHealthLevel() => _healthLevel < healthMaxLevel;
 
         public void IncreaseHealthLevel()
         {
-            if (_healthLevel < healthMaxLevel)
-                _healthLevel++;
+            if (!CanIncreaseHealthLevel())
+                return;
+
+            _healthLevel++;
             RecalculateStats();
         }
 
-        public int GetAttackDamageLevel()
-        {
-            return _attackDamageLevel;
-        }
+        public int GetAttackDamageLevel() => _attackDamageLevel;
+
+        public bool CanIncreaseAttackDamageLevel() => _attackDamageLevel < attackDamageMaxLevel;
 
         public void IncreaseAttackDamageLevel()
         {
-            if (_attackDamageLevel < attackDamageMaxLevel)
-                _attackDamageLevel++;
+            if (!CanIncreaseAttackDamageLevel())
+                return;
+
+            _attackDamageLevel++;
             RecalculateStats();
         }
 
-        public int GetAttackSpeedLevel()
-        {
-            return _attackSpeedLevel;
-        }
+        public int GetAttackSpeedLevel() => _attackSpeedLevel;
+
+        public bool CanIncreaseAttackSpeedLevel() => _attackSpeedLevel < attackSpeedMaxLevel;
 
         public void IncreaseAttackSpeedLevel()
         {
-            if (_attackSpeedLevel < attackSpeedMaxLevel)
-                _attackSpeedLevel++;
+            if (!CanIncreaseAttackSpeedLevel())
+                return;
+
+            _attackSpeedLevel++;
             RecalculateStats();
         }
 
-        public int GetAttackRangeLevel()
-        {
-            return _attackRangeLevel;
-        }
+        public int GetAttackRangeLevel() => _attackRangeLevel;
 
-        public void IncreaseAttackRange()
+        public bool CanIncreaseAttackRangeLevel() => _attackRangeLevel < attackRangeMaxLevel;
+
+        public void IncreaseAttackRangeLevel()
         {
-            if (_attackRangeLevel < attackRangeMaxLevel)
-                _attackRangeLevel++;
+            if (!CanIncreaseAttackRangeLevel())
+                return;
+
+            _attackRangeLevel++;
             RecalculateStats();
         }
 

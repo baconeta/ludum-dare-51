@@ -1,3 +1,4 @@
+using HUD;
 using UnityEngine;
 
 namespace Player
@@ -25,7 +26,7 @@ namespace Player
             Debug.Log(newName);
             _playerName = newName;
         }
-        
+
         public int GetCurrency()
         {
             return _currency;
@@ -74,15 +75,15 @@ namespace Player
             // mushroom score 15
             // boss score 50
             // minus overall time to complete game
-            
+
             //var puffballScore = puffballsKilled+puffsCollected*10;
             //var seedScore = seedsKilled+seedsCollected*12;
             //var mushroomScore = mushroomsKilled+seedsCollected*15;
             //var bossScore = bossKilled*50;
             //var overallTime = timetoComplete;
-            
-            
-            
+
+
+
             //var overallScore = puffballScore + seedScore + mushroomScore + bossScore - overallTime;
             // AddScore(overallScore);
         }

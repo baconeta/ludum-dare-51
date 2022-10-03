@@ -1,5 +1,6 @@
 using Objects;
 using UnityEngine;
+using Utils;
 
 namespace Entities
 {
@@ -9,6 +10,8 @@ namespace Entities
         public float projectileSpeed = 3;
         public Vector3 cornSpitOffset;
         public float timeAttackTakes;
+        public AudioClip[] spitSounds;
+        public AudioSource audioSource;
 
         // Start is called before the first frame update
         protected override void EnemyMovement()
@@ -32,6 +35,7 @@ namespace Entities
             instantiationLocation += cornSpitOffset;
             Projectile newProjectile = Instantiate(projectile, instantiationLocation, o.transform.rotation);
             newProjectile.ShootTarget(player.transform.position, gameObject, projectileSpeed, attackDamage);
+            audioSource.PlayOneShot(spitSounds.ChooseRandom());
         }
 
         protected override void UpdateAnimator()
