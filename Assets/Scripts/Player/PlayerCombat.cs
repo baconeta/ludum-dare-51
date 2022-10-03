@@ -116,14 +116,15 @@ namespace Player
          * Use us for calculations!
          */
         public int healthMax;
-        public int healthActual;
+        // Do not directly get/set this. Use HealthActual instead.
+        private int _healthActualInternal;
 
         private int HealthActual
         {
-            get => healthActual;
+            get => _healthActualInternal;
             set
             {
-                healthActual = value;
+                _healthActualInternal = value;
                 _gameUI.UpdateHealth();
             }
         }
@@ -157,7 +158,7 @@ namespace Player
         private void Update()
         {
             //For testing mostly
-            if (healthActual <= 0)
+            if (_healthActualInternal <= 0)
             {
                 if (!isDead) Die();
             }
