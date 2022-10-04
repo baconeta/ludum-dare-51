@@ -11990,7 +11990,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f01e12f68e5828d40ab31dee0033d593, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioSourceBufferTime: 1
+  audioSourceBufferTime: 2.5
   track: {fileID: 8286371916845773126}
 --- !u!114 &8286371916845773126
 MonoBehaviour:

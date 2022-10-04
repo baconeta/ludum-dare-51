@@ -17,6 +17,7 @@ namespace Player
         private float weaponIsDamagingDurationPercentage = 70.0F;
 
         private float _weaponIsDamagingDurationActual;
+        private Player _player;
 
         public GameObject weaponGraphic;
 
@@ -31,8 +32,9 @@ namespace Player
 
         private void Awake()
         {
-            _playerCombat = GetComponentInParent<PlayerCombat>();
+            _playerCombat = FindObjectOfType<PlayerCombat>();
             _circleCollider = GetComponent<CircleCollider2D>();
+            _player = FindObjectOfType<Player>();
 
             if (_circleCollider != null)
             {
@@ -40,6 +42,11 @@ namespace Player
             }
 
             RecalculateStats();
+        }
+
+        private void Update()
+        {
+            transform.position = _player.transform.position;
         }
 
         public void RecalculateStats()

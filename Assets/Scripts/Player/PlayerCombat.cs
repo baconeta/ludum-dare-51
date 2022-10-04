@@ -128,7 +128,7 @@ namespace Player
         // Start is called before the first frame update
         private void Start()
         {
-            _weapon = gameObject.GetComponentInChildren<PlayerWeapon>();
+            _weapon = FindObjectOfType<PlayerWeapon>();
             if (!_playerFacing) _playerFacing = GetComponent<PlayerFacing>();
             _gameUI = GetComponent<Player>().gameUI;
 
