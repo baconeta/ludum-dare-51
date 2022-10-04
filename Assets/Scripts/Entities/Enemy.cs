@@ -54,7 +54,13 @@ namespace Entities
                 _rigidbody2D = GetComponent<Rigidbody2D>();
 
             if (!animator)
+            {
                 animator = GetComponent<Animator>();
+                if (!animator)
+                {
+                    animator = GetComponentInParent<Animator>();
+                }
+            }
 
             if (!player)
                 player = FindObjectOfType<Player.Player>();
@@ -172,7 +178,8 @@ namespace Entities
                 //Spawn loot
                 GameObject newLoot = Instantiate(lootOnDeath);
                 float variance = 0.4f;
-                Vector3 randomOffset = new Vector3(Random.Range(-variance, variance), Random.Range(-variance, variance), 0f);
+                Vector3 randomOffset = new Vector3(Random.Range(-variance, variance), Random.Range(-variance, variance),
+                    0f);
                 //Move loot to die position
                 newLoot.transform.position = transform.position + centreOffset + randomOffset;
             }

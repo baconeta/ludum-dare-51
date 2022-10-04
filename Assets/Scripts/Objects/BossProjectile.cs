@@ -18,7 +18,7 @@ namespace Objects
         [SerializeField] private AudioSource audioSource;
 
         public override void ShootTarget(Vector3 newTargetPosition, GameObject newSource, float newSpeed,
-            float newDamage)
+            float newDamage, Vector3 offset = default)
         {
             // Make sure you set the projectile pos using instantiation before calling this function
 

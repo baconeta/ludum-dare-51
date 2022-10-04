@@ -1073,7 +1073,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyList:
   - {fileID: 7144231399020754067, guid: 09ce37325b04d4e4fadb8f33b04f450d, type: 3}
-  - {fileID: 1400654487774292807, guid: 46ce9b4196fd5ee438376a0583cacea7, type: 3}
+  - {fileID: 936152467831998931, guid: 46ce9b4196fd5ee438376a0583cacea7, type: 3}
   - {fileID: 7151240252480087818, guid: cb35bd557bd91944aa9e3f16a783cdd4, type: 3}
   - {fileID: 8284990446832664579, guid: cca0f7ac9e403114e97d373e24d4d2a8, type: 3}
   spawnableArea: {fileID: 2110533664}
@@ -1994,6 +1994,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1968543810}
     m_Modifications:
+    - target: {fileID: 1468215692, guid: 1f794f3f39fee51499b78d5c49b8607e, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 7369678366315388519, guid: 1f794f3f39fee51499b78d5c49b8607e, type: 3}
       propertyPath: m_Colors.m_PressedColor.b
       value: 0
@@ -2058,6 +2062,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: BuyUpgradeWeaponRange
       objectReference: {fileID: 0}
+    - target: {fileID: 7369678366556472369, guid: 1f794f3f39fee51499b78d5c49b8607e, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 7369678366741799277, guid: 1f794f3f39fee51499b78d5c49b8607e, type: 3}
       propertyPath: m_Colors.m_PressedColor.b
       value: 0
@@ -2105,6 +2113,10 @@ PrefabInstance:
     - target: {fileID: 7369678366741799277, guid: 1f794f3f39fee51499b78d5c49b8607e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
       value: HUD.GameUI, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7369678367082665745, guid: 1f794f3f39fee51499b78d5c49b8607e, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7369678367256390200, guid: 1f794f3f39fee51499b78d5c49b8607e, type: 3}
       propertyPath: m_Name

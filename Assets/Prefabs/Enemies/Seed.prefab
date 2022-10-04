@@ -116,6 +116,7 @@ MonoBehaviour:
   centreOffset: {x: 0, y: 0.6, z: 0}
   projectile: {fileID: 7244973061248620078, guid: b77f0f27f1e93e2418352bffe572728f, type: 3}
   projectileSpeed: 2
+  projectileOffset: {x: 0, y: 1, z: 0}
 --- !u!58 &7151240252480087816
 CircleCollider2D:
   m_ObjectHideFlags: 0

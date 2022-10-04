@@ -41,7 +41,7 @@ namespace Objects
         }
 
         public virtual void ShootTarget(Vector3 newTargetPosition, GameObject newSource, float newSpeed,
-            float newDamage)
+            float newDamage, Vector3 offset = default)
         {
             //Save variables
             _target = newTargetPosition;
@@ -51,7 +51,7 @@ namespace Objects
 
 
             //Move to spawn
-            transform.position = newSource.transform.position;
+            transform.position = newSource.transform.position + offset;
 
             //Get direction to shoot
             Vector3 shootDirection = (newTargetPosition - _source.transform.position).normalized;

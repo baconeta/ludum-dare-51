@@ -7,7 +7,7 @@ namespace Entities
     {
         public Projectile projectile;
         public float projectileSpeed;
-
+        [SerializeField] private Vector3 projectileOffset;
 
         //Only runs in "Dark Mode"
         protected override void EnemyMovement()
@@ -28,7 +28,8 @@ namespace Entities
         {
             //Spawn Projectile (Damage is handled by projectile)
             Projectile newProjectile = Instantiate(projectile);
-            newProjectile.ShootTarget(player.transform.position, gameObject, projectileSpeed, attackDamage);
+            newProjectile.ShootTarget(player.transform.position, gameObject, projectileSpeed, attackDamage,
+                projectileOffset);
         }
     }
 }

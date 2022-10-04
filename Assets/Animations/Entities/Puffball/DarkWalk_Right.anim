@@ -24,7 +24,7 @@ AnimationClip:
     - time: 0.16666667
       value: {fileID: 21300000, guid: f09b08cb4b6b24f45a5b6221cd73b0d7, type: 3}
     attribute: m_Sprite
-    path: 
+    path: Puffball
     classID: 212
     script: {fileID: 0}
   m_SampleRate: 60
@@ -35,7 +35,7 @@ AnimationClip:
   m_ClipBindingConstant:
     genericBindings:
     - serializedVersion: 2
-      path: 0
+      path: 335358670
       attribute: 0
       script: {fileID: 0}
       typeID: 212
