@@ -1938,6 +1938,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 8286371916845773125}
+        m_TargetAssemblyTypeName: Utils.BgMusic, Assembly-CSharp
+        m_MethodName: StartTrackManually
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &222676951
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11990,7 +12002,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f01e12f68e5828d40ab31dee0033d593, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioSourceBufferTime: 2.5
+  audioSourceBufferTime: 1
   track: {fileID: 8286371916845773126}
 --- !u!114 &8286371916845773126
 MonoBehaviour:

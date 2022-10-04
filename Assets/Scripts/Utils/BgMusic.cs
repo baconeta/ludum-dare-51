@@ -12,7 +12,12 @@ namespace Utils
         private void Start()
         {
             _loopableAudioSource = GetComponent<LoopableAudioSource>();
+            StartCoroutine(PlayBGMLooped(track, true));
+        }
 
+        public void StartTrackManually()
+        {
+            StopAllTracks();
             StartCoroutine(PlayBGMLooped(track, true));
         }
 
