@@ -25,11 +25,11 @@ namespace Utils
         {
             _loopableAudioSource.QueueClip(musicTrack.audioClip);
             double startTime = AudioSettings.dspTime + audioSourceBufferTime;
-            Debug.Log("start" + startTime);
+            // Debug.Log("start" + startTime);
             double endTime = startTime + musicTrack.loopStart + musicTrack.loopTime;
-            Debug.Log("end" + endTime);
+            // Debug.Log("end" + endTime);
             _loopableAudioSource.PlayScheduled(startTime, endTime);
-            Debug.Log("Start track loop from start");
+            // Debug.Log("Start track loop from start");
 
             while (loop)
             {

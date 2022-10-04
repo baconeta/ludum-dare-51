@@ -37,7 +37,7 @@ namespace Utils
 
         public void PlayScheduled(double startTime, double endTime, float time = 0)
         {
-            Debug.Log("Playing next loop from time" + time);
+            // Debug.Log("Playing next loop from time" + time);
             Switch();
             _sources[_current].time = time;
             _sources[_current].PlayScheduled(startTime);
