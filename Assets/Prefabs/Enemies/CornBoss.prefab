@@ -88,7 +88,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
+  m_SpriteSortPoint: 1
 --- !u!58 &8284990446832668668
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -102,7 +102,7 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 2.6}
+  m_Offset: {x: -0.57, y: 4.08}
   serializedVersion: 2
   m_Radius: 6.94
 --- !u!50 &8284990446832668659
@@ -171,6 +171,7 @@ MonoBehaviour:
   attackDamage: 19
   hitSound: {fileID: 8300000, guid: e001b17ed72cac74cafb8facd1afaa4f, type: 3}
   volume: 0.2
+  centreOffset: {x: 0, y: 0, z: 0}
   projectile: {fileID: 7280510772380333881, guid: 4a3e00c719d9e9d46879ec8844ff77be, type: 3}
   projectileSpeed: 4
   cornSpitOffset: {x: 1, y: -1, z: 0.1}

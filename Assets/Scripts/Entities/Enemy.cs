@@ -40,6 +40,7 @@ namespace Entities
         protected Animator animator;
         public AudioClip hitSound;
         [Range(0, 1f)] public float volume;
+        [SerializeField] private Vector3 centreOffset;
 
         public EnemyController EcRef { get; set; }
 
@@ -79,7 +80,7 @@ namespace Entities
             if (!_gameController.GameRunning) return;
 
             NotifyAnimator(Vector3.zero);
-            float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
+            float distanceToPlayer = Vector3.Distance(transform.position + centreOffset, player.transform.position);
 
             if (!_isAggravated)
             {
@@ -173,7 +174,7 @@ namespace Entities
                 float variance = 0.4f;
                 Vector3 randomOffset = new Vector3(Random.Range(-variance, variance), Random.Range(-variance, variance), 0f);
                 //Move loot to die position
-                newLoot.transform.position = transform.position + randomOffset;
+                newLoot.transform.position = transform.position + centreOffset + randomOffset;
             }
             else
             {
@@ -186,7 +187,7 @@ namespace Entities
                 if (random <= HealthLootChance)
                 {
                     GameObject healthLoot = Instantiate(HealthLoot);
-                    healthLoot.transform.position = transform.position;
+                    healthLoot.transform.position = transform.position + centreOffset;
                 }
             }
             else
@@ -198,7 +199,7 @@ namespace Entities
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(transform.position, attackRadius);
+            Gizmos.DrawWireSphere(transform.position + centreOffset, attackRadius);
 
             Gizmos.color = Color.yellow;
             Gizmos.DrawWireSphere(transform.position, aggravationRange);

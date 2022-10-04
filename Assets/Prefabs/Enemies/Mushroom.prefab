@@ -87,7 +87,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
+  m_SpriteSortPoint: 1
 --- !u!114 &7144231399020754067
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -113,6 +113,7 @@ MonoBehaviour:
   attackDamage: 10
   hitSound: {fileID: 8300000, guid: b58f7386fab7ba54396a45fba19acd1e, type: 3}
   volume: 0.3
+  centreOffset: {x: 0, y: 0.64, z: 0}
   jumpCurve:
     serializedVersion: 2
     m_Curve:
@@ -195,10 +196,10 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 1.63}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5, y: 0.2}
     oldSize: {x: 4.56, y: 5.74}
     newSize: {x: 4.56, y: 5.74}
     adaptiveTilingThreshold: 0.5
@@ -206,5 +207,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3.48, y: 4.48}
+  m_Size: {x: 3.41, y: 4.78}
   m_EdgeRadius: 0

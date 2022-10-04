@@ -87,7 +87,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
+  m_SpriteSortPoint: 1
 --- !u!114 &1400654487774292807
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -113,6 +113,7 @@ MonoBehaviour:
   attackDamage: 1
   hitSound: {fileID: 8300000, guid: b58f7386fab7ba54396a45fba19acd1e, type: 3}
   volume: 0.3
+  centreOffset: {x: 0, y: 0.36, z: 0}
 --- !u!58 &1400654487774292806
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -126,7 +127,7 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.92}
   serializedVersion: 2
   m_Radius: 1.65
 --- !u!50 &1400654487774292805

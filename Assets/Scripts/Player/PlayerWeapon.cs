@@ -29,6 +29,7 @@ namespace Player
 
         // True if collisions with the weapon will damage enemies.
         protected bool weaponIsDamaging = false;
+        [SerializeField] Vector3 weaponPivotOffset;
 
         private void Awake()
         {
@@ -46,7 +47,7 @@ namespace Player
 
         private void Update()
         {
-            transform.position = _player.transform.position;
+            transform.position = _player.transform.position + weaponPivotOffset;
         }
 
         public void RecalculateStats()
